@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 26/01/2025 - Noche - SignUp / Model
+### Spring 1 - 26/01/2025 - Mañana - bcrypt / nodemailer
 
 Dependencias:
 
@@ -10,6 +10,7 @@ npm i sequelize
 npm i mysql2
 npm i jsonwebtoken
 npm i nodemailer
+npm i bcrypt
 npm i dotenv (PENDIENTE)
 
 

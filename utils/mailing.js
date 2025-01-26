@@ -6,20 +6,20 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: "su_correo@gmail.com",
-        pass: "su_contraseña",
+        user: "aldaydev@gmail.com",
+        pass: "ryja wkun smln tnf",
     },
 });
 
-class Mail {
-    async confirmAccount (){
+class Mailing {
+    async send (email){
         // Configurar el objeto mailOptions
         const mailOptions = {
-            from: "remitente@ejemplo.com",
-            to: "destinatario@ejemplo.com",
+            from: "aldaydev@gmail.com",
+            to: "rafaldayparejo@gmail.com",
             subject: "Asunto del email",
             text: "Contenido del email en texto plano",
-            html: "<p>Contenido del email en HTML</p>",
+            html: "<h1>Contenido del email en HTML</h1>",
         };
 
         // Enviar el email
@@ -33,6 +33,8 @@ class Mail {
 
     }
 }
+
+export default new Mailing;
 
 
 
