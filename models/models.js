@@ -9,9 +9,13 @@ const Musician = sequelize.define('Musician', {
         autoIncrement: true
     },
     username: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(30),
         allowNull: false,
         unique: true
+    },
+    pass: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 }, {
     tableName: 'musicians'

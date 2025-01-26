@@ -15,6 +15,17 @@ class Token {
         });
     }
 
+    async verify(tokenToVerify) {
+        return new Promise((resolve, reject) => {
+            verify(tokenToVerify, 'secretkey', (err, token) => {
+                if (err) {
+                    return reject(new Error('Error al verificar el token'));
+                }
+                resolve(token);
+            });
+        });
+    }
+
     
 }
 

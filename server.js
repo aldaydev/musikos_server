@@ -16,12 +16,6 @@ app.use(urlencoded({extended: false}));
 app.use(cors());
 app.use(router);
 
-//Testing
-// app.get('/test', (req, res) => {
-// 	res.json({
-// 		mensaje: 'Server activo'
-// 	})
-// });
 
 const port = process.env.PORT || 3001;
 
@@ -37,7 +31,7 @@ const startServer = async () => {
 
 		app.listen(port, () => console.log(`Server running on port ${port}`));
 	}catch(e){
-
+		console.log('Error de conexión al servidor', e);
 	}
 }
 
