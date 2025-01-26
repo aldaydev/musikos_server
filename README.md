@@ -1,5 +1,5 @@
 # bandbros_server
-### Develop - 26/01/2025 - Noche - Esqueleto básico completo
+### Spring 1 - 26/01/2025 - Noche - SignUp
 
 Dependencias:
 
@@ -9,24 +9,38 @@ npm i cors
 npm i sequelize
 npm i mysql2
 npm i jsonwebtoken
+npm i nodemailer
 npm i dotenv (PENDIENTE)
+
 
 MUSICIAN:
  - Atributos:
-    * username
-    * firstname
-    * lastname
-    * slogan
-    * descripcion
-    * website
-    * instagram
-    * youtube
-    * tiktok
+    //DATOS NECESARIOS PARA CREAR LA CUENTA
+    * username <>
+    * email <>
+    * pass <>
+    //DATOS QUE SE COMPLETAN DESPUÉS DE CREAR LA CUENTA
+    * imagen <>
+    * firstname <>
+    * lastname <>
+    * slogan <>
+    * descripcion <>
+    * web <>
+    * instagram <>
+    * youtube <>
+    * tiktok <>
  - Primary key:
-    * id
+    * id <>
  - Foreign Keys:
     * Instrumentos
-    * Ciudad
     * estilos
-    
-    
+    * Ciudad
+
+1er SPRINT
+
+- Crear esqueleto del backend
+- Crear funcionalidad de signUp
+    * Request - Post - email, username, pass
+    * Protección de contraseña con bcrypt
+    * Email de confirmación (con token)
+    * Primer signIn a través del email
