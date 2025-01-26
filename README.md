@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 26/01/2025 - Noche - SignUp
+### Spring 1 - 26/01/2025 - Noche - SignUp / Model
 
 Dependencias:
 
