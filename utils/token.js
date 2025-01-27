@@ -10,18 +10,18 @@ class Token {
                 if (err) {
                     return reject(new Error('Error al generar el token'));
                 }
-                resolve('Bearer ' + token);
+                resolve(token);
             });
         });
     }
 
     async verify(tokenToVerify) {
         return new Promise((resolve, reject) => {
-            verify(tokenToVerify, 'secretkey', (err, token) => {
+            verify(tokenToVerify, 'secretkey', (err, authData) => {
                 if (err) {
                     return reject(new Error('Error al verificar el token'));
                 }
-                resolve(token);
+                resolve(authData);
             });
         });
     }

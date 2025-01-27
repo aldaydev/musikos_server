@@ -1,25 +1,28 @@
 import nodemailer from 'nodemailer';
 
+const email = "aldaymailing@gmail.com";
+const pass = "kttb aoub hwfz qsfw";
+
 // Crear un objeto de transporte
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false,
     auth: {
-        user: "aldaydev@gmail.com",
-        pass: "ryja wkun smln tnf",
+        user: email,
+        pass: pass,
     },
 });
 
 class Mailing {
-    async send (email){
+    async send (emailData){
         // Configurar el objeto mailOptions
         const mailOptions = {
-            from: "aldaydev@gmail.com",
-            to: "rafaldayparejo@gmail.com",
-            subject: "Asunto del email",
-            text: "Contenido del email en texto plano",
-            html: "<h1>Contenido del email en HTML</h1>",
+            from: email,
+            to: emailData.to,
+            subject: emailData.subject,
+            // text: "Contenido del email en texto plano",
+            html: emailData.html
         };
 
         // Enviar el email

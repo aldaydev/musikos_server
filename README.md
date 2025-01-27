@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 26/01/2025 - Mañana - bcrypt / nodemailer
+### Spring 1 - 27/01/2025 - Noche - Nodemailer operativo
 
 Dependencias:
 
@@ -40,8 +40,20 @@ MUSICIAN:
 1er SPRINT
 
 - Crear esqueleto del backend
-- Crear funcionalidad de signUp
-    * Request - Post - email, username, pass
-    * Protección de contraseña con bcrypt
-    * Email de confirmación (con token)
-    * Primer signIn a través del email
+   * Estructuración de carpetas y archivos inciales
+   * Creación de server.js -> node, middlewares, conexión a BD
+   * Creación de modelo "Musicians"
+
+- Crear endpoint "/signup"
+   * Request - Post - email, username, pass
+   * Validación de email, username y pass
+   * Protección de contraseña con bcrypt
+   * Generación de token con jwt
+   * Email de confirmación con nodemailer
+   * Enlace al endpoint de confirmación (con token en params)
+
+- Crear endpoint "/signup-confirm"
+   * Verificar token (obtenido de params)
+   * Recopilar email, username y pass (obtenidos del token)
+   * Crear usuario en la bd de mySQL (con sequelize)
+   * Redirigin a la sección de login del front
