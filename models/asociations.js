@@ -1,5 +1,6 @@
 import { Musician } from './musician.model.js';
 import { Style } from './style.model.js';
+import { Instrument } from './instrument.model.js';
 
 // MUSICIAN & STYLE RELATED
 Musician.belongsToMany(Style, { 
@@ -16,7 +17,19 @@ Style.belongsToMany(Musician, {
 
 // MUSICIAN & INSTRUMENT RELATED
 
+Musician.belongsToMany(Instrument, { 
+    through: 'musicians_instruments', 
+    foreignKey: 'musicianId', 
+    otherKey: 'instrumentId' 
+    }
+);
+
+Instrument.belongsToMany(Musician, {
+    through: 'musicians_instruments',
+    foreignKey: 'instrumentId',
+    otherKey: 'musicianId' });
+
 // STYLE & INSTRUMENT RELATED
 
 
-export { Musician, Style };
+export { Musician, Style, Instrument };

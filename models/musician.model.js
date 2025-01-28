@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, INTEGER } from 'sequelize';
 import sequelize from '../databases/sql.connect.js';
 
 // Definición del modelo Musician
@@ -35,6 +35,13 @@ const Musician = sequelize.define('Musician', {
     last_name: {
         type: DataTypes.STRING(50)
     },
+    age: {
+        type: DataTypes.INTEGER,
+        validate: {
+            min: 18, // Edad mínima
+            max: 99  // Edad máxima
+          }
+    },
     slogan: {
         type: DataTypes.STRING(150)
     },
@@ -52,6 +59,9 @@ const Musician = sequelize.define('Musician', {
     },
     tiktok: {
         type: DataTypes.STRING
+    },
+    last_connection: {
+        type: DataTypes.DATE
     }
 }, {
     tableName: 'musicians'

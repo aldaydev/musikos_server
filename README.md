@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 28/01/2025 - Noche - style musician_style model and mongoConnect
+### Spring 1 - 28/01/2025 - Tarde - instrument and musician_instrument model created
 
 Dependencias:
 
@@ -33,7 +33,7 @@ MUSICIAN:
     * tiktok <>
  - Primary key:
     * id <>
- - Foreign Keys:
+ - Foreign Keys (associations in sequelize)
     * Instrumentos
     * Estilos
     * Región
@@ -46,7 +46,10 @@ MUSICIAN:
    * Creación de fichero de conexión a MySQL
    * Creación de modelo "Musician"
    * Creación de modelo "Style"
+   * Creación de modelo "Instrument"
    * Creación de modelo intermedio "Musician_Style"
+   * Creación de modelo intermedio "Musician_Instrument"
+   * Creación de asociaciones entre tablas
    * Creación de fichero de conexión a MongoDB
 
 - Crear endpoint "/signup"

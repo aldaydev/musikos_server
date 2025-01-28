@@ -10,6 +10,7 @@ import EmailViews from "../views/email.views.js";
 
 class Musicians {
 
+    //SignUp controller
     async signUp(req, res){
         try{
             //Validating pass, email and username
@@ -52,6 +53,7 @@ class Musicians {
         }
     }
 
+    //Confirm SignUp controller
     async confirmSignUp(req, res){
         try{
             const authData = await Token.verify(req.params.token);
@@ -73,7 +75,6 @@ class Musicians {
         }
         
     }
-
 }
 
 export default new Musicians;

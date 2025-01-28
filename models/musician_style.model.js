@@ -1,4 +1,3 @@
-import { DataTypes } from 'sequelize';
 import sequelize from '../databases/sql.connect.js';
 
 const Musician_Style = sequelize.define(
