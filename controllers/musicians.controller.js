@@ -1,13 +1,16 @@
-import { Musician } from "../models/models.js";
+//Dependency imports
 import Token from "../utils/token.js";
 import Encrypt from '../utils/bcrypt.js';
 import Mailing from "../utils/mailing.js";
 import Validate from "../utils/validate.js";
+//Model import
+import { Musician } from "../models/musician.model.js";
+//Email views import
 import EmailViews from "../views/email.views.js";
 
-
 class Musicians {
-    async create(req, res){
+
+    async signUp(req, res){
         try{
             //Validating pass, email and username
             if(!Validate.pass(req.body.pass)){
@@ -45,11 +48,11 @@ class Musicians {
 
         }catch(e){
             console.error('Error creating new musician', e);
-			res.status(500).json({ message: 'Error creating new musician', e });
+			res.status(500).json({ message: 'Error al crear tu cuenta', e });
         }
     }
 
-    async confirm(req, res){
+    async confirmSignUp(req, res){
         try{
             const authData = await Token.verify(req.params.token);
 

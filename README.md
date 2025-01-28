@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 27/01/2025 - Noche - Nodemailer operativo
+### Spring 1 - 28/01/2025 - Noche - style musician_style model and mongoConnect
 
 Dependencias:
 
@@ -11,6 +11,7 @@ npm i mysql2
 npm i jsonwebtoken
 npm i nodemailer
 npm i bcrypt
+npm i mongoose
 npm i dotenv (PENDIENTE)
 
 
@@ -34,15 +35,19 @@ MUSICIAN:
     * id <>
  - Foreign Keys:
     * Instrumentos
-    * estilos
-    * Ciudad
+    * Estilos
+    * Región
 
 1er SPRINT
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales
-   * Creación de server.js -> node, middlewares, conexión a BD
-   * Creación de modelo "Musicians"
+   * Creación de server.js -> node, middlewares, conexión a BDs
+   * Creación de fichero de conexión a MySQL
+   * Creación de modelo "Musician"
+   * Creación de modelo "Style"
+   * Creación de modelo intermedio "Musician_Style"
+   * Creación de fichero de conexión a MongoDB
 
 - Crear endpoint "/signup"
    * Request - Post - email, username, pass
@@ -56,4 +61,7 @@ MUSICIAN:
    * Verificar token (obtenido de params)
    * Recopilar email, username y pass (obtenidos del token)
    * Crear usuario en la bd de mySQL (con sequelize)
-   * Redirigin a la sección de login del front
+   * Redirigir a la sección de login del front
+
+- Crear endpoint LOPD
+- Crear endpoint Condiciones
