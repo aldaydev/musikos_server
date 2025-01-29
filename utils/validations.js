@@ -17,5 +17,4 @@ class Validate {
         return regex.test(username);
     }
 }
-
 export default new Validate;

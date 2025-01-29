@@ -1,4 +1,4 @@
-//Express & middlewares imports
+//Express & middleware imports
 import express, {json, urlencoded} from 'express';
 import cors from 'cors';
 import { router } from './routes/routes.js';
@@ -7,16 +7,16 @@ import { router } from './routes/routes.js';
 import sequelize from './databases/sql.connect.js';
 
 //Squelize Models imports
-import { Musician, Style, Instrument } from './models/asociations.js';
-import Musician_Style from './models/musician_style.model.js';
-import Musician_Instrument from './models/musicians_instruments.model.js';
+import { Musician, Style, Instrument } from './models/mysql.models/asociations.js';
+import Musician_Style from './models/mysql.models/musician_style.model.js';
+import Musician_Instrument from './models/mysql.models/musicians_instruments.model.js';
 
 //Squelize Seeding tables imports
 import { seedInstruments, seedStyles } from './databases/sql.seed.js';
 
 //Mongoose connection import
 import connectMongo from './databases/mongo.connect.js';
-
+import seedLegal from './databases/mongo.seed.js';
 
 //Express inicialization
 const app = express();
@@ -43,10 +43,9 @@ const startServer = async () => {
 		await Instrument.sync();
 		await Musician_Style.sync();
 		await Musician_Instrument.sync();
-
 		console.log('MySQL - Modelos sincronizados.');
 
-		//Seeding static tables
+		//Seeding mySQL static tables (only in production)
 		await seedStyles();
 		await seedInstruments();
 		console.log('MySQL - Datos introducidos en tablas fijas');
@@ -54,6 +53,9 @@ const startServer = async () => {
 		//Connect to MongoDB (Mongoose)
 		await connectMongo();
 		console.log('MongoDB - Conexión correcta a BD');
+
+		//Seeding MongoDB static tables (only in production)
+		await seedLegal();
 
 		//Inicializating server at selected port
 		app.listen(port, () => console.log(`Server running on port ${port}`));

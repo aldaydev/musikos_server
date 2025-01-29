@@ -1,5 +1,5 @@
-import { Instrument } from "../models/instrument.model.js";
-import { Style } from "../models/style.model.js";
+import { Instrument } from "../models/mysql.models/instrument.model.js";
+import { Style } from "../models/mysql.models/style.model.js";
 
 const seedStyles = async () => {
     const styles = [
@@ -69,9 +69,9 @@ const seedInstruments = async () => {
         "Cajón flamenco",
         "Campanas tubulares",
         "Lira"
-      ];
+    ];
 
-      for (const instrument of instruments) {
+    for (const instrument of instruments) {
         await Instrument.findOrCreate({ where: { instrument_name: instrument } });
     }
 }

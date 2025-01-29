@@ -1,0 +1,43 @@
+Más comunes:
+
+200 OK: Solicitud exitosa.
+201 Created: Creación exitosa de un recurso.
+400 Bad Request: La solicitud es incorrecta o mal formada.
+401 Unauthorized: Falta de autenticación.
+403 Forbidden: El cliente no tiene permiso para acceder al recurso.
+404 Not Found: El recurso no se encontró.
+
+* 1xx - Informativos:
+
+- 100 Continue: El servidor ha recibido los encabezados de la solicitud y el cliente debe continuar enviando el cuerpo de la solicitud.
+- 101 Switching Protocols: El servidor está cambiando el protocolo según lo solicitado por el cliente.
+
+* 2xx - Éxito: Estos códigos indican que la solicitud se ha procesado correctamente.
+
+- 200 OK: La solicitud fue exitosa y la respuesta contiene el recurso solicitado.
+- 201 Created: La solicitud fue exitosa y ha dado lugar a la creación de un nuevo recurso.
+- 204 No Content: La solicitud fue exitosa, pero no hay contenido para enviar en la respuesta (por ejemplo, al eliminar un recurso).
+
+* 3xx - Redirección: Estos códigos indican que se necesita una acción adicional del cliente, generalmente una redirección.
+
+- 301 Moved Permanently: El recurso solicitado ha sido movido permanentemente a una nueva URL.
+- 302 Found (o Moved Temporarily): El recurso solicitado se ha movido temporalmente a una nueva URL.
+- 304 Not Modified: El recurso no ha cambiado desde la última vez que el cliente lo solicitó (es usado por cachés).
+
+* 4xx - Errores del cliente: Estos códigos indican que hay un problema con la solicitud realizada por el cliente.
+
+- 400 Bad Request: La solicitud no puede ser procesada debido a errores de sintaxis o datos incorrectos.
+- 401 Unauthorized: El cliente no está autorizado para acceder al recurso solicitado. Es necesario autenticar al usuario.
+- 403 Forbidden: El servidor entendió la solicitud, pero no tiene permiso para procesarla. El cliente no tiene acceso al recurso.
+- 404 Not Found: El recurso solicitado no existe en el servidor.
+- 405 Method Not Allowed: El método HTTP utilizado (por ejemplo, GET, POST) no está permitido para el recurso solicitado.
+- 409 Conflict: La solicitud no se pudo completar debido a un conflicto en los datos (por ejemplo, intentar crear un recurso con una clave que ya existe).
+- 422 Unprocessable Entity: El servidor entiende el tipo de contenido de la solicitud, pero no puede procesarla debido a un error de validación (usado comúnmente con APIs RESTful).
+- 429 Too Many Requests: El cliente ha enviado demasiadas solicitudes en un período de tiempo determinado (limitación de tasa).
+
+* 5xx - Errores del servidor: Estos códigos indican que hubo un error en el servidor al procesar la solicitud.
+
+- 500 Internal Server Error: El servidor encontró un error inesperado que le impidió procesar la solicitud.
+502 Bad Gateway: El servidor recibió una respuesta inválida de un servidor ascendente o proxy.
+- 503 Service Unavailable: El servidor no está disponible temporalmente, generalmente debido a mantenimiento o sobrecarga.
+- 504 Gateway Timeout: El servidor, actuando como un gateway o proxy, no recibió una respuesta oportuna de un servidor ascendente.

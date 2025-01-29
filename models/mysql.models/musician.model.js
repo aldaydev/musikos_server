@@ -1,5 +1,5 @@
 import { DataTypes, INTEGER } from 'sequelize';
-import sequelize from '../databases/sql.connect.js';
+import sequelize from '../../databases/sql.connect.js';
 
 // Definición del modelo Musician
 const Musician = sequelize.define('Musician', {
@@ -22,6 +22,16 @@ const Musician = sequelize.define('Musician', {
     pass: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    accepted_terms_at: {
+        type: DataTypes.DATE,
+        allowNull: false, // Obliga a aceptar los términos al registrarse.
+        defaultValue: DataTypes.NOW, // Registra automáticamente la fecha de aceptación.
+    },
+    accepted_privacy_at: {
+        type: DataTypes.DATE,
+        allowNull: false, // Lo mismo para la política de privacidad.
+        defaultValue: DataTypes.NOW,
     },
     //Datos que se introducen una vez creado
     image: {

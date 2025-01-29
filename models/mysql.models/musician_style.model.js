@@ -1,4 +1,4 @@
-import sequelize from '../databases/sql.connect.js';
+import sequelize from '../../databases/sql.connect.js';
 
 const Musician_Style = sequelize.define(
     'Musician_Style', 

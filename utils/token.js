@@ -25,8 +25,6 @@ class Token {
             });
         });
     }
-
-    
 }
 
 export default new Token;
