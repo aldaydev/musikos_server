@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 29/01/2025 - Madrugada - legal endpoints created and optimizating code
+### Spring 1 - 31/01/2025 - Madrugada - just testing
 
 Dependencias:
 

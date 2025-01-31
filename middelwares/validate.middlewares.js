@@ -31,15 +31,18 @@ class validation_MW {
 
         //Checking if terms and privacy were accepted
         if (!acceptTerms || !acceptPrivacy) {
+            console.log('Debes aceptar los Términos y Condiciones y la Política de Privacidad.')
             res.status(400).json({msg: 'Debes aceptar los Términos y Condiciones y la Política de Privacidad.'});
         }
 
         //Checking if email already exists
         else if(await Musician.findOne({ where: {email} })){
+            console.log(`Ya hay una cuenta registrada con el email ${email}`)
             return res.status(400).json({ msg: `Ya hay una cuenta registrada con el email ${email}`});
         }
         //Checking if username already exists
         else if(await Musician.findOne({ where: {username} })){
+            console.log(`El username (${username}) no está disponible.`);
             return res.status(400).json({ msg: `El username (${username}) no está disponible.` });
         }else{
             next();
