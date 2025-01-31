@@ -16,8 +16,7 @@ const router = Router();
 
 //EndPoint for creating a musician
 router.post('/bandbros/v1/musicians/signup', 
-    Validation_MW.initial, //Basic Validations Middleware
-    Validation_MW.existsAndTerms, //Exists Validations Middleware
+    Validation_MW.signUp, //Validations Middleware
     Encrypt_MW.generate, //Encrypting pass Middleware
     Musicians.signUp //Final controller
 );

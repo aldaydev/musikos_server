@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 31/01/2025 - Madrugada - just testing
+### Spring 1 - 31/01/2025 - Tarde - reorganizing validate middlewares of signup
 
 Dependencias:
 
