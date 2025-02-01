@@ -26,8 +26,6 @@ class validation_MW {
         //Body request destructuring
         const {email, username, pass, acceptTerms, acceptPrivacy} = req.body;
 
-        console.log(req.body);
-
         //Validating pass format
         if(!req.body.pass || !Validate.pass(pass)){
             console.log('Contraseña inexistente o con formato incorrecto');
@@ -54,7 +52,7 @@ class validation_MW {
             console.log(`El username (${username}) no está disponible.`);
             return res.status(400).json({ msg: `El username (${username}) no está disponible.` });
         
-        
+        //Checking accepted terms and privacy
         }else if (!acceptTerms || !acceptPrivacy) {
             console.log('Debes aceptar los Términos y Condiciones y la Política de Privacidad.', acceptTerms, acceptPrivacy)
             res.status(400).json({msg: 'Debes aceptar los Términos y Condiciones y la Política de Privacidad.'});

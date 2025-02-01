@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 31/01/2025 - Tarde - reorganizing validate middlewares of signup
+### Spring 1 - 01/02/2025 - Madrugada - testing with front
 
 Dependencias:
 
@@ -83,3 +83,28 @@ MUSICIAN:
 - Crear endpoint Condiciones
    * Busca el documento "terms" en la colección "legals"
    * Devuelve html con clases al front
+
+
+VALIDACIÓN DEL USERNAME
+
+1. Debe tener entre 3 y 30 caracteres
+2. Solo puede contener minúsculas (a-z), números (0-9), guion (-) y guion bajo (_)
+3. No puede empezar ni terminar con _ o - 
+4. No puede tener dos guiones (--) o dos guiones bajos (__) seguidos
+
+VALIDACIÓN PASS
+
+1. Una letra minúscula (a-z)
+2. Una letra mayúscula (A-Z)
+3. Un número (0-9)
+4. Un carácter especial (@$!-_%*?&)
+5. Mínimo 8 caracteres de longitud
+
+VALIDACIÓN EMAIL
+
+1. Evita puntos consecutivos (..) en la parte local del email.
+2. La parte local (antes del @) puede contener letras, números y caracteres especiales permitidos: ._%+-, y debe tener entre 1 y 64 caracteres.
+3. El dominio debe ser alfanumérico y puede incluir . y -, pero no puede comenzar ni terminar con esos caracteres.
+4. Debe tener un TLD (por ejemplo, .com, .org) de al menos 2 letras.
+5. Debe tener un @ y un punto . entre el dominio y el TLD.
+6. Asegura que no haya caracteres extra al final del string.

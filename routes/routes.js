@@ -6,8 +6,8 @@ import Musicians from '../controllers/musicians.controller.js';
 import Legals from '../controllers/legal.controller.js';
 
 //Middleware imports
-import Validation_MW from '../middelwares/validate.middlewares.js';
-import Encrypt_MW from '../middelwares/encrypt.middelwares.js';
+import Validation_MW from '../middlewares/validate.middlewares.js';
+import Encrypt_MW from '../middlewares/encrypt.middelwares.js';
 
 //Router initialization
 const router = Router();
