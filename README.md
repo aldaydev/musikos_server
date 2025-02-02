@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 01/02/2025 - Madrugada - testing with front
+### Spring 1 - 02/02/2025 - Madrugada - correcting legal views and responses
 
 Dependencias:
 
@@ -40,7 +40,12 @@ MUSICIAN:
     * Estilos
     * Región
 
-##1er SPRINT
+## 1er SPRINT
+
+### RESUMEN DE OBJETIVOS:
+1. Inicialización del proyecto
+2. Diseño de la estructura de datos
+3. Función de signUp sincronizada con frontend
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales

@@ -1,7 +1,6 @@
 export const termsHtml = `
 <div class="legal__container">
     <h3 class="legal__title">Términos y Condiciones de BandBros</h3>
-    <p class="legal__text">(Referencia general)</p>
 
     <h4 class="legal__subtitle">Introducción</h4>
     <p class="legal__text">
@@ -10,7 +9,7 @@ export const termsHtml = `
 
     <h4 class="legal__subtitle">1. Servicios</h4>
     <p class="legal__text">
-        BandBros ofrece [detallar los servicios ofrecidos: streaming, redes sociales, foros, etc.]. Nos reservamos el derecho de modificar o interrumpir nuestros servicios en cualquier momento.
+        BandBros ofrece un servicio de búsqueda de músicos y bandas a través de la creación de perfiles. Nos reservamos el derecho de modificar o interrumpir nuestros servicios en cualquier momento.
     </p>
 
     <h4 class="legal__subtitle">2. Uso Aceptable</h4>
@@ -43,7 +42,6 @@ export const termsHtml = `
 export const privacyHtml = `
 <div class="legal__container">
     <h3 class="legal__title">Política de Privacidad de BandBros</h3>
-    <p class="legal__text">(Referencia general)</p>
     
     <h4 class="legal__subtitle">Introducción</h4>
     <p class="legal__text">
