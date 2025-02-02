@@ -59,6 +59,37 @@ class Musicians {
         }
     }
 
+    //Check if a username already exists
+    async checkUsername(req, res){
+        const {username} = req.body;
+
+        try{
+            if(await Musician.findOne({ where: {username} })){
+                res.json({exists: true})
+            }else{
+                res.json({exists: false})
+            }
+        }catch(e){
+            res.status(500).json({msg: 'Error al comprobar username', error: e})
+        }
+    }
+
+    //Check if a user exists (by email or username)
+    async checkUser(req, res){
+        const {check} = req.body;
+        // console.log(req.body.check);
+        const result = await Musician.findOne({ where: {
+            [Op.or]: 
+                [
+                    { email: check },
+                    { username: check }
+                ]
+            } 
+        });
+        console.log(result);
+
+    }
+
     //SignIn controller
     async signIn(req, res){
         try{

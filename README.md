@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 02/02/2025 - Madrugada - correcting legal views and responses
+### Spring 1 - 02/02/2025 - Mañana - working on checkUsername endpoint
 
 Dependencias:
 

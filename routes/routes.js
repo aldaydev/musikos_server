@@ -31,6 +31,16 @@ router.post('/bandbros/v1/musicians/signin',
     Musicians.signIn
 );
 
+//Endpoint to check if a user already exists
+router.post('/bandbros/v1/musicians/check-user',
+    Musicians.checkUser
+);
+
+//Endpoint to check if a username already exists
+router.post('/bandbros/v1/musicians/check-username',
+    Musicians.checkUsername
+);
+
 //-------- MONGO ROUTES -------- //
 
 //EndPoint for getting terms and conds
