@@ -74,6 +74,21 @@ class Musicians {
         }
     }
 
+    //Check if a email already exists
+    async checkEmail(req, res){
+        const {email} = req.body;
+
+        try{
+            if(await Musician.findOne({ where: {email} })){
+                res.json({exists: true})
+            }else{
+                res.json({exists: false})
+            }
+        }catch(e){
+            res.status(500).json({msg: 'Error al comprobar username', error: e})
+        }
+    }
+
     //Check if a user exists (by email or username)
     async checkUser(req, res){
         const {check} = req.body;

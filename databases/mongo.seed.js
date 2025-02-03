@@ -15,9 +15,9 @@ const seedLegal = async () => {
                 { type: 'privacy', html: privacyHtml }
             ]);
 
-            console.log('Database seeded successfully!');
+            console.log('MongoDB - Seeding "legals" table');
         } else {
-            console.log('Database already contains data, skipping seed.');
+            console.log('MongoDB - "legals" already seeded.');
         }
 } catch (error) {
     console.error('Error seeding database:', error);

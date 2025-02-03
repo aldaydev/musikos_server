@@ -12,7 +12,7 @@ import Encrypt_MW from '../middlewares/encrypt.middelwares.js';
 //Router initialization
 const router = Router();
 
-//-------- SQL ROUTES -------- //
+// ---------- SQL ROUTES ---------- //
 
 //EndPoint for creating a musician
 router.post('/bandbros/v1/musicians/signup', 
@@ -41,7 +41,12 @@ router.post('/bandbros/v1/musicians/check-username',
     Musicians.checkUsername
 );
 
-//-------- MONGO ROUTES -------- //
+//Endpoint to check if a email already exists
+router.post('/bandbros/v1/musicians/check-email',
+    Musicians.checkEmail
+);
+
+// ---------- MONGO ROUTES ---------- //
 
 //EndPoint for getting terms and conds
 router.get('/bandbros/v1/legal/terms', Legals.getTerms);

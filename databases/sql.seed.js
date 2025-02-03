@@ -34,6 +34,8 @@ const seedStyles = async () => {
     for (const style of styles) {
         await Style.findOrCreate({ where: { style_name: style } });
     }
+
+    return console.log('MySQL - Seeding "styles" table')
 };
 
 const seedInstruments = async () => {
@@ -74,6 +76,8 @@ const seedInstruments = async () => {
     for (const instrument of instruments) {
         await Instrument.findOrCreate({ where: { instrument_name: instrument } });
     }
+
+    return console.log('MySQL - Seeding "instruments" table')
 }
 
 export { seedStyles, seedInstruments };

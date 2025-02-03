@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 02/02/2025 - Mañana - working on checkUsername endpoint
+### Spring 1 - 03/02/2025 - Madrugada - commenting code
 
 Dependencias:
 
@@ -12,6 +12,7 @@ npm i jsonwebtoken
 npm i nodemailer
 npm i bcrypt
 npm i mongoose
+npm i swagger-ui-express swagger-jsdoc
 npm i dotenv (PENDIENTE)
 
 
