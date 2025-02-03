@@ -31,7 +31,7 @@ app.use(urlencoded({extended: false}));
 app.use(cors());
 app.use(router);
 
-// Configuración de Swagger UI
+// Swagger UI Configuration
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //Port definition
@@ -74,4 +74,5 @@ const startServer = async () => {
 	}
 }
 
+//Server initialization
 startServer();

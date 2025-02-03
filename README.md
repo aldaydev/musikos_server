@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 03/02/2025 - Madrugada - commenting code
+### Spring 1 - 03/02/2025 - Madrugada - commenting code on server
 
 Dependencias:
 
