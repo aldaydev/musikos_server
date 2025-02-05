@@ -1,38 +1,30 @@
-import nodemailer from 'nodemailer';
+import transporter from "../config/nodemailer.js";
 
-const email = "aldaymailing@gmail.com";
-const pass = "kttb aoub hwfz qsfw";
-
-// Crear un objeto de transporte
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-        user: email,
-        pass: pass,
-    },
-});
+const email = process.env.GMAIL_EMAIL;
 
 class Mailing {
-    async send (emailData){
+    async send (emailData, res){
+
+        console.log('EMAIL', email);
         // Configurar el objeto mailOptions
         const mailOptions = {
-            from: email,
+            from: '"Band Bros" <correo>',
             to: emailData.to,
             subject: emailData.subject,
             // text: "Contenido del email en texto plano",
             html: emailData.html
         };
 
-        // Enviar el email
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 console.log("Error:", error);
+                return res.status(400).json({message: 'No se ha podido enviar el email de confirmación'})
             } else {
                 console.log("Email enviado:", info.response);
+                return res.status(200).json({message: 'Mensaje enviado'})
             }
         });
+
 
     }
 }

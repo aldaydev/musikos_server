@@ -22,8 +22,15 @@ class Musicians {
                 subject: 'Confirma tu cuenta en BandBros',
                 html: EmailViews.confirmation(confirmationUrl, req.body.username)
             }
+
+            // const loadMailer = async () =>{
+            //     const {default: Mailing} = await import('../utils/mailing.js');
+            //     await Mailing.send(emailData);
+            // }
+            // loadMailer();
+            
             //Sending confirmation email
-            await Mailing.send(emailData);
+            await Mailing.send(emailData, res);
 
             //Final response
             console.log(`SignUp correcto. Se ha enviado un link de confirmación a ${req.body.email}.`);

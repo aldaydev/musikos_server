@@ -1,7 +1,13 @@
+//Logger config import | Activate env variables
+import logger from './config/logger.config.js';
+
+//Dotenv config import | Activate env variables
+import './config/env.config.js';
+
 //Express & global middleware imports
 import express, {json, urlencoded} from 'express';
 import cors from 'cors';
-import { router } from './routes/routes.js';
+import { router } from './routes/router.js';
 
 //Sequelize connection import
 import sequelize from './databases/sql.connect.js';
@@ -22,7 +28,7 @@ import seedLegal from './databases/mongo.seed.js';
 import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./utils/swagger.config.js";
 
-//Express inicialization
+//Express initialization
 const app = express();
 
 //Global middlewares
@@ -42,7 +48,7 @@ const startServer = async () => {
 	try{
 		//Connect to mySQL DB (Sequelize)
 		await sequelize.authenticate();
-        console.log('MySQL - Connected');
+		logger.info('MySQL - Connected');
 
 		//Sync sequelize models
         await Musician.sync();
@@ -50,27 +56,27 @@ const startServer = async () => {
 		await Instrument.sync();
 		await Musician_Style.sync();
 		await Musician_Instrument.sync();
-		console.log('MySQL - Models synchronized');
+		logger.info('MySQL - Models synchronized');
 
 		//Seeding mySQL static tables (only in production)
 		await seedStyles();
 		await seedInstruments();
-		console.log('MySQL - All static tables seeded');
+		logger.info('MySQL - All static tables seeded');
 
 		//Connect to MongoDB (Mongoose)
 		await connectMongo();
-		console.log('MongoDB - Connected');
+		logger.info('MongoDB - Connected');
 
 		//Seeding MongoDB static tables (only in production)
 		await seedLegal();
-		console.log('MongoDB - All static tables seeded');
+		logger.info('MongoDB - All static tables seeded');
 
 		//Inicializating server at selected port
-		app.listen(port, () => console.log(
+		app.listen(port, () => logger.info(
 			`Server running on http://localhost:${port}`
 		));
 	}catch(e){
-		console.log('Error de conexión al servidor', e);
+		logger.error('Error de conexión al servidor ' + e.message);
 	}
 }
 

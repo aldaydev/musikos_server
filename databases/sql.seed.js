@@ -1,3 +1,4 @@
+import logger from "../config/logger.config.js";
 import { Instrument } from "../models/mysql.models/instrument.model.js";
 import { Style } from "../models/mysql.models/style.model.js";
 
@@ -35,7 +36,7 @@ const seedStyles = async () => {
         await Style.findOrCreate({ where: { style_name: style } });
     }
 
-    return console.log('MySQL - Seeding "styles" table')
+    return logger.info('MySQL - Seeding "styles" table')
 };
 
 const seedInstruments = async () => {
@@ -77,7 +78,7 @@ const seedInstruments = async () => {
         await Instrument.findOrCreate({ where: { instrument_name: instrument } });
     }
 
-    return console.log('MySQL - Seeding "instruments" table')
+    return logger.info('MySQL - Seeding "instruments" table')
 }
 
 export { seedStyles, seedInstruments };

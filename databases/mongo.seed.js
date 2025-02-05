@@ -1,3 +1,4 @@
+import logger from '../config/logger.config.js';
 import Legal from '../models/mongo.models/legal.model.js';
 import { privacyHtml, termsHtml } from '../views/legal.views.js';
 
@@ -15,12 +16,12 @@ const seedLegal = async () => {
                 { type: 'privacy', html: privacyHtml }
             ]);
 
-            console.log('MongoDB - Seeding "legals" table');
+            logger.info('MongoDB - Seeding "legals" table');
         } else {
-            console.log('MongoDB - "legals" already seeded.');
+            logger.info('MongoDB - "legals" already seeded.');
         }
 } catch (error) {
-    console.error('Error seeding database:', error);
+    logger.error('Error seeding database:', error);
 }
 };
 

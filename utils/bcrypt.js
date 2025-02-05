@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 
+console.log('ooooo')
+
 class Encrypt {
     async generate(pass) {
         try{

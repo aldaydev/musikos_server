@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 03/02/2025 - Madrugada - commenting code on server
+### Spring 1 - 05/02/2025 - Madrugada - dontenv and winston logger
 
 Dependencias:
 
@@ -13,7 +13,9 @@ npm i nodemailer
 npm i bcrypt
 npm i mongoose
 npm i swagger-ui-express swagger-jsdoc
-npm i dotenv (PENDIENTE)
+npm i dotenv
+npm i winston
+
 
 
 MUSICIAN:

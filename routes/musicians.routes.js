@@ -3,7 +3,6 @@ import { Router } from 'express';
 
 //Controllers import
 import Musicians from '../controllers/musicians.controller.js';
-import Legals from '../controllers/legal.controller.js';
 
 //Middleware imports
 import Validation_MW from '../middlewares/validate.middlewares.js';
@@ -12,46 +11,36 @@ import Encrypt_MW from '../middlewares/encrypt.middelwares.js';
 //Router initialization
 const router = Router();
 
-// ---------- SQL ROUTES ---------- //
-
 //EndPoint for creating a musician
-router.post('/bandbros/v1/musicians/signup', 
+router.post('/signup', 
     Validation_MW.signUp, //Validations Middleware
     Encrypt_MW.generate, //Encrypting pass Middleware
     Musicians.signUp //Final controller
 );
 
 //EndPoint for confirming musician account (email)
-router.get('/bandbros/v1/musicians/signup-confirm/:token', 
+router.get('/signup-confirm/:token', 
     Musicians.confirmSignUp
 );
 
 //EndPoint for signingIn
-router.post('/bandbros/v1/musicians/signin', 
+router.post('/signin', 
     Musicians.signIn
 );
 
 //Endpoint to check if a user already exists
-router.post('/bandbros/v1/musicians/check-user',
+router.post('/check-user',
     Musicians.checkUser
 );
 
 //Endpoint to check if a username already exists
-router.post('/bandbros/v1/musicians/check-username',
+router.post('/check-username',
     Musicians.checkUsername
 );
 
 //Endpoint to check if a email already exists
-router.post('/bandbros/v1/musicians/check-email',
+router.post('/check-email',
     Musicians.checkEmail
 );
 
-// ---------- MONGO ROUTES ---------- //
-
-//EndPoint for getting terms and conds
-router.get('/bandbros/v1/legal/terms', Legals.getTerms);
-
-//EndPoint for getting terms and conds
-router.get('/bandbros/v1/legal/privacy', Legals.getPrivacy);
-
-export { router };
+export default router;
