@@ -19,7 +19,7 @@ const Musician = sequelize.define('Musician', {
         allowNull: false,
         unique: true
     },
-    pass: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -50,7 +50,7 @@ const Musician = sequelize.define('Musician', {
         validate: {
             min: 18, // Edad mínima
             max: 99  // Edad máxima
-          }
+        }
     },
     slogan: {
         type: DataTypes.STRING(150)

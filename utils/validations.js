@@ -1,8 +1,8 @@
 class Validate {
-    pass (pass){
+    pass (password){
         // Validate pass with regex
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!-_%*?&])[A-Za-z\d@$!-_%*?&]{8,}$/;
-        return regex.test(pass);
+        return regex.test(password);
     }
 
     email (email){

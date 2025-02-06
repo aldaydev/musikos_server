@@ -22,6 +22,8 @@ import { seedInstruments, seedStyles } from './databases/sql.seed.js';
 
 //Mongoose connection import
 import connectMongo from './databases/mongo.connect.js';
+
+//Mongoose Seeding tables imports
 import seedLegal from './databases/mongo.seed.js';
 
 //Swagger imports
@@ -75,6 +77,7 @@ const startServer = async () => {
 		app.listen(port, () => logger.info(
 			`Server running on http://localhost:${port}`
 		));
+
 	}catch(e){
 		logger.error('Error de conexión al servidor ' + e.message);
 	}

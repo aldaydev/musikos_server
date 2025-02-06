@@ -5,8 +5,8 @@ import { Router } from 'express';
 import Musicians from '../controllers/musicians.controller.js';
 
 //Middleware imports
-import Validation_MW from '../middlewares/validate.middlewares.js';
-import Encrypt_MW from '../middlewares/encrypt.middelwares.js';
+import Validation_MW from '../middlewares/validate.middleware.js';
+import Encrypt_MW from '../middlewares/encrypt.middelware.js';
 
 //Router initialization
 const router = Router();

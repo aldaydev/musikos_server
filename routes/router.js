@@ -17,5 +17,4 @@ router.use('/bandbros/v1/legal', legalRouter);
 router.use('/bandbros/v1/musicians', musiciansRouter);
 
 
-
 export { router };

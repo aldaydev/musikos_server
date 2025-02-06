@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 05/02/2025 - Madrugada - dontenv and winston logger
+### Spring 1 - 06/02/2025 - Madrugada - handling errors
 
 Dependencias:
 

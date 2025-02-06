@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import logger from '../config/logger.config.js';
 
 const {sign, verify} = jwt;
 
@@ -19,7 +20,17 @@ class Token {
         return new Promise((resolve, reject) => {
             verify(tokenToVerify, 'secretkey', (err, authData) => {
                 if (err) {
-                    return reject(new Error('Error al verificar el token'));
+                    let errorMessage = 'unknown';
+
+                    // Personalización basada en el tipo de error
+                    if (err.name === 'TokenExpiredError') {
+                        errorMessage = 'expired';
+                    } else if (err.name === 'JsonWebTokenError') {
+                        errorMessage = 'invalid';
+                    }
+    
+                    logger.info(errorMessage);
+                    return reject(new Error(errorMessage));
                 }
                 resolve(authData);
             });

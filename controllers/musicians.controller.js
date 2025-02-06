@@ -5,6 +5,7 @@ import Mailing from "../utils/mailing.js";
 import { Musician } from "../models/mysql.models/musician.model.js";
 //Email views import
 import EmailViews from "../views/email.views.js";
+import logger from "../config/logger.config.js";
 
 class Musicians {
     //SignUp controller
@@ -22,23 +23,18 @@ class Musicians {
                 subject: 'Confirma tu cuenta en BandBros',
                 html: EmailViews.confirmation(confirmationUrl, req.body.username)
             }
-
-            // const loadMailer = async () =>{
-            //     const {default: Mailing} = await import('../utils/mailing.js');
-            //     await Mailing.send(emailData);
-            // }
-            // loadMailer();
             
             //Sending confirmation email
             await Mailing.send(emailData, res);
 
             //Final response
-            console.log(`SignUp correcto. Se ha enviado un link de confirmación a ${req.body.email}.`);
-            return res.status(202).json({msg: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`});
+            logger.info(`Susscessful register. A confirmation link has been sent to ${req.body.email}.`);
+
+            return res.status(200).json({message: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`});
 
         }catch(e){
-            console.error('Error creating new musician', e);
-			res.status(500).json({ msg: 'Error al crear tu cuenta', error: e });
+            logger.error('Error creating account', e.message);
+			res.status(500).json({ message: 'Ha habido un error al crear tu cuenta', error: e.message });
         }
     }
 
@@ -51,18 +47,37 @@ class Musicians {
             //Taking user data from token (authData)
             const userData = {
                 email: authData.email,
-                pass: authData.pass,
+                password: authData.password,
                 username: authData.username
             }
 
             //Adding new musician to DB
-            const newMusician = await Musician.create(userData);
-            console.log('Músico creado:', newMusician.toJSON());
+            try{
+                await Musician.create(userData);
+            }catch(err){
+                logger.error('The user has already been confirmed', err.qslMessage);
+                throw new Error('alreadyconfirmed');
+            }
+            
 
             //Final response - redirect to front
-            return res.redirect(302, "https://cvaudiovisual.alday.es");
+            logger.info('Created musician:', authData.username);
+            return res.status(302).redirect("http://localhost:5173/login?confirmation=true");
         }catch(e){
-            res.status(404).send('<h1>No se ha podido confirmar tu cuenta</h1>');
+
+            let status;
+            if(e.message === 'invalid' || e.message === 'expired'){
+                status = 401;
+            }else if(e.message === 'alreadyconfirmed'){
+                status = 400;
+            }else{
+                status = 500;
+            }
+
+            res.status(status).redirect(
+                `http://localhost:5173/login?error=${e.message}`
+            );
+
         }
     }
 
@@ -77,7 +92,7 @@ class Musicians {
                 res.json({exists: false})
             }
         }catch(e){
-            res.status(500).json({msg: 'Error al comprobar username', error: e})
+            res.status(500).json({message: 'Error al comprobar username', error: e.message})
         }
     }
 
@@ -92,14 +107,13 @@ class Musicians {
                 res.json({exists: false})
             }
         }catch(e){
-            res.status(500).json({msg: 'Error al comprobar username', error: e})
+            res.status(500).json({message: 'Error al comprobar username', error: e.message})
         }
     }
 
     //Check if a user exists (by email or username)
     async checkUser(req, res){
-        const {check} = req.body;
-        // console.log(req.body.check);
+        const { check } = req.body;
         const result = await Musician.findOne({ where: {
             [Op.or]: 
                 [

@@ -1,19 +1,12 @@
 import bcrypt from 'bcrypt';
 
-console.log('ooooo')
+const encryptPassword = async (password) => {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+};
 
-class Encrypt {
-    async generate(pass) {
-        try{
-            const saltRounds = 10;
-            const hash = await bcrypt.hash(pass, saltRounds);
-            console.log('Password encrypted. Hash: ', hash);
-            return hash;
-        }catch(e){
-            return res.status(500).json({msg: "No se ha podido encriptar la contraseña", error: e})
-        }
-    }
+const comparePassword = async (password, hash) => {
+    return await bcrypt.compare(password, hash);
+};
 
-}
-
-export default new Encrypt;
+export {encryptPassword, comparePassword};
