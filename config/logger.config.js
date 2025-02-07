@@ -3,7 +3,7 @@ import winston from 'winston';
 //Set up ñpgger: levels, transports, formats
 const logger = winston.createLogger({
     // Puede ser 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
-    level: 'info', 
+    level: 'http', 
     transports: [
         new winston.transports.Console({
             format: winston.format.simple()

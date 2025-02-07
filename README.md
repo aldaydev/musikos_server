@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 06/02/2025 - Madrugada - handling errors
+### Spring 1 - 07/02/2025 - Madrugada - handling errors and customError
 
 Dependencias:
 

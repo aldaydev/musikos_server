@@ -1,15 +1,35 @@
 import Legal from "../models/mongo.models/legal.model.js";
+import logger from '../config/logger.config.js';
+import customError from "../utils/customError.js";
 
 class Legals {
     //Terms controller
     async getTerms(req, res){
         try{
+            logger.http('Request started: /legal/terms');
             const terms = await Legal.findOne({ type: "terms" });
-            console.log(terms);
-            res.json(terms);
-        }catch(e){
-            console.error('Error accessing the content of the terms and conditions', e);
-			res.status(500).json({ msg: 'Error al acceder al contenido de los términos y condiciones', error: e });
+            if(!terms){
+                throw new customError(
+                    'interno', 
+                    'Fallo al obtener los términos de servicio'
+                )
+                // throw new Error('Fallo al obtener los términos de servicio', {cause: 'interno'});
+            }else{
+                res.status(200).json(terms);
+            }
+        }catch(error){
+            if(error.type === 'interno'){
+                res.status(500).json({ 
+                    message: error.message, 
+                    type: error.type
+                });
+            }else{
+                logger.error('Unknown error');
+                res.status(500).json({ 
+                    message: 'Error inesperado en el servidor', 
+                    cause: 'interno' 
+                });
+            }
         }
     }
 
@@ -17,11 +37,29 @@ class Legals {
     async getPrivacy(req, res){
         try{
             const privacy = await Legal.findOne({ type: "privacy" });
-            console.log(privacy);
+            if(!privacy){
+                logger.error('Database failure');
+                throw new customError(
+                    'interno', 
+                    'Fallo al obtener la política de privacidad'
+                )
+            }else{
+                res.status(200).json(privacy);
+            }
             res.json(privacy);
-        }catch(e){
-            console.error('Error accessing the content of the privacy conditions', e);
-			res.status(500).json({ msg: 'Error al acceder al contenido de las condiciones de privacidad', error: e });
+        }catch(error){
+            console.log(error);
+            if(error.type === 'interno'){
+                res.status(500).json({ 
+                    message: error.message, 
+                    type: error.type 
+                });
+            }else{
+                logger.error('Unknown error');
+                res.status(500).json({ 
+                    message: 'Error inesperado en el servidor', 
+                    type: 'interno' });
+            }
         }
     }
 
