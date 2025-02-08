@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../../databases/sql.connect.js';
+import sequelize from '../../config/mysql.config.js';
 
 // Definición del modelo Musician
 const Style = sequelize.define('Style', {

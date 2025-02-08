@@ -6,6 +6,7 @@ import { Musician } from "../models/mysql.models/musician.model.js";
 //Email views import
 import EmailViews from "../views/email.views.js";
 import logger from "../config/logger.config.js";
+import musicianService from "../services/mysql/musician.service.js";
 
 class Musicians {
     //SignUp controller
@@ -83,16 +84,15 @@ class Musicians {
 
     //Check if a username already exists
     async checkUsername(req, res){
-        const {username} = req.body;
-
         try{
-            if(await Musician.findOne({ where: {username} })){
+            const exists = await musicianService.checkUsername(req.body.username);
+            if(exists){
                 res.json({exists: true})
             }else{
                 res.json({exists: false})
             }
-        }catch(e){
-            res.status(500).json({message: 'Error al comprobar username', error: e.message})
+        }catch(error){
+            res.status(500).json({message: 'Error al comprobar username', error})
         }
     }
 
@@ -102,6 +102,7 @@ class Musicians {
 
         try{
             if(await Musician.findOne({ where: {email} })){
+
                 res.json({exists: true})
             }else{
                 res.json({exists: false})

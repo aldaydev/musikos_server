@@ -1,9 +1,12 @@
 import swaggerJsDoc from "swagger-jsdoc";
-import path from "path";
+import YAML from 'yamljs';
+import path from 'path';
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const legalsSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/legals.yaml'));
 
 const swaggerOptions = {
     swaggerDefinition: {
@@ -18,17 +21,21 @@ const swaggerOptions = {
                 url: "https://github.com/aldaydev",
             }
         },
+        tags: [
+            { name: 'Legal', description: 'Operaciones relacionadas las condiciones de uso y la política de privacidad' },
+            // ... otros tags
+        ],
         servers: [
             { url: "http://localhost:3001", description: "Servidor local" }
         ],
         components: {
-            securitySchemes: {
-                BearerAuth: {
-                    type: "http",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
-                }
-            },
+            // securitySchemes: {
+            //     BearerAuth: {
+            //         type: "http",
+            //         scheme: "bearer",
+            //         bearerFormat: "JWT",
+            //     }
+            // },
             responses: {
                 UnauthorizedError: {
                     description: "Unauthorized",
@@ -51,8 +58,16 @@ const swaggerOptions = {
             },
         }
     },
-    apis: [path.join(__dirname, "../routes/routes.js")],
+    apis: ['../docs/swagger/*.yaml'],
 };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const swaggerDocs = swaggerJsDoc({
+    ...swaggerOptions,
+    definition: {
+        ...swaggerOptions.definition,
+        paths: {
+            ...legalsSwagger.paths,
+        },
+    },
+});
 export default swaggerDocs;

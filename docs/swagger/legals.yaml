@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  title: API de Direcciones
+  version: 1.0.0
+paths:
+  /bandbros/v1/legal/terms:
+    get:
+      tags:
+        - Legal
+      summary: Ver todo tipo de direcciones.
+      responses:
+        '200':
+          description: Listado de tipos de dirección.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "67868ab3c69cb35b43c45f58"
+                    type:
+                      type: string
+                      example: "ACERA"
+                    abr:
+                      type: string
+                      example: "AC"
+
+  /trainingpro/v1/address/all-towns:
+    get:
+      tags:
+        - Address
+      summary: Ver todos los municipios de Madrid
+      responses:
+        '200':
+          description: Lista de municipios en Madrid
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "60d0fe4f5311236168a109cb"
+                    nombre_municipio:
+                      type: string
+                      example: "Madrid"
+                    abrev_municipio:
+                      type: string
+                      example: "MAD"

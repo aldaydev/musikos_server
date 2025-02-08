@@ -10,25 +10,14 @@ import cors from 'cors';
 import { router } from './routes/router.js';
 
 //Sequelize connection import
-import sequelize from './databases/sql.connect.js';
-
-//Sequelize Models imports
-import { Musician, Style, Instrument } from './models/mysql.models/asociations.js';
-import Musician_Style from './models/mysql.models/musician_style.model.js';
-import Musician_Instrument from './models/mysql.models/musicians_instruments.model.js';
-
-//Sequelize Seeding tables imports
-import { seedInstruments, seedStyles } from './databases/sql.seed.js';
+import mysql from './databases/mysql.connection.js'
 
 //Mongoose connection import
-import connectMongo from './databases/mongo.connect.js';
-
-//Mongoose Seeding tables imports
-import seedLegal from './databases/mongo.seed.js';
+import mongodb from './databases/mongo.connection.js';
 
 //Swagger imports
-import swaggerUi from "swagger-ui-express";
-import swaggerDocs from "./utils/swagger.config.js";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from './config/swagger.config.js';
 
 //Express initialization
 const app = express();
@@ -48,38 +37,26 @@ const port = process.env.PORT || 3001;
 //Start server function
 const startServer = async () => {
 	try{
+
 		//Connect to mySQL DB (Sequelize)
-		await sequelize.authenticate();
-		logger.info('MySQL - Connected');
-
+		mysql.connect();
 		//Sync sequelize models
-        await Musician.sync();
-		await Style.sync();
-		await Instrument.sync();
-		await Musician_Style.sync();
-		await Musician_Instrument.sync();
-		logger.info('MySQL - Models synchronized');
-
+		await mysql.syncModels();
 		//Seeding mySQL static tables (only in production)
-		await seedStyles();
-		await seedInstruments();
-		logger.info('MySQL - All static tables seeded');
+		await mysql.seedTables();
 
 		//Connect to MongoDB (Mongoose)
-		await connectMongo();
-		logger.info('MongoDB - Connected');
-
+		await mongodb.connect();
 		//Seeding MongoDB static tables (only in production)
-		await seedLegal();
-		logger.info('MongoDB - All static tables seeded');
+		await mongodb.seedTables();
 
 		//Inicializating server at selected port
 		app.listen(port, () => logger.info(
-			`Server running on http://localhost:${port}`
+			`Server - Running on http://localhost:${port}`
 		));
 
-	}catch(e){
-		logger.error('Error de conexión al servidor ' + e.message);
+	}catch(error){
+		logger.error('Error de conexión al servidor ' + error.message);
 	}
 }
 

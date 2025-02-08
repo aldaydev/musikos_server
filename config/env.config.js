@@ -5,7 +5,7 @@ import logger from './logger.config.js';
 //function to activate env variables
 const envConfig = () => {
     dotenv.config();
-    logger.info('Variables de entorno activas');
+    logger.info('Server - Environment variables enabled');
 }
 
 export default envConfig();

@@ -1,5 +1,6 @@
 import logger from '../config/logger.config.js';
 import Legal from '../models/mongo.models/legal.model.js';
+import customError from '../utils/customError.js';
 import { privacyHtml, termsHtml } from '../views/legal.views.js';
 
 const seedLegal = async () => {
@@ -9,7 +10,6 @@ const seedLegal = async () => {
     
         // If there are no documents, seeds the collection
         if (count === 0) {
-            // console.log('Seeding database...');
 
             await Legal.insertMany([
                 { type: 'terms', html: termsHtml },
@@ -18,10 +18,13 @@ const seedLegal = async () => {
 
             logger.info('MongoDB - Seeding "legals" table');
         } else {
-            logger.info('MongoDB - "legals" already seeded.');
+            logger.info('MongoDB - "legals" already seeded');
         }
 } catch (error) {
-    logger.error('Error seeding database:', error);
+    throw new customError(
+        'interno', 
+        'MongoDB - Error seeding database'
+    )
 }
 };
 

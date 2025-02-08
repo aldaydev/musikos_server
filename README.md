@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 07/02/2025 - Madrugada - handling errors and customError
+### Spring 1 - 08/02/2025 - Mañana - refactoring code and swagger config
 
 Dependencias:
 
@@ -15,6 +15,8 @@ npm i mongoose
 npm i swagger-ui-express swagger-jsdoc
 npm i dotenv
 npm i winston
+npm i path
+npm i yamljs
 
 
 
