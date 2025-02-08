@@ -7,10 +7,10 @@ paths:
     get:
       tags:
         - Legal
-      summary: Ver todo tipo de direcciones.
+      summary: Ver terminos y condiciones.
       responses:
         '200':
-          description: Listado de tipos de dirección.
+          description: Datos de los terminos y condiciones.
           content:
             application/json:
               schema:

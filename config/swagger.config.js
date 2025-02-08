@@ -1,7 +1,7 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import YAML from 'yamljs';
 import path from 'path';
-import { fileURLToPath } from "url";
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,65 +9,38 @@ const __dirname = path.dirname(__filename);
 const legalsSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/legals.yaml'));
 
 const swaggerOptions = {
-    swaggerDefinition: {
-        openapi: "3.0.0",
-        info: {
-            title: "Band Bros - API Documentation",
-            version: "1.0.0",
-            description: "'Band Bros' Web App API Documentation",
-            contact: {
-                name: "Rafa Alday",
-                email: "aldaydev@gmail.com",
-                url: "https://github.com/aldaydev",
-            }
-        },
-        tags: [
-            { name: 'Legal', description: 'Operaciones relacionadas las condiciones de uso y la política de privacidad' },
-            // ... otros tags
-        ],
-        servers: [
-            { url: "http://localhost:3001", description: "Servidor local" }
-        ],
-        components: {
-            // securitySchemes: {
-            //     BearerAuth: {
-            //         type: "http",
-            //         scheme: "bearer",
-            //         bearerFormat: "JWT",
-            //     }
-            // },
-            responses: {
-                UnauthorizedError: {
-                    description: "Unauthorized",
-                    content: {
-                        "application/json": {
-                            example: { error: "Invalid or expired token" },
-                        },
-                    },
-                },
-            },
-            schemas: {
-                User: {
-                    type: "object",
-                    properties: {
-                        id: { type: "integer", example: 1 },
-                        name: { type: "string", example: "Juan Pérez" },
-                        email: { type: "string", example: "juan@example.com" },
-                    },
-                },
-            },
-        }
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Training Pro - API Documentación",
+      version: "1.0.0",
+      description: "Documentación de la API con Swagger",
+      contact: {
+        name: "Davinia",
+        email: 'tfm.davinia.unir@gmail.com'
+      },
     },
-    apis: ['../docs/swagger/*.yaml'],
+    tags: [
+      { name: 'Legal', description: 'Operaciones relacionadas con legal' },
+      // ... otros tags
+    ],
+    servers: [
+      {
+        url: "http://127.0.0.1:3001",
+      },
+    ],
+  },
+  apis: ["../docs/swagger/*.yaml"],
 };
 
 const swaggerDocs = swaggerJsDoc({
-    ...swaggerOptions,
-    definition: {
-        ...swaggerOptions.definition,
-        paths: {
-            ...legalsSwagger.paths,
-        },
+  ...swaggerOptions,
+  definition: {
+    ...swaggerOptions.definition,
+    paths: {
+      ...legalsSwagger.paths,
     },
+  },
 });
+
 export default swaggerDocs;
