@@ -18,6 +18,7 @@ import mongodb from './databases/mongo.connection.js';
 //Swagger imports
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './config/swagger.config.js';
+import error_MW from './middlewares/error.middleware.js';
 
 //Express initialization
 const app = express();
@@ -27,6 +28,7 @@ app.use(json());
 app.use(urlencoded({extended: false}));
 app.use(cors());
 app.use(router);
+app.use(error_MW);
 
 // Swagger UI Configuration
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));

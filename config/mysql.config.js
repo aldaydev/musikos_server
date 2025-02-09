@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import logger from './logger.config.js';
 
 //Configuración de la conexión a BD
-const sequelize = new Sequelize('bandbros', 'root', 'root', {
+const sequelize = new Sequelize('musiko', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
     port: 3306,

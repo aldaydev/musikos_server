@@ -10,12 +10,7 @@ export default {
         try{
             return await Legal.findOne({ type: value });
         }catch(error){
-            throw errors.database;
-            // throw new customError (
-            //     'interno', 
-            //     `Error al cargar los datos`
-            // );
+            throw {code: 'database'};
         }
-        
     }
 }

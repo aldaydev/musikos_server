@@ -1,0 +1,14 @@
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 14:59:15"}
+{"level":"error","timestamp":"2025-02-09 14:59:25"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:00:55"}
+{"level":"error","timestamp":"2025-02-09 15:01:05"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:01:42"}
+{"level":"error","timestamp":"2025-02-09 15:01:52"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:02:35"}
+{"level":"error","message":"MySQL - Error at seeding tables","timestamp":"2025-02-09 15:02:45"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:02:55"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-09 15:03:05"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:05:08"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-09 15:05:18"}
+{"level":"error","message":"MySQL - Error connecting Unknown database 'musiko'","name":"SequelizeConnectionError","original":{"code":"ER_BAD_DB_ERROR","errno":1049,"sqlMessage":"Unknown database 'musiko'","sqlState":"42000"},"parent":{"code":"ER_BAD_DB_ERROR","errno":1049,"sqlMessage":"Unknown database 'musiko'","sqlState":"42000"},"stack":"SequelizeConnectionError: Unknown database 'musiko'\n    at ConnectionManager.connect (C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\mysql\\connection-manager.js:102:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async ConnectionManager._connect (C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\abstract\\connection-manager.js:222:24)\n    at async C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\abstract\\connection-manager.js:174:32","timestamp":"2025-02-09 15:22:26"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-09 15:22:26"}

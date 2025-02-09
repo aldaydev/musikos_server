@@ -45,7 +45,7 @@ class MongoDB {
             await seedLegal();
             logger.info('MongoDB - All static tables seeded');
         } catch (error) {
-            logger.error(error.message);
+            logger.error('MongoDB - Error at seeding tables');
         }
     }
 }

@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 09/02/2025 - Madrugada - swagger on legals and custom errors
+### Spring 1 - 09/02/2025 - Mañana - error middleware config and musiko change
 
 Dependencias:
 
