@@ -16,12 +16,12 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "Documentación de la API con Swagger",
       contact: {
-        name: "Davinia",
-        email: 'tfm.davinia.unir@gmail.com'
+        name: "Rafa Alday",
+        email: 'aldaydev@gmail.com'
       },
     },
     tags: [
-      { name: 'Legal', description: 'Operaciones relacionadas con legal' },
+      { name: 'Legal', description: 'Operaciones relacionadas con terminos de uso y política de privacidad' },
       // ... otros tags
     ],
     servers: [
@@ -29,6 +29,57 @@ const swaggerOptions = {
         url: "http://127.0.0.1:3001",
       },
     ],
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+      schemas: {
+        Error: {
+          type: "object",
+          properties: {
+            type: {
+              type: "string",
+              example: "interno",
+            },
+            message: {
+              type: "string",
+              example: "Error inesperado en el servidor",
+            },
+          },
+        },
+      },
+      responses: {
+        UnexpectedError: {
+          description: "Error inesperado",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Error"
+              },
+              example: {
+                type: "interno",
+                message: "Error inesperado en el servidor"
+              }
+            },
+          },
+        },
+        InternalServerError: {
+          description: "Error inesperado en el servidor",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Error"
+              },
+            },
+          },
+        },
+        // Puedes seguir agregando más respuestas globales
+      }
+    },
   },
   apis: ["../docs/swagger/*.yaml"],
 };

@@ -1,54 +1,72 @@
 openapi: 3.0.0
 info:
-  title: API de Direcciones
+  title: API de recursos legales
   version: 1.0.0
 paths:
   /bandbros/v1/legal/terms:
     get:
       tags:
         - Legal
-      summary: Ver terminos y condiciones.
+      summary: Obtener los terminos y condiciones.
       responses:
         '200':
-          description: Datos de los terminos y condiciones.
+          description: Respuesta exitosa.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      example: "67868ab3c69cb35b43c45f58"
-                    type:
-                      type: string
-                      example: "ACERA"
-                    abr:
-                      type: string
-                      example: "AC"
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "67a760a9f54fc89199a6cf9e"
+                  type:
+                    type: string
+                    example: "terms"
+                  html:
+                    type: string
+                    example: "\n<div>Ejemplo</div>"
+        '404':
+          description: Error en la solicitud.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                message: "Fallo al obtener los términos y condiciones"
+                type: "interno"
+        '500':
+          $ref: "#/components/responses/UnexpectedError"
 
-  /trainingpro/v1/address/all-towns:
+  /bandbros/v1/legal/privacy:
     get:
       tags:
-        - Address
-      summary: Ver todos los municipios de Madrid
+        - Legal
+      summary: Obtener la política de privacidad.
       responses:
         '200':
-          description: Lista de municipios en Madrid
+          description: Respuesta exitosa.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      example: "60d0fe4f5311236168a109cb"
-                    nombre_municipio:
-                      type: string
-                      example: "Madrid"
-                    abrev_municipio:
-                      type: string
-                      example: "MAD"
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "67a760a9f54fc89199a6cf9e"
+                  type:
+                    type: string
+                    example: "privacy"
+                  html:
+                    type: string
+                    example: "\n<div>Ejemplo</div>"
+        '404':
+          description: Error en la solicitud.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                message: "Fallo al obtener la política de privacidad"
+                type: "interno"
+        '500':
+          $ref: "#/components/responses/UnexpectedError"

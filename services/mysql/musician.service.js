@@ -1,9 +1,5 @@
-
-// import { Musician } from "../../models/mysql.models/musician.model.js";
 import customError from "../../utils/customError.js";
 import { Musician } from "../../models/mysql.models/asociations.js";
-import mysql from "../../databases/mysql.connection.js";
-import sequelize from "../../config/mysql.config.js";
 
 export default {
 

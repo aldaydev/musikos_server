@@ -1,8 +1,13 @@
 import bcrypt from 'bcrypt';
+import errors from './errors.js';
 
 const encryptPassword = async (password) => {
-    const saltRounds = 10;
-    return await bcrypt.hash(password, saltRounds);
+    try {
+        const saltRounds = 10;
+        return await bcrypt.hash(password, saltRounds);
+    } catch (error) {
+        throw errors.validation;
+    }
 };
 
 const comparePassword = async (password, hash) => {

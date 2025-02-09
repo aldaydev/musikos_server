@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 08/02/2025 - Tarde - fixing labtop and swagger config
+### Spring 1 - 09/02/2025 - Madrugada - swagger on legals and custom errors
 
 Dependencias:
 

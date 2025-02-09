@@ -1,6 +1,7 @@
 import logger from '../config/logger.config.js';
 import customError from "../utils/customError.js";
 import legalService from "../services/mongo/legal.service.js";
+import errors from '../utils/errors.js';
 
 class Legals {
     //Terms controller
@@ -9,26 +10,33 @@ class Legals {
             const terms = await legalService.findOne('terms');
             if(!terms){
                 throw new customError(
+                    'database',
                     'interno', 
-                    'Fallo al obtener los términos de servicio'
+                    'Fallo al obtener la política de privacidad',
+                    404
                 )
                 
             }else{
                 res.status(200).json(terms);
             }
         }catch(error){
-            if(error.type === 'interno'){
-                res.status(404).json({ 
-                    message: error.message, 
-                    type: error.type
-                });
+            if(error.status === 404){
+                res.status(404).json(error)
+            }else if (error.origin !== 'unexpected'){
+                res.status(500).json(error)
             }else{
-                logger.error('Unknown error');
-                res.status(500).json({ 
-                    message: 'Error inesperado en el servidor', 
-                    type: 'interno' 
-                });
+                res.status(500).json(errors.unexpected)
             }
+            // console.log(error);
+            // if(error.type === 'interno'){
+            //     res.status(404).json({ 
+            //         message: error.message, 
+            //         type: error.type
+            //     });
+            // }else{
+            //     logger.error('Unknown error');
+            //     res.status(500).json(errors.unexpected);
+            // }
         }
     }
 
@@ -38,24 +46,32 @@ class Legals {
             const privacy = await legalService.findOne('privacy');
             if(!privacy){
                 throw new customError(
+                    'database',
                     'interno', 
-                    'Fallo al obtener la política de privacidad'
+                    'Fallo al obtener la política de privacidad',
+                    404
                 )
             }else{
                 res.status(200).json(privacy);
             }
         }catch(error){
-            if(error.type === 'interno'){
-                res.status(404).json({ 
-                    message: error.message, 
-                    type: error.type 
-                });
+            if(error.status === 404){
+                res.status(404).json(error)
+            }else if (error.origin !== 'unexpected'){
+                res.status(500).json(error)
             }else{
-                logger.error('Unknown error');
-                res.status(500).json({ 
-                    message: 'Error inesperado en el servidor', 
-                    type: 'interno' });
+                res.status(500).json(errors.unexpected)
             }
+            // console.log(error);
+            // if(error.type === 'interno'){
+            //     res.status(404).json({ 
+            //         message: error.message, 
+            //         type: error.type 
+            //     });
+            // }else{
+            //     logger.error('Unknown error');
+            //     res.status(500).json(errors.unexpected);
+            // }
         }
     }
 

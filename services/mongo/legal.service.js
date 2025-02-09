@@ -2,6 +2,7 @@ import Legal from "../../models/mongo.models/legal.model.js";
 import mongodb from "../../databases/mongo.connection.js";
 import logger from "../../config/logger.config.js";
 import customError from "../../utils/customError.js";
+import errors from "../../utils/errors.js";
 
 export default {
 
@@ -9,10 +10,11 @@ export default {
         try{
             return await Legal.findOne({ type: value });
         }catch(error){
-            throw new customError (
-                'interno', 
-                `Error at getting ${value} data`
-            );
+            throw errors.database;
+            // throw new customError (
+            //     'interno', 
+            //     `Error al cargar los datos`
+            // );
         }
         
     }
