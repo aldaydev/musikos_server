@@ -24,7 +24,7 @@ paths:
                     example: "terms"
                   html:
                     type: string
-                    example: "\n<div>Ejemplo</div>"
+                    example: "\n<div>Ejemplo de html</div>"
         '404':
           description: Error en la solicitud.
           content:
@@ -33,6 +33,7 @@ paths:
                 $ref: "#/components/schemas/Error"
               example:
                 message: "Fallo al obtener los términos y condiciones"
+                status: 404
                 type: "interno"
         '500':
           $ref: "#/components/responses/UnexpectedError"

@@ -27,7 +27,7 @@ class MongoDB {
             await mongoose.connect(mongoConfig.uri, mongoConfig.options);
             logger.info('MongoDB - Connected');
         } catch (error) {
-            logger.error('MongoDB - Error connecting', error.message);
+            logger.error('MongoDB - Error connecting');
         }
     }
 
@@ -36,7 +36,7 @@ class MongoDB {
             await mongoose.disconnect();
             logger.info('MongoDB - Closed');
         } catch (error) {
-            logger.error('MySQL - Error closing', error.message);
+            logger.error('MySQL - Error closing');
         }
     }
 

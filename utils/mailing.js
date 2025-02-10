@@ -1,29 +1,36 @@
 import logger from "../config/logger.config.js";
 import transporter from "../config/nodemailer.js";
 
-class Mailing {
-    async send (emailData, res){
+class Email {
+
+    constructor({fromName = 'Musiko', fromEmail = 'correo', to, subject, html}){
+        this.fromName = fromName;
+        this.fromEmail = fromEmail;
+        this.to = to;
+        this.subject = subject;
+        this.html = html;
+    }
+
+    send (){
 
         // Configurar el objeto mailOptions
         const mailOptions = {
-            from: '"Band Bros" <correo>',
-            to: emailData.to,
-            subject: emailData.subject,
-            html: emailData.html
+            from: `"${this.fromName}" <${this.fromEmail}>`,
+            to: this.to,
+            subject: this.subject,
+            html: this.html
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
                 logger.error("Error:", error);
-                return res.status(500).json({message: 'No se ha podido enviar el email de confirmación. Intétalo en unos minutos', error: error})
+                throw {code: 'emailFailed'};
             }
         });
-
-
     }
 }
 
-export default new Mailing;
+export default Email;
 
 
 

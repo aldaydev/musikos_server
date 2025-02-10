@@ -13,7 +13,6 @@ import Musician_Instrument from "../models/mysql.models/musicians_instruments.mo
 import { seedInstruments, seedStyles } from "./mysql.seed.js";
 
 
-
 class MySQL {
 
     async connect(){
@@ -21,7 +20,7 @@ class MySQL {
             await sequelize.authenticate();
             logger.info('MySQL - Connected');
         }catch(error){
-            logger.error('MySQL - Error connecting', error);
+            logger.error('MySQL - Error connecting');
         }
     }
 
@@ -30,7 +29,7 @@ class MySQL {
             sequelize.close();
             logger.info('MySQL - Closed');
         }catch(error){
-            logger.error('MySQL - Error closing', error.message)
+            logger.error('MySQL - Error closing');
         }
     }
 
@@ -54,7 +53,7 @@ class MySQL {
             await seedInstruments();
             logger.info('MySQL - All static tables seeded');
         }catch(error){
-
+            logger.info('MySQL - Error seeding tables');
         }
     }
 }

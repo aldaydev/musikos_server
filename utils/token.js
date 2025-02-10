@@ -1,15 +1,13 @@
 import jwt from 'jsonwebtoken';
 import logger from '../config/logger.config.js';
 
-const {sign, verify} = jwt;
-
 class Token {
 
     async generate(tokenFrom, expires) {
         return new Promise((resolve, reject) => {
-            sign(tokenFrom, 'secretkey', { expiresIn: expires }, (err, token) => {
+            jwt.sign(tokenFrom, 'secretkey', { expiresIn: expires }, (err, token) => {
                 if (err) {
-                    return reject(new Error('Error al generar el token'));
+                    reject({code: 'unexpected'});
                 }
                 resolve(token);
             });
@@ -18,19 +16,22 @@ class Token {
 
     async verify(tokenToVerify) {
         return new Promise((resolve, reject) => {
-            verify(tokenToVerify, 'secretkey', (err, authData) => {
+            jwt.verify(tokenToVerify, 'secretkey', (err, authData) => {
                 if (err) {
-                    let errorMessage = 'unknown';
-
+                    let redirect = 'unexpected';
+                    let status = '500';
                     // Personalización basada en el tipo de error
                     if (err.name === 'TokenExpiredError') {
-                        errorMessage = 'expired';
+                        redirect = 'expired';
+                        status = 410;
                     } else if (err.name === 'JsonWebTokenError') {
-                        errorMessage = 'invalid';
+                        redirect = 'incorrect';
+                        status = 400;
                     }
     
-                    logger.info(errorMessage);
-                    return reject(new Error(errorMessage));
+                    reject({
+                        status: status, 
+                        redirect: `/login?error=${redirect}`});
                 }
                 resolve(authData);
             });

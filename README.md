@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 09/02/2025 - Mañana - error middleware config and musiko change
+### Spring 1 - 10/02/2025 - Madrugada - reErrors cofiguration
 
 Dependencias:
 

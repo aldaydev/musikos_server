@@ -1,6 +1,4 @@
-import logger from '../config/logger.config.js';
 import legalService from "../services/mongo/legal.service.js";
-import errors from '../utils/errors.js';
 
 class Legals {
     //Terms controller

@@ -3,11 +3,11 @@ class EmailViews {
         const html = `
         <div style="padding: 0px 20px 20px 20px; width: 70%; margin: 0 auto">
             <h1 style="text-align: center; margin-bottom: 20px">
-                🎸 Bienvenido a BandBros 🎸
+                🎸 Bienvenido a Musiko 🎸
             </h1> 
     
             <p style="font-size: 18px; margin-top: 0px">
-                Hola ${username}. Solo te falta un paso para poder editar tu perfil de músico y disfrutar de todas las funcionalidades de bandbros.
+                Hola ${username}. Solo te falta un paso para poder editar tu perfil de músico y comenzar a conectar con otros músicos y bandas de tu zona.
             </p>
 
             <p style="font-size: 18px; margin-top: 0px">
@@ -20,7 +20,7 @@ class EmailViews {
                 </a>
             </div>
 
-            <p>*Este enlace caducará en unos 10 minutos. Si tras ese tiempo no has confirmado tu cuenta, deberás volver a registrarte en la web</p>
+            <p>*Este enlace caducará en aproximadamente 10 minutos. Si tras ese tiempo no has confirmado tu cuenta, deberás volver a registrarte</p>
             
         </div>
         `

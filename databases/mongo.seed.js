@@ -1,6 +1,6 @@
 import logger from '../config/logger.config.js';
 import Legal from '../models/mongo.models/legal.model.js';
-import customError from '../utils/customError.js';
+import { ResError } from '../utils/errors/resErrorsClass.js';
 import { privacyHtml, termsHtml } from '../views/legal.views.js';
 
 const seedLegal = async () => {
@@ -21,7 +21,7 @@ const seedLegal = async () => {
             logger.info('MongoDB - "legals" already seeded');
         }
 } catch (error) {
-    throw new customError(
+    throw new ResError(
         'interno', 
         'MongoDB - Error seeding database'
     )

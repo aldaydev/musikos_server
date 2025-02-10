@@ -7,10 +7,9 @@ class Encrypt_MW {
         try{
             req.body.password = await encryptPassword(req.body.password);
             logger.info('Password encrypted');
-            return next();
+            next();
         }catch(error){
-            logger.error('Password could not be encrypted');
-            return res.status(500).json(error);
+            next(error)
         }
     }
 }

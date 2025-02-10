@@ -41,7 +41,7 @@ const startServer = async () => {
 	try{
 
 		//Connect to mySQL DB (Sequelize)
-		mysql.connect();
+		await mysql.connect();
 		//Sync sequelize models
 		await mysql.syncModels();
 		//Seeding mySQL static tables (only in production)

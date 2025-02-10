@@ -19,8 +19,8 @@ router.post('/signup',
 );
 
 //EndPoint for confirming musician account (email)
-router.get('/signup-confirm/:token', 
-    Musicians.confirmSignUp
+router.get('/signup-confirmation/:token', 
+    Musicians.signUpConfirmation
 );
 
 //EndPoint for signingIn

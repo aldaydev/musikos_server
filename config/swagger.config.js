@@ -41,13 +41,17 @@ const swaggerOptions = {
         Error: {
           type: "object",
           properties: {
-            type: {
-              type: "string",
-              example: "interno",
-            },
             message: {
               type: "string",
               example: "Error inesperado en el servidor",
+            },
+            status: {
+              type: "integer",
+              example: 500,
+            },
+            type: {
+              type: "string",
+              example: "interno",
             },
           },
         },
@@ -59,24 +63,10 @@ const swaggerOptions = {
             "application/json": {
               schema: {
                 $ref: "#/components/schemas/Error"
-              },
-              example: {
-                type: "interno",
-                message: "Error inesperado en el servidor"
               }
             },
           },
-        },
-        InternalServerError: {
-          description: "Error inesperado en el servidor",
-          content: {
-            "application/json": {
-              schema: {
-                $ref: "#/components/schemas/Error"
-              },
-            },
-          },
-        },
+        }
         // Puedes seguir agregando más respuestas globales
       }
     },

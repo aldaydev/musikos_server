@@ -1,46 +1,47 @@
 //Dependency imports
 import Token from "../utils/token.js";
-import Mailing from "../utils/mailing.js";
 //Model import
 import { Musician } from "../models/mysql.models/musician.model.js";
 //Email views import
 import EmailViews from "../views/email.views.js";
 import logger from "../config/logger.config.js";
 import musicianService from "../services/mysql/musician.service.js";
+import Email from "../utils/mailing.js";
 
 class Musicians {
+
     //SignUp controller
-    async signUp(req, res){
+    async signUp(req, res, next){
         try{
             //Generating token
             const generatedToken = await Token.generate(req.body, '1000s');
 
             //Generating confirmation URL
-            const confirmationUrl = 'http://localhost:3001/bandbros/v1/musicians/signup-confirm/' + generatedToken
+            const confirmationUrl = 'http://localhost:3001/bandbros/v1/musicians/signup-confirmation/' + generatedToken
 
-            //Setting up confirmation email
-            const emailData = {
+            //Setting up confirmation email and sending it
+            new Email ({
                 to: req.body.email,
-                subject: 'Confirma tu cuenta en BandBros',
+                subject: 'Confirma tu cuenta en Musiko',
                 html: EmailViews.confirmation(confirmationUrl, req.body.username)
-            }
-            
-            //Sending confirmation email
-            await Mailing.send(emailData, res);
+            }).send();
 
             //Final response
             logger.info(`Susscessful register. A confirmation link has been sent to ${req.body.email}.`);
 
-            return res.status(200).json({message: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`});
+            return res.status(200).json({
+                title: '¡CONFIRMA TU CUENTA!',
+                message: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`
+            });
 
-        }catch(e){
-            logger.error('Error creating account', e.message);
-			res.status(500).json({ message: 'Ha habido un error al crear tu cuenta', error: e.message });
+        }catch(error){
+            logger.error('Error creating account');
+            next(error);
         }
     }
 
     //Confirm SignUp controller
-    async confirmSignUp(req, res){
+    async signUpConfirmation(req, res, next){
         try{
             //Token verification
             const authData = await Token.verify(req.params.token);
@@ -52,33 +53,13 @@ class Musicians {
                 username: authData.username
             }
 
-            //Adding new musician to DB
-            try{
-                await Musician.create(userData);
-            }catch(err){
-                logger.error('The user has already been confirmed', err.qslMessage);
-                throw new Error('alreadyconfirmed');
-            }
-            
+            await musicianService.create(userData);
 
             //Final response - redirect to front
-            logger.info('Created musician:', authData.username);
-            return res.status(302).redirect("http://localhost:5173/login?confirmation=true");
-        }catch(e){
-
-            let status;
-            if(e.message === 'invalid' || e.message === 'expired'){
-                status = 401;
-            }else if(e.message === 'alreadyconfirmed'){
-                status = 400;
-            }else{
-                status = 500;
-            }
-
-            res.status(status).redirect(
-                `http://localhost:5173/login?error=${e.message}`
-            );
-
+            logger.info({message: 'Created musician:', data: userData});
+            return res.status(302).redirect("/login?confirmation=true");
+        }catch(error){
+            next(error);
         }
     }
 
