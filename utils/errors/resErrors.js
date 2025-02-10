@@ -1,76 +1,65 @@
-// const setError = (key, message, status, type) => {
-//     errors[key] = {
-//         message: message,
-//         status: status,
-//         type: type
-//     }
+export class ResError {
+    constructor(message, status = '500' ){
+        this.message = message;
+        this.status = status;
+    }
 
-//     return {code: key};
-// }
+    add (key){
+        resErrors[key] = this;
+        return {code: key};
+    }
+}
 
-
-const resErrors = {
+export const resErrors = {
 
     // ---------- STATUS 500 ----------
     
-    unexpected: {
-        message: 'Error inesperado al procesar la solicitud. Intétalo más tarde',
-        status: 500,
-        type: 'interno'
-    },
+    internalServerError: new ResError(
+        'Error interno en el servidor. Inténtalo más tarde',
+        500
+    ),
 
-    database: {
-        message: 'Error al cargar el recurso. Inténtalo más tarde',
-        status: 500,
-        type: 'interno',
-    },
+    unexpected: new ResError (
+        'Error inesperado en el servidor',
+        500
+    ),
 
-    validation: {
-        message: 'Los datos proporcionados no son válidos. Por favor, revisa la información enviada',
-        status: 400,
-        type: 'interno',
-    },
+    serviceUnavailable: new ResError(
+        'El servicio no está disponible en este momento. Inténtalo más tarde',
+        503
+    ),
+
+    timeout: new ResError(
+        'El servidor tardó demasiado en responder. Inténtalo más tarde',
+        504
+    ),
 
     // ---------- STATUS 400 ----------
 
-    notFound: {
-        message: 'El recurso no se encontró. Inténtalo más tarde',
-        status: 404,
-        type: 'interno'
-    },
+    badRequest: new ResError(
+        'Solicitud incorrecta. Verifica los datos enviados',
+        400
+    ),
 
-    //--------- CURSTOM ----------
+    unauthorized: new ResError(
+        'No autorizado. Debes iniciar sesión para acceder a este recurso',
+        401
+    ),
 
-    notFoundTerms: {
-        message: 'Fallo al obtener los términos y condiciones de servicio. Inténtalo más tarde',
-        status: 404,
-        type: 'interno'
-    },
+    forbidden: new ResError(
+        'Acceso prohibido. No tienes permisos para realizar esta acción',
+        403
+    ),
 
-    notFoundPrivacy: {
-        message: 'Fallo al obtener la política de privacidad. Inténtalo más tarde',
-        status: 404,
-        type: 'interno',
-    },
-
-    emailFailed: {
-        message: 'No se ha podido enviar el email de confirmación. Inténtalo más tarde',
-        status: 500,
-        type: 'interno'
-    },
-
-    tokenExpired: {
-        message: 'El enlace de confirmación ha expirado. Vuelve a registrarte para obtener uno nuevo',
-        status: 410,
-        type: 'del cliente'
-    },
-
-    tokenIncorrect: {
-        message: 'El enlace de confirmación ha expirado. Vuelve a registrarte para obtener uno nuevo',
-        status: 410,
-        type: 'del cliente'
-    },
-
+    notFound: new ResError(
+        'El recurso no se encontró. Inténtalo más tarde',
+        404
+    ),
 }
 
-export default resErrors;
+// EJEMPLO DE CÓMO LANZAR PERSONALIZADOS
+
+// throw new ResError (
+//     'Fallo al obtener los términos y condiciones de servicio. Inténtalo más tarde',
+//     404,
+// ).add('notFoundTerms');

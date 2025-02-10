@@ -1,12 +1,37 @@
-import resErrors from "../utils/errors/resErrors.js";
+// import resErrors from "../utils/errors/resErrors.js";
+import { resErrors } from "../utils/errors/resErrors.js";
+import logger from "../config/logger.config.js";
+import { LogError, logErrors } from "../utils/errors/logErrors.js";
 
 export default (err, req, res, next) => {
-    console.error(err); // Log del error en la consola
 
+    //Throw log Error if exists
+    if(err.key){
+        logErrors[err.key].endpoint = req.originalUrl;
+        logErrors[err.key].method = req.method;
+        logErrors[err.key].user = req.body.username || 'No autenticado';
+        logger.error(logErrors[err.key]);
+    }
+    //If error redirection...
     if(err.redirect){
         res.status(err.status).redirect(`http://localhost:5173${err.redirect}`);
     }else{
-        const errorResponse = resErrors[err.code] || resErrors.unexpected;
-    res.status(errorResponse.status).json(errorResponse);
+        let errorResponse;
+        //If unexpected error (no code recieved)
+        if(!resErrors[err.code]){
+            errorResponse = resErrors.unexpected;
+            new LogError({
+                message: 'Unexpected error',
+                method: req.method,
+                endpoint: req.originalUrl,
+                user: req.body.username || 'No autenticado'
+            }).add('unexpected');
+            logger.error(logErrors.unexpected);
+        //If error response with code
+        }else{
+            errorResponse = resErrors[err.code]
+        }
+        //Final response
+        res.status(errorResponse.status).json(errorResponse);
     }
 }

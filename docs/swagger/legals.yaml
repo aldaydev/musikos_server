@@ -25,18 +25,8 @@ paths:
                   html:
                     type: string
                     example: "\n<div>Ejemplo de html</div>"
-        '404':
-          description: Error en la solicitud.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-              example:
-                message: "Fallo al obtener los términos y condiciones"
-                status: 404
-                type: "interno"
         '500':
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/internalServerError"
 
   /bandbros/v1/legal/privacy:
     get:
@@ -60,14 +50,5 @@ paths:
                   html:
                     type: string
                     example: "\n<div>Ejemplo</div>"
-        '404':
-          description: Error en la solicitud.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-              example:
-                message: "Fallo al obtener la política de privacidad"
-                type: "interno"
         '500':
-          $ref: "#/components/responses/UnexpectedError"
+          $ref: "#/components/responses/internalServerError"

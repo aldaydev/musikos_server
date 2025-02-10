@@ -43,22 +43,18 @@ const swaggerOptions = {
           properties: {
             message: {
               type: "string",
-              example: "Error inesperado en el servidor",
+              example: "Error interno en el servidor. Inténtalo más tarde",
             },
             status: {
               type: "integer",
               example: 500,
-            },
-            type: {
-              type: "string",
-              example: "interno",
-            },
+            }
           },
         },
       },
       responses: {
-        UnexpectedError: {
-          description: "Error inesperado",
+        internalServerError: {
+          description: "Error interno",
           content: {
             "application/json": {
               schema: {

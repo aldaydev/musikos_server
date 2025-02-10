@@ -1,24 +1,124 @@
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 14:59:15"}
-{"level":"error","timestamp":"2025-02-09 14:59:25"}
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:00:55"}
-{"level":"error","timestamp":"2025-02-09 15:01:05"}
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:01:42"}
-{"level":"error","timestamp":"2025-02-09 15:01:52"}
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:02:35"}
-{"level":"error","message":"MySQL - Error at seeding tables","timestamp":"2025-02-09 15:02:45"}
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:02:55"}
-{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-09 15:03:05"}
-{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-09 15:05:08"}
-{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-09 15:05:18"}
-{"level":"error","message":"MySQL - Error connecting Unknown database 'musiko'","name":"SequelizeConnectionError","original":{"code":"ER_BAD_DB_ERROR","errno":1049,"sqlMessage":"Unknown database 'musiko'","sqlState":"42000"},"parent":{"code":"ER_BAD_DB_ERROR","errno":1049,"sqlMessage":"Unknown database 'musiko'","sqlState":"42000"},"stack":"SequelizeConnectionError: Unknown database 'musiko'\n    at ConnectionManager.connect (C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\mysql\\connection-manager.js:102:17)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async ConnectionManager._connect (C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\abstract\\connection-manager.js:222:24)\n    at async C:\\Users\\Alday PC\\Desktop\\DAW IFCD0210\\DAW_TRABAJOS\\BandBros\\bandbros_server\\node_modules\\sequelize\\lib\\dialects\\abstract\\connection-manager.js:174:32","timestamp":"2025-02-09 15:22:26"}
-{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-09 15:22:26"}
-{"level":"error","message":"Non-existent or incorrectly formatted username","timestamp":"2025-02-10 02:31:59"}
-{"level":"error","message":"Non-existent or incorrectly formatted username","timestamp":"2025-02-10 02:34:03"}
-{"level":"error","message":"Non-existent or incorrectly formatted username","timestamp":"2025-02-10 02:40:11"}
-{"level":"error","message":"There is already an account registered with the email rafaldayparejo@gmail.com","timestamp":"2025-02-10 02:44:07"}
-{"level":"error","message":"Error creating account","timestamp":"2025-02-10 03:28:26"}
-{"level":"error","message":"Error creating account","timestamp":"2025-02-10 03:28:46"}
-{"level":"error","timestamp":"2025-02-10 03:58:50"}
-{"level":"error","timestamp":"2025-02-10 03:59:25"}
-{"level":"error","timestamp":"2025-02-10 04:00:18"}
-{"level":"error","timestamp":"2025-02-10 04:01:38"}
+{"level":"error","message":{"code":"internalServerError"},"timestamp":"2025-02-10 17:55:34"}
+{"level":"error","message":{"code":"internalServerError","key":"no-terms-found"},"timestamp":"2025-02-10 18:16:21"}
+{"level":"error","message":"{\"code\":\"internalServerError\",\"key\":\"no-terms-found\"}","timestamp":"2025-02-10 18:18:17"}
+{"level":"error","message":"{\"code\":\"internalServerError\",\"key\":\"noTermsFound\"}","timestamp":"2025-02-10 18:31:56"}
+{"level":"error","message":"{\"timestamp\":\"2025-02-10T17:33:55.675Z\",\"message\":\"Resource not found in MongoDB\",\"status\":500,\"endpoint\":\"/legal/terms\",\"method\":\"GET\",\"user\":\"No autenticado\"}","timestamp":"2025-02-10 18:33:55"}
+{"endpoint":"/legal/terms","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 18:38:00","user":"No autenticado"}
+{"endpoint":"/legal/terms","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 18:55:03","user":"No autenticado"}
+{"endpoint":"/legal/privacy","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 18:55:16","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 18:56:48"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 18:56:58"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:00:53"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:01:03"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:06:46"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:06:56"}
+{"endpoint":"Desconocido","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:07:13","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:07:49"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:07:59"}
+{"endpoint":"Desconocido","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:08:12","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:10:53"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:11:03"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:11:22"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:11:32"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:12:50"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:13:00"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:14:27"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:14:37"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:18:16"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:18:26"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:19:16"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:19:26"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:25:39"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:25:49"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:26:58"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:27:08"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:29:05"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:29:15"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:30:02"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:30:12"}
+{"level":"error","timestamp":"2025-02-10 19:30:32"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:31:02"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:31:12"}
+{"endpoint":"/bandbros/v1/legal/privacy","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:31:24","user":"No autenticado"}
+{"endpoint":"/legal/privacy","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 19:33:29","user":"No autenticado"}
+{"endpoint":"/bandbros/v1/legal/privacy","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:35:26","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:37:02"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:37:11"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:37:21"}
+{"endpoint":"/bandbros/v1/legal/privacy","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:37:36","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:38:40"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:38:50"}
+{"endpoint":"/bandbros/v1/legal/privacy","level":"error","message":"Unexpected error","method":"GET","status":500,"timestamp":"2025-02-10 19:39:03","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:40:20"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:40:29"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:40:39"}
+{"endpoint":"/legal","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 19:40:57","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:41:53"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:42:03"}
+{"endpoint":"/legal","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 19:42:15","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:42:57"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:43:07"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:46:58"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:47:08"}
+{"endpoint":"/legal","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 19:47:20","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:47:59"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:48:10"}
+{"endpoint":"/legal","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 19:48:22","user":"No autenticado"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:52:36"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:52:46"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:53:52"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:54:02"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:54:14"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:54:24"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 19:54:29"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 19:54:39"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:00:08"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:00:18"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:00:53"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:01:03"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:01:41"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:01:51"}
+{"endpoint":"/bandbros/v1/legal/privacy","error":"Operation `legals.findOne()` buffering timed out after 10000ms","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 20:02:09","user":null}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:08:30"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:08:40"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:08:47"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:08:57"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:09:37"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:09:47"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:10:46"}
+{"level":"error","message":"MongoDB - Error connecting","timestamp":"2025-02-10 20:10:54"}
+{"level":"error","message":"MongoDB - Error at seeding tables","timestamp":"2025-02-10 20:11:04"}
+{"endpoint":"/bandbros/v1/legal/terms","error":"Operation `legals.findOne()` buffering timed out after 10000ms","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 20:11:20","user":"No autenticado"}
+{"endpoint":"/bandbros/v1/legal/terms","error":"Operation `legals.findOne()` buffering timed out after 10000ms","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 20:12:35","user":"No autenticado"}
+{"endpoint":"/bandbros/v1/legal/terms","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 20:13:07","user":"No autenticado"}
+{"endpoint":"/bandbros/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-10 20:13:37","user":"No autenticado"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:52:47","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:53:36","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:56:25","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:56:56","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:57:27","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:57:58","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 20:59:25","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 21:07:00","user":null}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:07:53"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:07:53"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-10 21:08:05","user":null}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:08:40"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:08:40"}
+{"endpoint":"/musiko/v1/musicians/signup","error":null,"level":"error","message":"Fail at searching in MongoDB","method":"POST","status":500,"timestamp":"2025-02-10 21:08:45","user":"rafa"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:08:57"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:08:57"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:09:05"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:09:05"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:10:17"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:10:17"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:10:21"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:10:21"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:11:00"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:11:00"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:13:17"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:13:17"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:13:47"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:13:47"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-10 21:14:32"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-10 21:14:32"}

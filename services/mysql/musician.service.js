@@ -1,8 +1,20 @@
-// import customError from "../../utils/customError.js";
-import logger from "../../config/logger.config.js";
 import { Musician } from "../../models/mysql.models/asociations.js";
+import { LogError } from "../../utils/errors/logErrors.js";
 
 export default {
+
+    findOne: async (key, value) => {
+        try{
+            const element = await Musician.findOne({where: {[key]: value}});
+            return element;
+        }catch(error){
+            const errorFindingMusician = new LogError({
+                message: 'Fail at searching in MongoDB',
+                error: error.message
+            }).add('errorFindingMusician');
+            throw { code: 'internalServerError', key: errorFindingMusician };
+        }
+    },
 
     checkUsername: async (username) => {
         try{

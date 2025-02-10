@@ -1,4 +1,4 @@
-//Logger config import | Activate env variables
+//Logger config import
 import logger from './config/logger.config.js';
 
 //Dotenv config import | Activate env variables
@@ -58,7 +58,10 @@ const startServer = async () => {
 		));
 
 	}catch(error){
-		logger.error('Error de conexión al servidor ' + error.message);
+		logger.error({
+			message: 'Server connection error', 
+			error: error.message
+		});
 	}
 }
 

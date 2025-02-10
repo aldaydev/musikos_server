@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 10/02/2025 - Madrugada - reErrors cofiguration
+### Spring 1 - 10/02/2025 - Tarde - defining resErrors and logErrors enviroment
 
 Dependencias:
 
