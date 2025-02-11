@@ -1,10 +1,4 @@
 import nodemailer from 'nodemailer'; 
-// import dotenv from 'dotenv';
-// dotenv.config();
-
-
-// const email = process.env.MAILER_EMAIL;
-// const pass = process.env.MAILER_PASS;
 
 // Crear un objeto de transporte
 const transporter = nodemailer.createTransport({

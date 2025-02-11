@@ -21,12 +21,15 @@ class Musicians {
             //Generating confirmation URL
             const confirmationUrl = 'http://localhost:3001/bandbros/v1/musicians/signup-confirmation/' + generatedToken
 
-            //Setting up confirmation email and sending it
-            new Email ({
+            //Setting up confirmation email
+            const newEmail = new Email ({
                 to: req.body.email,
                 subject: 'Confirma tu cuenta en Musiko',
                 html: EmailViews.confirmation(confirmationUrl, req.body.username)
-            }).send();
+            });
+
+            //Sending confirmation email
+            await newEmail.send();
 
             //Final response
             logger.info(`Susscessful register. A confirmation link has been sent to ${req.body.email}.`);

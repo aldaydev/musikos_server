@@ -9,3 +9,28 @@
 {"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 01:45:52","user":"rafa"}
 {"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 01:46:07","user":"rafa"}
 {"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 01:47:24","user":"rafa"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:03:39","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:05:06","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:05:49","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:06:32","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:07:35","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:09:11","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:10:38","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:10:54","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:11:40","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:12:02","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:12:33","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:13:13","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:13:53","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-11 03:16:20","user":null}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:16:59","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:18:16","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:19:10","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:20:02","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:21:57","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:22:37","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:22:47","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:23:14","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:24:06","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:24:39","user":"rafa"}
+{"endpoint":"/musiko/v1/musicians/signup","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:25:36","user":"rafa"}
