@@ -2,10 +2,14 @@ import { Sequelize } from 'sequelize';
 import logger from './logger.config.js';
 
 //Configuración de la conexión a BD
-const sequelize = new Sequelize('musiko', 'root', 'root', {
-    host: 'localhost',
+const sequelize = new Sequelize(
+    process.env.MYSQL_NAME, 
+    process.env.MYSQL_USER, 
+    process.env.MYSQL_PASS, 
+    {
+    host: process.env.MYSQL_HOST,
     dialect: 'mysql',
-    port: 3306,
+    port: process.env.MYSQL_PORT,
     logging: false, // Desactiva los logs SQL
     pool: {
         max: 5, // Número máximo de conexiones en el pool

@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 10/02/2025 - Tarde - defining resErrors and logErrors enviroment
+### Spring 1 - 11/02/2025 - Noche - working on signup errors
 
 Dependencias:
 

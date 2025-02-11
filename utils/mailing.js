@@ -1,5 +1,6 @@
 import logger from "../config/logger.config.js";
 import transporter from "../config/nodemailer.js";
+import { LogError } from "./errors/logErrors.js";
 
 class Email {
 
@@ -11,22 +12,29 @@ class Email {
         this.html = html;
     }
 
-    send (){
+    async send (){
+        try{
+            // Configurar el objeto mailOptions
+            const mailOptions = {
+                from: `"${this.fromName}" <${this.fromEmail}>`,
+                to: this.to,
+                subject: this.subject,
+                html: this.html
+            };
 
-        // Configurar el objeto mailOptions
-        const mailOptions = {
-            from: `"${this.fromName}" <${this.fromEmail}>`,
-            to: this.to,
-            subject: this.subject,
-            html: this.html
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                logger.error("Error:", error);
-                throw {code: 'emailFailed'};
-            }
-        });
+            return transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    new LogError({message: 'Email failed', error: error.message}).add('errorSendingEmail')
+                    console.log(error);
+                    throw {code: 'internalServerError', key: 'errorSendingEmail'};
+                }else{
+                    console.log(data);
+                }
+            });
+        }catch(error){
+            throw(error);
+        }
+        
     }
 }
 

@@ -13,7 +13,9 @@ class Musicians {
     //SignUp controller
     async signUp(req, res, next){
         try{
-            //Generating token
+            // logger.html({message: 'Request started', method: req.method, endpoint: req.originalUrl})
+
+            //Generate token
             const generatedToken = await Token.generate(req.body, '1000s');
 
             //Generating confirmation URL
@@ -35,7 +37,6 @@ class Musicians {
             });
 
         }catch(error){
-            logger.error('Error creating account');
             next(error);
         }
     }

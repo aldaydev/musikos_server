@@ -1,13 +1,17 @@
 import jwt from 'jsonwebtoken';
-import logger from '../config/logger.config.js';
+import { LogError } from './errors/logErrors.js';
 
 class Token {
 
     async generate(tokenFrom, expires) {
         return new Promise((resolve, reject) => {
-            jwt.sign(tokenFrom, 'secretkey', { expiresIn: expires }, (err, token) => {
-                if (err) {
-                    reject({code: 'unexpected'});
+            jwt.sign(tokenFrom, 'secretkey', { expiresIn: expires }, (error, token) => {
+                if (error) {
+                    const errorGeneratingToken = new LogError({
+                        message: 'Error generating token',
+                        error: error.message
+                    }).add('errorGeneratingToken');
+                    reject({code: 'internalServerError', key: errorGeneratingToken});
                 }
                 resolve(token);
             });
@@ -16,8 +20,8 @@ class Token {
 
     async verify(tokenToVerify) {
         return new Promise((resolve, reject) => {
-            jwt.verify(tokenToVerify, 'secretkey', (err, authData) => {
-                if (err) {
+            jwt.verify(tokenToVerify, 'secretkey', (error, authData) => {
+                if (error) {
                     let redirect = 'unexpected';
                     let status = '500';
                     // Personalización basada en el tipo de error

@@ -1,8 +1,8 @@
-//Logger config import
-import logger from './config/logger.config.js';
-
 //Dotenv config import | Activate env variables
 import './config/env.config.js';
+
+//Logger config import
+import logger from './config/logger.config.js';
 
 //Express & global middleware imports
 import express, {json, urlencoded} from 'express';

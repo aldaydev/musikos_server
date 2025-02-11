@@ -1,5 +1,5 @@
 export default {
-    uri: 'mongodb://127.0.0.1:27017/musiko',
+    uri: process.env.MONGO_URI,
     options: {
         connectTimeoutMS: 3000, // Tiempo de espera de conexión
         socketTimeoutMS: 5000, // Tiempo de espera de los sockets
