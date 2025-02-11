@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 11/02/2025 - Noche - working on signup errors
+### Spring 1 - 11/02/2025 - Noche - fixing nodemailer errors
 
 Dependencias:
 

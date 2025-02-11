@@ -19,7 +19,7 @@ class Musicians {
             const generatedToken = await Token.generate(req.body, '1000s');
 
             //Generating confirmation URL
-            const confirmationUrl = 'http://localhost:3001/bandbros/v1/musicians/signup-confirmation/' + generatedToken
+            const confirmationUrl = 'http://localhost:3001/musiko/v1/musicians/signup-confirmation/' + generatedToken
 
             //Setting up confirmation email
             const newEmail = new Email ({

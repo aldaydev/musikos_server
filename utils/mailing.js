@@ -1,5 +1,5 @@
-import logger from "../config/logger.config.js";
-import transporter from "../config/nodemailer.js";
+
+import transporter from "../config/mailer.config.js";
 import { LogError } from "./errors/logErrors.js";
 
 class Email {
@@ -35,6 +35,7 @@ class Email {
 
         return new Promise((resolve, reject)=> {
             transporter.sendMail(mailOptions, function (error, info) {
+                console.log('Mailer')
                 if (error) {
                     new LogError({
                         message: 'Error sending email',
