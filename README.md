@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 11/02/2025 - Noche - fixing nodemailer errors
+### Spring 1 - 14/02/2025 - Tarde - fixing with front
 
 Dependencias:
 

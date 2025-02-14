@@ -58,3 +58,27 @@
 {"endpoint":"/musiko/v1/musicians/signup","error":"0C0F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:58:55","user":"rafa"}
 {"endpoint":"/musiko/v1/musicians/signup","error":"E8190000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 03:59:15","user":"rafa"}
 {"endpoint":"/musiko/v1/musicians/signup","error":"B81E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-11 04:00:40","user":"rafa"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-14 18:16:47"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-14 18:16:47"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-14 18:18:38"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-14 18:18:38"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:20:49","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:20:52","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:22:57","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:37:43","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:37:54","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:38:30","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:39:10","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:39:46","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:39:52","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:39:54","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-14 18:40:58"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-14 18:40:58"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:42:57","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:45:15","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:46:23","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:46:49","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:55:15","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"connect ECONNREFUSED 127.0.0.1:27017","level":"error","message":"Fail at searching in MongoDB","method":"GET","status":500,"timestamp":"2025-02-14 18:55:59","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-14 18:57:59"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-14 18:57:59"}

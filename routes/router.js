@@ -10,11 +10,11 @@ const router = Router();
 
 // ---------- MONGO ROUTES ---------- //
 
-router.use('/musiko/v1/legal', legalRouter);
+router.use('/musikos/v1/legal', legalRouter);
 
 // ---------- SQL ROUTES ---------- //
 
-router.use('/musiko/v1/musicians', musiciansRouter);
+router.use('/musikos/v1/musicians', musiciansRouter);
 
 
 export { router };

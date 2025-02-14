@@ -13,7 +13,7 @@ class Musicians {
     //SignUp controller
     async signUp(req, res, next){
         try{
-            // logger.html({message: 'Request started', method: req.method, endpoint: req.originalUrl})
+            // logger.http({message: 'Request started', method: req.method, endpoint: req.originalUrl})
 
             //Generate token
             const generatedToken = await Token.generate(req.body, '1000s');
