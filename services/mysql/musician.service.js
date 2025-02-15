@@ -43,7 +43,8 @@ export default {
 
     create: async (data) => {
         try {
-            await Musician.create(data);
+            const newMusician = await Musician.create(data);
+            console.log(newMusician);
         } catch (error) {
             if(error.name === 'SequelizeUniqueConstraintError'){
                 throw ({

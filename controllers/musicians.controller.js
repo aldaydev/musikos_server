@@ -14,6 +14,14 @@ class Musicians {
     async signUp(req, res, next){
         try{
             // logger.http({message: 'Request started', method: req.method, endpoint: req.originalUrl})
+            
+            const userData = {
+                email: req.body.email,
+                username: req.body.username,
+                password: req.body.password
+            }
+
+            await musicianService.create(userData);
 
             //Generate token
             const generatedToken = await Token.generate(req.body, '1000s');
@@ -56,8 +64,6 @@ class Musicians {
                 password: authData.password,
                 username: authData.username
             }
-
-            await musicianService.create(userData);
 
             //Final response - redirect to front
             logger.info({message: 'Created musician:', data: userData});

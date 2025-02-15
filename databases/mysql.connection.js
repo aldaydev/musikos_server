@@ -20,7 +20,7 @@ class MySQL {
             await sequelize.authenticate();
             logger.info('MySQL - Connected');
         }catch(error){
-            logger.error('MySQL - Error connecting');
+            logger.error({message: 'MySQL - Error connecting', details: error.original.sqlMessage});
         }
     }
 
@@ -29,7 +29,7 @@ class MySQL {
             sequelize.close();
             logger.info('MySQL - Closed');
         }catch(error){
-            logger.error('MySQL - Error closing');
+            logger.error({message: 'MySQL - Error closing', details: error.original.sqlMessage});
         }
     }
 
@@ -42,7 +42,7 @@ class MySQL {
             await Musician_Instrument.sync();
             logger.info('MySQL - Models synchronized');
         }catch(error){
-            logger.error('MySQL - Error synchronizing models')
+            logger.error({message: 'MySQL - Error synchronizing models', details: error.original.sqlMessage});
         }
         
     }
@@ -53,7 +53,7 @@ class MySQL {
             await seedInstruments();
             logger.info('MySQL - All static tables seeded');
         }catch(error){
-            logger.info('MySQL - Error seeding tables');
+            logger.error({message: 'MySQL - Error seeding tables', details: error.original.sqlMessage});
         }
     }
 }

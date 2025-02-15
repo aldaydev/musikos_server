@@ -1,4 +1,4 @@
-import { DataTypes, INTEGER } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysql.config.js';
 
 // Definición del modelo Musician
@@ -12,27 +12,30 @@ const Musician = sequelize.define('Musician', {
     username: {
         type: DataTypes.STRING(30),
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            is: {
+                args: /^(?!.*[_-]{2})(?![_-])([a-z0-9_-]{3,30})(?<![_-])$/,
+                msg: "Invalid format of username"
+            }
+        }
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            is: {
+                args: /^(?!.*\.\.)[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                msg: "Invalid format of email"
+            }
+        }
     },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    accepted_terms_at: {
-        type: DataTypes.DATE,
-        allowNull: false, // Obliga a aceptar los términos al registrarse.
-        defaultValue: DataTypes.NOW, // Registra automáticamente la fecha de aceptación.
-    },
-    accepted_privacy_at: {
-        type: DataTypes.DATE,
-        allowNull: false, // Lo mismo para la política de privacidad.
-        defaultValue: DataTypes.NOW,
-    },
+    
     //Datos que se introducen una vez creado
     image: {
         type: DataTypes.STRING(255),
@@ -70,8 +73,24 @@ const Musician = sequelize.define('Musician', {
     tiktok: {
         type: DataTypes.STRING
     },
+    isConfirmed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    //Timestamps
     last_connection: {
         type: DataTypes.DATE
+    },
+    accepted_terms_at: {
+        type: DataTypes.DATE,
+        allowNull: false, // Obliga a aceptar los términos al registrarse.
+        defaultValue: DataTypes.NOW, // Registra automáticamente la fecha de aceptación.
+    },
+    accepted_privacy_at: {
+        type: DataTypes.DATE,
+        allowNull: false, // Lo mismo para la política de privacidad.
+        defaultValue: DataTypes.NOW,
     }
 }, {
     tableName: 'musicians'
