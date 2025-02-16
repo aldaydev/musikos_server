@@ -44,18 +44,20 @@ export default {
     create: async (data) => {
         try {
             const newMusician = await Musician.create(data);
-            console.log(newMusician);
         } catch (error) {
+            //If username or email already exists
             if(error.name === 'SequelizeUniqueConstraintError'){
-                throw ({
-                    status: 400, 
-                    redirect: `/login?error=already-confirmed`
-                });
+                throw { code: 'badRequest' };
+            //If username or email already exists
+            }else if(error.name === 'SequelizeValidationError'){
+                throw { code: 'badRequest' };
+            //Other internal errors
             }else{
-                throw ({
-                    status: 500,
-                    redirect: `/login?error=unexpected`
-                })
+                const mysqlError = new LogError({
+                    message: 'MySQL failed',
+                    error: error.name
+                }).add('mysqlError');
+                throw { code: 'internalServerError', key: mysqlError };
             }
         }
     }

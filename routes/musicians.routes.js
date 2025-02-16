@@ -2,45 +2,45 @@
 import { Router } from 'express';
 
 //Controllers import
-import Musicians from '../controllers/musicians.controller.js';
+import musiciansController from '../controllers/musicians.controller.js';
 
 //Middleware imports
-import Validation_MW from '../middlewares/validate.middleware.js';
-import Encrypt_MW from '../middlewares/encrypt.middelware.js';
+import validationMiddleware from '../middlewares/validation.middleware.js';
+import encryptMiddleware from '../middlewares/encrypt.middelware.js';
 
 //Router initialization
 const router = Router();
 
 //EndPoint for creating a musician
 router.post('/signup', 
-    Validation_MW.signUp, //Validations Middleware
-    Encrypt_MW.generate, //Encrypting pass Middleware
-    Musicians.signUp //Final controller
+    validationMiddleware.signUp, //Validation Middleware
+    encryptMiddleware.generate, //Encrypting pass Middleware
+    musiciansController.signUp //Final controller
 );
 
 //EndPoint for confirming musician account (email)
 router.get('/signup-confirmation/:token', 
-    Musicians.signUpConfirmation
+    musiciansController.signUpConfirmation
 );
 
 //EndPoint for signingIn
 router.post('/signin', 
-    Musicians.signIn
+    musiciansController.signIn
 );
 
 //Endpoint to check if a user already exists
 router.post('/check-user',
-    Musicians.checkUser
+    musiciansController.checkUser
 );
 
 //Endpoint to check if a username already exists
 router.post('/check-username',
-    Musicians.checkUsername
+    musiciansController.checkUsername
 );
 
 //Endpoint to check if a email already exists
 router.post('/check-email',
-    Musicians.checkEmail
+    musiciansController.checkEmail
 );
 
 export default router;

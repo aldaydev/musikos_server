@@ -8,12 +8,11 @@ import logger from "../config/logger.config.js";
 import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
 
-class Musicians {
-
+export default {
     //SignUp controller
-    async signUp(req, res, next){
+    signUp: async (req, res, next) => {
         try{
-            // logger.http({message: 'Request started', method: req.method, endpoint: req.originalUrl})
+            logger.http({message: 'Request started', method: req.method, endpoint: req.originalUrl})
             
             const userData = {
                 email: req.body.email,
@@ -50,10 +49,10 @@ class Musicians {
         }catch(error){
             next(error);
         }
-    }
+    },
 
     //Confirm SignUp controller
-    async signUpConfirmation(req, res, next){
+    signUpConfirmation: async (req, res, next) => {
         try{
             //Token verification
             const authData = await Token.verify(req.params.token);
@@ -71,10 +70,9 @@ class Musicians {
         }catch(error){
             next(error);
         }
-    }
+    },
 
-    //Check if a username already exists
-    async checkUsername(req, res){
+    checkUsername: async (req, res, next) => {
         try{
             const exists = await musicianService.checkUsername(req.body.username);
             if(exists){
@@ -85,10 +83,9 @@ class Musicians {
         }catch(error){
             res.status(500).json({message: 'Error al comprobar username', error})
         }
-    }
+    },
 
-    //Check if a email already exists
-    async checkEmail(req, res){
+    checkEmail: async (req, res, next) => {
         const {email} = req.body;
 
         try{
@@ -101,10 +98,9 @@ class Musicians {
         }catch(e){
             res.status(500).json({message: 'Error al comprobar username', error: e.message})
         }
-    }
+    },
 
-    //Check if a user exists (by email or username)
-    async checkUser(req, res){
+    checkUser: async (req, res, next) => {
         const { check } = req.body;
         const result = await Musician.findOne({ where: {
             [Op.or]: 
@@ -115,11 +111,9 @@ class Musicians {
             } 
         });
         console.log(result);
+    },
 
-    }
-
-    //SignIn controller
-    async signIn(req, res){
+    signIn: async (req, res, next) => {
         try{
             console.log(req.body);
             res.json({data: req.body});
@@ -128,5 +122,3 @@ class Musicians {
         }
     }
 }
-
-export default new Musicians;

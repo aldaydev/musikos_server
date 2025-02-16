@@ -32,8 +32,11 @@ const Musician = sequelize.define('Musician', {
         }
     },
     password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(60),
         allowNull: false,
+        validate: {
+            len: [60, 60]
+        }
     },
     
     //Datos que se introducen una vez creado
@@ -73,14 +76,15 @@ const Musician = sequelize.define('Musician', {
     tiktok: {
         type: DataTypes.STRING
     },
-    isConfirmed: {
+    is_confirmed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
     },
     //Timestamps
     last_connection: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
     },
     accepted_terms_at: {
         type: DataTypes.DATE,

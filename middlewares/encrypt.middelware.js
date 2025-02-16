@@ -1,9 +1,8 @@
 import { encryptPassword } from '../utils/bcrypt.js';
 import logger from '../config/logger.config.js';
 
-class Encrypt_MW {
-
-    async generate(req, res, next) {
+export default {
+    generate: async (req, res, next) => {
         try{
             req.body.password = await encryptPassword(req.body.password);
             next();
@@ -12,5 +11,3 @@ class Encrypt_MW {
         }
     }
 }
-
-export default new Encrypt_MW;

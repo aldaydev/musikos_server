@@ -18,10 +18,10 @@ const sequelize = new Sequelize(
         acquire: 30000, // Tiempo máximo intento de conexión en ms
         idle: 10000 // Conexión inactiva liberada en ms
     },
-    // define: {
-    //     timestamps: true, // Añade automáticamente createdAt y updatedAt a los modelos
-    //     underscored: true, // Usa snake_case en lugar de camelCase para los nombres de columnas
-    // }
+    define: {
+        timestamps: true, // Añade automáticamente createdAt y updatedAt a los modelos
+        underscored: true, // Usa snake_case en lugar de camelCase para los nombres de columnas
+    }
 });
 
 const shutdown = async () => {

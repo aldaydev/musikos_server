@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 14/02/2025 - Tarde - fixing with front
+### Spring 1 - 16/02/2025 - Noche - refactoring code
 
 Dependencias:
 
