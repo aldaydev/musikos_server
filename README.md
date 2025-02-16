@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 16/02/2025 - Noche - refactoring code
+### Spring 1 - 16/02/2025 - Tarde - confirm account endpoint
 
 Dependencias:
 

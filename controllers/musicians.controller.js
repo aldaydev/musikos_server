@@ -69,7 +69,15 @@ export default {
 
             const username = authData.username;
 
-            const isConfirmed = await 
+            const isConfirmed = await musicianService.findOne('is_confirmed', true);
+            
+            console.log(isConfirmed);
+
+            if(!isConfirmed){
+                await musicianService.updateIsConnected(username)
+            }else{
+                throw{message: 'No'}
+            }
 
             //Final response - redirect to front
             logger.info({message: 'Created musician:', data: userData});

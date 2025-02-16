@@ -23,14 +23,16 @@ export default {
             jwt.verify(tokenToVerify, 'secretkey', (error, authData) => {
                 if (error) {
                     let redirect = 'unexpected';
-                    let status = '500';
+                    let status = 500;
                     let message = 'Error interno en el servidor. Inténtalo más tarde.'
+                    console.log('ERRORRRRRR', typeof error.name)
                     // Personalización basada en el tipo de error
-                    if (err.name === 'TokenExpiredError') {
+                    if (error.name === 'TokenExpiredError') {
                         redirect = 'expired';
                         status = 410;
                         message = 'El enlace ha caducado o es incorrecto.'
-                    } else if (err.name === 'JsonWebTokenError') {
+                    } else if (error.name === 'JsonWebTokenError') {
+                        console.log('ERRORRRRRR2', error.name)
                         redirect = 'incorrect';
                         status = 400;
                         message = 'El enlace ha caducado o es incorrecto.'

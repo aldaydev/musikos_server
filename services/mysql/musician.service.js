@@ -16,6 +16,22 @@ export default {
         }
     },
 
+    updateIsConnected: async (username) => {
+        try{
+            const element = await Musician.update(
+                {is_confirmed: true},
+                {where: {username}}
+            );
+            return element;
+        }catch(error){
+            const errorFindingMusician = new LogError({
+                message: 'Fail at searching in MongoDB',
+                error: error.message
+            }).add('errorFindingMusician');
+            throw { code: 'internalServerError', key: errorFindingMusician };
+        }
+    },
+
     checkUsername: async (username) => {
         try{
             const exists = await Musician.findOne({ where: {username} });

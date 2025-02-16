@@ -196,3 +196,42 @@
 {"endpoint":"/musikos/v1/musicians/signup","error":"SequelizeDatabaseError","level":"error","message":"MySQL failed","method":"POST","status":500,"timestamp":"2025-02-16 03:32:32","user":"rafa"}
 {"endpoint":"/musikos/v1/musicians/signup","error":null,"level":"error","message":"MySQL failed","method":"POST","status":500,"timestamp":"2025-02-16 03:33:12","user":"rafa"}
 {"endpoint":"/musikos/v1/musicians/signup","error":"Table 'musikos.musicians' doesn't exist","level":"error","message":"MySQL failed","method":"POST","status":500,"timestamp":"2025-02-16 03:33:37","user":"rafa"}
+{"endpoint":"/musikos/v1/legal/terms","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:27:20","user":"No autenticado"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 16:30:21","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 16:30:33","user":null}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:31:06","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:31:47","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:32:58","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:33:22","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:33:29","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:33:36","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/privacy","error":null,"level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:33:46","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 16:33:52","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:01:01","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:04:18","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:25:08","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:33:59","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:35:56","user":"No autenticado"}
+{"endpoint":"/musikos/v1/legal/terms","error":"The collection doesn´t exists or is missing","level":"error","message":"Resource not found in MongoDB","method":"GET","status":500,"timestamp":"2025-02-16 18:37:03","user":"No autenticado"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:35:36","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:37:44","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:38:35","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:39:29","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:40:26","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:43:09","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:43:39","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:44:06","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:46:10","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:47:51","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:48:57","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:50:57","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:51:29","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:52:03","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:52:27","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:52:57","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:53:14","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:53:46","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 19:54:01","user":null}
+{"endpoint":"/musikos/v1/musicians/signup-confirmation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFsZGF5cGFyZWpvQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFmYSIsInBhc3N3b3JkIjoiJDJiJDEwJFB0Vy5TU1RzNGdKVktuU1lxZTVpRXVJZnRMWEU0VDFqdWhFNEJ2bHo4bjNObTVuLnZiUW5pIiwiYWNjZXB0VGVybXMiOnRydWUsImFjY2VwdFByaXZhY3kiOnRydWUsImlhdCI6MTczOTcyNzU2NSwiZXhwIjoxNzM5NzI4NTY1fQ.z1OAKmLdo5pTWhVeSkcQvvDkI5lv8MLBWzZciiEk4rs","error":"jwt expired","level":"error","message":"Error verifying token","method":"GET","status":500,"timestamp":"2025-02-16 19:54:27","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians/signup-confirmation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFsZGF5cGFyZWpvQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicmFmYSIsInBhc3N3b3JkIjoiJDJiJDEwJFB0Vy5TU1RzNGdKVktuU1lxZTVpRXVJZnRMWEU0VDFqdWhFNEJ2bHo4bjNObTVuLnZiUW5pIiwiYWNjZXB0VGVybXMiOnRydWUsImFjY2VwdFByaXZhY3kiOnRydWUsImlhdCI6MTczOTcyNzU2NSwiZXhwIjoxNzM5NzI4NTY1fQ.z1OAKmLdo5pTWhVeSkcQvvDkI5lv8MLBWzZciiEk4rs","error":"jwt expired","level":"error","message":"Error verifying token","method":"GET","status":500,"timestamp":"2025-02-16 20:05:53","user":"No autenticado"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-16 20:05:58","user":null}

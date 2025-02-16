@@ -1,15 +1,15 @@
 import legalService from "../services/mongo/legal.service.js";
 import { LogError } from "../utils/errors/logErrors.js";
 
-class Legals {
+export default {
     //Terms controller
-    async getTerms(req, res, next){
+    getTerms: async (req, res, next) => {
         try{
             const terms = await legalService.findOne('terms');
             if(!terms){
-                // throw {code: 'notFoundTerms'};
                 const noTermsFound = new LogError({
-                    message: 'Resource not found in MongoDB'
+                    message: 'Resource not found in MongoDB',
+                    error: 'The collection doesn´t exists or is missing'
                 }).add('noTermsFound');
                 throw {code: 'internalServerError', key: noTermsFound};
             }else{
@@ -18,15 +18,15 @@ class Legals {
         }catch(error){
             next(error);
         }
-    }
-
-    //Terms controller
-    async getPrivacy(req, res, next){
+    },
+    //Privacy controller
+    getPrivacy: async (req, res, next) => {
         try{
             const privacy = await legalService.findOne('privacy');
             if(!privacy){
                 const noPrivacyFound = new LogError({
                     message: 'Resource not found in MongoDB',
+                    error: 'The collection doesn´t exists or is missing'
                 }).add('noPrivacyFound');
                 throw { code: 'internalServerError', key: noPrivacyFound };
             }else{
@@ -36,7 +36,4 @@ class Legals {
             next(error);
         }
     }
-
 }
-
-export default new Legals;
