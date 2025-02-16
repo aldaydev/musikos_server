@@ -9,10 +9,12 @@ import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
 
 export default {
+
     //SignUp controller
     signUp: async (req, res, next) => {
         try{
-            logger.http({message: 'Request started', method: req.method, endpoint: req.originalUrl})
+            //Initial log
+            logger.http({message: 'Request started', action: 'Register user', method: req.method, endpoint: req.originalUrl})
             
             const userData = {
                 email: req.body.email,
@@ -20,13 +22,14 @@ export default {
                 password: req.body.password
             }
 
+            //Creating musician
             await musicianService.create(userData);
 
             //Generate token
             const generatedToken = await Token.generate(req.body, '1000s');
 
             //Generating confirmation URL
-            const confirmationUrl = 'http://localhost:3001/musiko/v1/musicians/signup-confirmation/' + generatedToken
+            const confirmationUrl = 'http://localhost:3001/musikos/v1/musicians/signup-confirmation/' + generatedToken
 
             //Setting up confirmation email
             const newEmail = new Email ({
@@ -39,7 +42,7 @@ export default {
             await newEmail.send();
 
             //Final response
-            logger.info(`Susscessful register. A confirmation link has been sent to ${req.body.email}.`);
+            logger.http({message: 'Request ended', action: `confirmation link has been sent to ${req.body.email}`, method: req.method, endpoint: req.originalUrl})
 
             return res.status(200).json({
                 title: '¡CONFIRMA TU CUENTA!',
@@ -55,7 +58,7 @@ export default {
     signUpConfirmation: async (req, res, next) => {
         try{
             //Token verification
-            const authData = await Token.verify(req.params.token);
+            const authData = await Token.verifyAndRedirect(req.params.token);
 
             //Taking user data from token (authData)
             const userData = {
@@ -64,9 +67,13 @@ export default {
                 username: authData.username
             }
 
+            const username = authData.username;
+
+            const isConfirmed = await 
+
             //Final response - redirect to front
             logger.info({message: 'Created musician:', data: userData});
-            return res.status(302).redirect("/login?confirmation=true");
+            return res.status(302).redirect("http://localhost:5173/login?confirmation=true");
         }catch(error){
             next(error);
         }

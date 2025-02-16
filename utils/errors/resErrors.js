@@ -6,7 +6,7 @@ export class ResError {
 
     add (key){
         resErrors[key] = this;
-        return {code: key};
+        return key;
     }
 }
 
