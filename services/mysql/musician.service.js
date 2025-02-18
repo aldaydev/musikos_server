@@ -9,51 +9,51 @@ export default {
             return element;
         }catch(error){
             const errorFindingMusician = new LogError({
-                message: 'Fail at searching in MongoDB',
+                message: 'Fail at searching in MySQL',
                 error: error.message
             }).add('errorFindingMusician');
             throw { code: 'internalServerError', key: errorFindingMusician };
         }
     },
 
-    updateIsConnected: async (username) => {
+    checkConfirmed: async (username) => {
+        try {
+            const isConfirmed = await Musician.findOne({
+                where: {
+                    username, 
+                    is_confirmed: true
+                }
+            });
+            return isConfirmed;
+        } catch (error) {
+            const errorFindingMusician = new LogError({
+                message: 'Fail at searching in MySQL',
+                error: error.message
+            }).add('errorFindingMusician');
+            throw { 
+                code: 'internalServerError', 
+                key: errorFindingMusician,
+                redirect: `/login?error=internal`
+            };
+        }
+    },
+
+    updateIsConfirmed: async (username) => {
         try{
-            const element = await Musician.update(
+            const updateMusician = await Musician.update(
                 {is_confirmed: true},
                 {where: {username}}
             );
-            return element;
+            return updateMusician;
         }catch(error){
             const errorFindingMusician = new LogError({
-                message: 'Fail at searching in MongoDB',
+                message: 'Fail at updating in MySQL',
                 error: error.message
             }).add('errorFindingMusician');
-            throw { code: 'internalServerError', key: errorFindingMusician };
-        }
-    },
-
-    checkUsername: async (username) => {
-        try{
-            const exists = await Musician.findOne({ where: {username} });
-            return exists;
-        }catch(error){
-            // throw new customError (
-            //     'interno', 
-            //     'Error at checking username'
-            // );
-        }
-    },
-
-    checkEmail: async (email) => {
-        try{
-            const exists = await Musician.findOne({ where: {email} });
-            console.log(exists);
-            return exists;
-        }catch(error){
-            // throw new customError (
-            //     'interno', 
-            //     'Error at checking username'
-            // );
+            throw { code: 'internalServerError', 
+                key: errorFindingMusician, 
+                redirect: `/login?error=internal`
+            };
         }
     },
 

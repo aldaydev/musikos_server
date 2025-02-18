@@ -1,5 +1,5 @@
 # bandbros_server
-### Spring 1 - 16/02/2025 - Tarde - confirm account endpoint
+### Spring 1 - 18/02/2025 - Mañana - confirm account endpoint finished and working on errors
 
 Dependencias:
 

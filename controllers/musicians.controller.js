@@ -67,20 +67,18 @@ export default {
                 username: authData.username
             }
 
-            const username = authData.username;
-
-            const isConfirmed = await musicianService.findOne('is_confirmed', true);
+            const isConfirmed = await musicianService.checkConfirmed(userData.username);
             
-            console.log(isConfirmed);
-
             if(!isConfirmed){
-                await musicianService.updateIsConnected(username)
+                await musicianService.updateIsConfirmed(userData.username);
             }else{
-                throw{message: 'No'}
+                throw { code: 'badRequest',
+                    redirect: `/login?error=already-updated`
+                };
             }
 
             //Final response - redirect to front
-            logger.info({message: 'Created musician:', data: userData});
+            logger.http({message: 'Musician confirmed:', data: isConfirmed});
             return res.status(302).redirect("http://localhost:5173/login?confirmation=true");
         }catch(error){
             next(error);
@@ -89,29 +87,29 @@ export default {
 
     checkUsername: async (req, res, next) => {
         try{
-            const exists = await musicianService.checkUsername(req.body.username);
+            const exists = await musicianService.findOne('username', req.body.username);
+            
             if(exists){
-                res.json({exists: true})
+                res.status(200).json({exists: true});
             }else{
-                res.json({exists: false})
+                res.status(200).json({exists: false});
             }
         }catch(error){
-            res.status(500).json({message: 'Error al comprobar username', error})
+            next(error);
         }
     },
 
     checkEmail: async (req, res, next) => {
-        const {email} = req.body;
-
         try{
-            if(await Musician.findOne({ where: {email} })){
-
-                res.json({exists: true})
+            const exists = await musicianService.findOne('email', req.body.email);
+            
+            if(exists){
+                res.status(200).json({exists: true});
             }else{
-                res.json({exists: false})
+                res.status(200).json({exists: false});
             }
         }catch(e){
-            res.status(500).json({message: 'Error al comprobar username', error: e.message})
+            next(error);
         }
     },
 

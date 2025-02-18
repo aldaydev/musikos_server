@@ -25,7 +25,7 @@ export default {
                     let redirect = 'unexpected';
                     let status = 500;
                     let message = 'Error interno en el servidor. Inténtalo más tarde.'
-                    console.log('ERRORRRRRR', typeof error.name)
+                    
                     // Personalización basada en el tipo de error
                     if (error.name === 'TokenExpiredError') {
                         redirect = 'expired';
@@ -39,10 +39,6 @@ export default {
                     }else{
                         redirect = 'internal';
                     }
-    
-                    // reject({
-                    //     status: status, 
-                    //     redirect: `/login?error=${redirect}`});
 
                     const logErrorVerifyingToken = new LogError({
                         message: 'Error verifying token',
