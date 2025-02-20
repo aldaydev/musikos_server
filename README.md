@@ -1,5 +1,5 @@
 # musikos_server
-### Spring 1 - 20/02/2025 - Madrugada - resend confirmation email working
+### Sprint 1 - 20/02/2025 - Mañana - testing with front
 
 Dependencias:
 
