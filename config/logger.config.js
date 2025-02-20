@@ -9,7 +9,7 @@ const logger = winston.createLogger({
             format: winston.format.simple()
         }), // Mostrar logs en la consola
         new winston.transports.File({
-            filename: 'logs/app.log',
+            filename: 'logs/musikos.log',
             level: 'error',
             format: winston.format.combine(
                 winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),

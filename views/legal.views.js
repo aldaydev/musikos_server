@@ -1,15 +1,15 @@
 export const termsHtml = `
 <div class="legal__container">
-    <h3 class="legal__title">Términos y Condiciones de BandBros</h3>
+    <h3 class="legal__title">Términos y Condiciones de Musikos</h3>
 
     <h4 class="legal__subtitle">Introducción</h4>
     <p class="legal__text">
-        Bienvenido a BandBros. Al acceder o utilizar nuestros servicios, aceptas cumplir con estos Términos y Condiciones. Si no estás de acuerdo con alguna parte, no debes utilizar nuestros servicios.
+        Bienvenido a Musikos. Al acceder o utilizar nuestros servicios, aceptas cumplir con estos Términos y Condiciones. Si no estás de acuerdo con alguna parte, no debes utilizar nuestros servicios.
     </p>
 
     <h4 class="legal__subtitle">1. Servicios</h4>
     <p class="legal__text">
-        BandBros ofrece un servicio de búsqueda de músicos y bandas a través de la creación de perfiles. Nos reservamos el derecho de modificar o interrumpir nuestros servicios en cualquier momento.
+        Musikos ofrece un servicio de búsqueda de músicos y bandas a través de la creación de perfiles. Nos reservamos el derecho de modificar o interrumpir nuestros servicios en cualquier momento.
     </p>
 
     <h4 class="legal__subtitle">2. Uso Aceptable</h4>
@@ -19,7 +19,7 @@ export const termsHtml = `
 
     <h4 class="legal__subtitle">3. Propiedad Intelectual</h4>
     <p class="legal__text">
-        El contenido proporcionado por BandBros, como logos, imágenes, textos, es propiedad de BandBros o sus licenciantes y está protegido por derechos de autor.
+        El contenido proporcionado por Musikos, como logos, imágenes, textos, es propiedad de Musikos o sus licenciantes y está protegido por derechos de autor.
     </p>
 
     <h4 class="legal__subtitle">4. Responsabilidad</h4>
@@ -41,11 +41,11 @@ export const termsHtml = `
 
 export const privacyHtml = `
 <div class="legal__container">
-    <h3 class="legal__title">Política de Privacidad de BandBros</h3>
+    <h3 class="legal__title">Política de Privacidad de Musikos</h3>
     
     <h4 class="legal__subtitle">Introducción</h4>
     <p class="legal__text">
-        En BandBros, nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos y protegemos tu información personal. Al utilizar nuestros servicios, aceptas los términos de esta política.
+        En Musikos, nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos y protegemos tu información personal. Al utilizar nuestros servicios, aceptas los términos de esta política.
     </p>
 
     <h4 class="legal__subtitle">1. Información Recopilada</h4>

@@ -23,6 +23,11 @@ router.get('/signup-confirmation/:token',
     musiciansController.signUpConfirmation
 );
 
+//EndPoint for confirming musician account (email)
+router.post('/resend-confirmation', 
+    musiciansController.resendConfirmation
+);
+
 //EndPoint for signingIn
 router.post('/signin', 
     musiciansController.signIn

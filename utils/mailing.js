@@ -5,7 +5,7 @@ import { LogError } from "./errors/logErrors.js";
 class Email {
 
     constructor({fromName, fromEmail, to, subject, html}){
-        this.fromName = fromName || 'Musiko';
+        this.fromName = fromName || 'Musikos';
         this.fromEmail = fromEmail || process.env.MAILER_EMAIL;
         this.to = to;
         this.subject = subject;

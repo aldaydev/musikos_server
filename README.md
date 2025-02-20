@@ -1,5 +1,5 @@
-# bandbros_server
-### Spring 1 - 18/02/2025 - Mañana - confirm account endpoint finished and working on errors
+# musikos_server
+### Spring 1 - 20/02/2025 - Madrugada - resend confirmation email working
 
 Dependencias:
 

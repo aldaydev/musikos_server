@@ -14,7 +14,7 @@ export default {
     signUp: async (req, res, next) => {
         try{
             //Initial log
-            logger.http({message: 'Request started', action: 'Register user', method: req.method, endpoint: req.originalUrl})
+            logger.http({message: 'Register request started', action: 'Register user', method: req.method, endpoint: req.originalUrl});
             
             const userData = {
                 email: req.body.email,
@@ -26,10 +26,10 @@ export default {
             await musicianService.create(userData);
 
             //Generate token
-            const generatedToken = await Token.generate(req.body, '1000s');
+            const generatedToken = await Token.generate(req.body, '600s');
 
             //Generating confirmation URL
-            const confirmationUrl = 'http://localhost:3001/musikos/v1/musicians/signup-confirmation/' + generatedToken
+            const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${userData.username}`
 
             //Setting up confirmation email
             const newEmail = new Email ({
@@ -41,9 +41,9 @@ export default {
             //Sending confirmation email
             await newEmail.send();
 
+            //Finaization log
+            logger.http({message: `confirmation link has been sent to ${req.body.email}`, action: 'Register user', method: req.method, endpoint: req.originalUrl})
             //Final response
-            logger.http({message: 'Request ended', action: `confirmation link has been sent to ${req.body.email}`, method: req.method, endpoint: req.originalUrl})
-
             return res.status(200).json({
                 title: '¡CONFIRMA TU CUENTA!',
                 message: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`
@@ -57,8 +57,11 @@ export default {
     //Confirm SignUp controller
     signUpConfirmation: async (req, res, next) => {
         try{
+            //Initial log
+            logger.http({message: 'Account confirmation started', action: 'Confirm account', method: req.method, endpoint: req.originalUrl});
+
             //Token verification
-            const authData = await Token.verifyAndRedirect(req.params.token);
+            const authData = await Token.verifyAndRedirect(req.params.token, req.query.username);
 
             //Taking user data from token (authData)
             const userData = {
@@ -67,9 +70,10 @@ export default {
                 username: authData.username
             }
 
+            //Checking if user is already confirmed
             const isConfirmed = await musicianService.checkConfirmed(userData.username);
-            
             if(!isConfirmed){
+                //If not... set is_confirmed -> true
                 await musicianService.updateIsConfirmed(userData.username);
             }else{
                 throw { code: 'badRequest',
@@ -77,10 +81,53 @@ export default {
                 };
             }
 
+            //Final log
+            logger.http({message: 'Account successfully confirmed', action: 'Confirm account', method: req.method, endpoint: req.originalUrl});
             //Final response - redirect to front
-            logger.http({message: 'Musician confirmed:', data: isConfirmed});
             return res.status(302).redirect("http://localhost:5173/login?confirmation=true");
         }catch(error){
+            next(error);
+        }
+    },
+    //Resend confirmation email
+    resendConfirmation: async (req, res, next) => {
+        try {
+            //Initial log
+            logger.http({message: 'Resending email request stared', action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl});
+
+            const username = req.body.username;
+            //Generate token
+            const generatedToken = await Token.generate({username}, '600s');
+
+            //Generating confirmation URL
+            const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${req.body.username}`
+
+            //Searching user
+            const user = await musicianService.findOne('username', username);
+            if(!user){
+                throw { code: 'badRequest' };
+            }
+
+
+            //Setting up confirmation email
+            const newEmail = new Email ({
+                to: user.email,
+                subject: 'Nuevo email de confirmación',
+                html: EmailViews.resendConfirmation(confirmationUrl, username)
+            });
+
+            //Sending confirmation email
+            await newEmail.send();
+
+            //Finaization log
+            logger.http({message: `confirmation link has been sent to ${user.email}`, action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl})
+            //Final response
+            return res.status(200).json({
+                title: '¡CONFIRMA TU CUENTA!',
+                message: `Te hemos enviado un link de confirmación a ${req.body.email}. Por favor, revisa tu correo y sigue el enlace`
+            });
+
+        } catch (error) {
             next(error);
         }
     },

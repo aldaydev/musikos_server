@@ -18,7 +18,7 @@ export default {
         });
     },
 
-    verifyAndRedirect: async (tokenToVerify) => {
+    verifyAndRedirect: async (tokenToVerify, username) => {
         return new Promise((resolve, reject) => {
             jwt.verify(tokenToVerify, 'secretkey', (error, authData) => {
                 if (error) {
@@ -32,7 +32,6 @@ export default {
                         status = 410;
                         message = 'El enlace ha caducado o es incorrecto.'
                     } else if (error.name === 'JsonWebTokenError') {
-                        console.log('ERRORRRRRR2', error.name)
                         redirect = 'incorrect';
                         status = 400;
                         message = 'El enlace ha caducado o es incorrecto.'
@@ -53,7 +52,7 @@ export default {
                     reject({
                         code: resErrorVerifyingToken, 
                         key: logErrorVerifyingToken,
-                        redirect: `/login?error=${redirect}`
+                        redirect: `/login?error=${redirect}&username=${username}`
                     });
                 }
                 resolve(authData);

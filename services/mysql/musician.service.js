@@ -33,7 +33,7 @@ export default {
             throw { 
                 code: 'internalServerError', 
                 key: errorFindingMusician,
-                redirect: `/login?error=internal`
+                redirect: `/login?error=internal&username=${username}`
             };
         }
     },
@@ -52,7 +52,7 @@ export default {
             }).add('errorFindingMusician');
             throw { code: 'internalServerError', 
                 key: errorFindingMusician, 
-                redirect: `/login?error=internal`
+                redirect: `/login?error=internal&username=${username}`
             };
         }
     },
