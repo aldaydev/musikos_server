@@ -2,6 +2,7 @@ import legalService from "../services/mongo/legal.service.js";
 import { LogError } from "../utils/errors/logErrors.js";
 
 export default {
+    
     //Terms controller
     getTerms: async (req, res, next) => {
         try{
@@ -19,6 +20,7 @@ export default {
             next(error);
         }
     },
+
     //Privacy controller
     getPrivacy: async (req, res, next) => {
         try{

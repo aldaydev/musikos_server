@@ -7,21 +7,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const legalsSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/legals.yaml'));
+const musiciansSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/musicians.yaml'));
 
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Training Pro - API Documentación",
+      title: "Musikos - API Documentation",
       version: "1.0.0",
-      description: "Documentación de la API con Swagger",
+      description: "Musikos API Documentation with Swagger",
       contact: {
         name: "Rafa Alday",
         email: 'aldaydev@gmail.com'
       },
     },
     tags: [
-      { name: 'Legal', description: 'Operaciones relacionadas con terminos de uso y política de privacidad' },
+      { name: 'Legal', description: 'Operations related to terms of use and privacy policy' },
+      { name: 'Musicians', description: 'Operations related to the "musicians" model and user actions' },
       // ... otros tags
     ],
     servers: [
@@ -54,11 +56,25 @@ const swaggerOptions = {
       },
       responses: {
         internalServerError: {
-          description: "Error interno",
+          description: "Internal Error",
           content: {
             "application/json": {
               schema: {
                 $ref: "#/components/schemas/Error"
+              }
+            }
+          }
+        },
+        badRequest: {
+          description: "Bad Request Error",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: "#/components/schemas/Error"
+              },
+              example: {
+                message: "Solicitud incorrecta. Verifica los datos enviados.",
+                status: 400
               }
             },
           },
@@ -76,6 +92,7 @@ const swaggerDocs = swaggerJsDoc({
     ...swaggerOptions.definition,
     paths: {
       ...legalsSwagger.paths,
+      ...musiciansSwagger.paths,
     },
   },
 });

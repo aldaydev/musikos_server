@@ -1,16 +1,16 @@
 openapi: 3.0.0
 info:
-  title: API de recursos legales
+  title: Legal Resources API
   version: 1.0.0
 paths:
-  /bandbros/v1/legal/terms:
+  /musikos/v1/legal/terms:
     get:
       tags:
         - Legal
-      summary: Obtener los terminos y condiciones.
+      summary: Get the terms and conditions data.
       responses:
         '200':
-          description: Respuesta exitosa.
+          description: Successful response.
           content:
             application/json:
               schema:
@@ -28,14 +28,14 @@ paths:
         '500':
           $ref: "#/components/responses/internalServerError"
 
-  /bandbros/v1/legal/privacy:
+  /musikos/v1/legal/privacy:
     get:
       tags:
         - Legal
-      summary: Obtener la política de privacidad.
+      summary: Get the privacy policy data.
       responses:
         '200':
-          description: Respuesta exitosa.
+          description: Successful response.
           content:
             application/json:
               schema:

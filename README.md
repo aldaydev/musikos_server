@@ -1,56 +1,42 @@
 # musikos_server
-### Sprint 1 - 20/02/2025 - Mañana - testing with front
+### Sprint 1 - 21/02/2025 - Mañana - refactoring code and updating swagger endpoints
+
+## 1er SPRINT (BACKEND)
+
+### RESUMEN DE OBJETIVOS:
+
+He trabajado intensamente en todo el diseño inicial del backend, realizando solo una funcionalidad (signUp). Aunque me ha llevado tiempo, todo lo dispuesto en este sprint agilizará mucho el trabajo en los siguientes.
+
+1. Diseño del backend (directorios, middlewares, conexiones...).
+2. Diseño de la estructura de datos (sequelize y mongoose).
+3. Funcionalidad de signUp sincronizada con frontend.
+4. Configuración de nodemailer.
+5. Diseño de la clase Email y sus métodos.
+6. Diseño de la clase resError, sus métodos y el objeto resErrors.
+7. Configuración de winston.
+8. Diseño de la clase logError, sus métodos y el objeto logErrors.
+9. Configuración de swagger.
+10. Configuración de variables de entorno (dotenv).
+11. Configuración de jwt y bcrypt.
 
 Dependencias:
 
-npm instal --save-dev nodemon
-npm i express
-npm i cors
-npm i sequelize
-npm i mysql2
-npm i jsonwebtoken
-npm i nodemailer
-npm i bcrypt
-npm i mongoose
-npm i swagger-ui-express swagger-jsdoc
-npm i dotenv
-npm i winston
-npm i path
-npm i yamljs
+   - npm instal --save-dev nodemon
+   - npm i express
+   - npm i cors
+   - npm i sequelize
+   - npm i mysql2
+   - npm i jsonwebtoken
+   - npm i nodemailer
+   - npm i bcrypt
+   - npm i mongoose
+   - npm i swagger-ui-express swagger-jsdoc
+   - npm i dotenv
+   - npm i winston
+   - npm i path
+   - npm i yamljs
 
-
-
-MUSICIAN:
- - Atributos:
-    //DATOS NECESARIOS PARA CREAR LA CUENTA
-    * username <>
-    * email <>
-    * pass <>
-    * accepted_terms_at
-    * accepted_privacy_at
-    //DATOS QUE SE COMPLETAN DESPUÉS DE CREAR LA CUENTA
-    * imagen <>
-    * firstname <>
-    * lastname <>
-    * slogan <>
-    * descripcion <>
-    * web <>
-    * instagram <>
-    * youtube <>
-    * tiktok <>
- - Primary key:
-    * id <>
- - Foreign Keys (associations in sequelize)
-    * Instrumentos
-    * Estilos
-    * Región
-
-## 1er SPRINT
-
-### RESUMEN DE OBJETIVOS:
-1. Inicialización del proyecto
-2. Diseño de la estructura de datos
-3. Función de signUp sincronizada con frontend
+------------ NOTAS ------------
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales
@@ -118,3 +104,31 @@ VALIDACIÓN EMAIL
 4. Debe tener un TLD (por ejemplo, .com, .org) de al menos 2 letras.
 5. Debe tener un @ y un punto . entre el dominio y el TLD.
 6. Asegura que no haya caracteres extra al final del string.
+
+
+
+MUSICIAN:
+ - Atributos:
+    //DATOS NECESARIOS PARA CREAR LA CUENTA
+    * username <>
+    * email <>
+    * pass <>
+    * accepted_terms_at
+    * accepted_privacy_at
+    //DATOS QUE SE COMPLETAN DESPUÉS DE CREAR LA CUENTA
+    * imagen <>
+    * firstname <>
+    * lastname <>
+    * slogan <>
+    * descripcion <>
+    * web <>
+    * instagram <>
+    * youtube <>
+    * tiktok <>
+ - Primary key:
+    * id <>
+ - Foreign Keys (associations in sequelize)
+    * Instrumentos
+    * Estilos
+    * Región
+

@@ -9,12 +9,12 @@ export default (err, req, res, next) => {
     if(err.key){
         logErrors[err.key].endpoint = req.originalUrl;
         logErrors[err.key].method = req.method;
-        logErrors[err.key].user = req.body.username || 'No autenticado';
+        logErrors[err.key].user = req.body.username || req.query.username || 'No autenticado';
         logger.error(logErrors[err.key]);
     }
     //If error redirection...
     if(err.redirect){
-        res.status(err.status).redirect(`http://localhost:5173${err.redirect}`);
+        res.status(303).redirect(`http://localhost:5173${err.redirect}`);
     }else{
         let errorResponse;
         //If unexpected error (no code recieved)
@@ -24,7 +24,7 @@ export default (err, req, res, next) => {
                 message: 'Unexpected error',
                 method: req.method,
                 endpoint: req.originalUrl,
-                user: req.body.username || 'No autenticado'
+                user: req.body.username || req.query.username || 'No autenticado'
             }).add('unexpected');
             logger.error(logErrors.unexpected);
         //If error response with code

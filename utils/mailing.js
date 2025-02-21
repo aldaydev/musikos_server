@@ -12,18 +12,6 @@ class Email {
         this.html = html;
     }
 
-    set() {
-        // Configurar el objeto mailOptions
-        const mailOptions = {
-            from: `"${this.fromName}" <${this.fromEmail}>`,
-            to: this.to,
-            subject: this.subject,
-            html: this.html
-        };
-
-        return mailOptions;
-    }
-
     send (){
 
         const mailOptions = {
@@ -35,7 +23,6 @@ class Email {
 
         return new Promise((resolve, reject)=> {
             transporter.sendMail(mailOptions, function (error, info) {
-                console.log('Mailer')
                 if (error) {
                     new LogError({
                         message: 'Error sending email',

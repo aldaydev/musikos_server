@@ -11,6 +11,16 @@ import encryptMiddleware from '../middlewares/encrypt.middelware.js';
 //Router initialization
 const router = Router();
 
+//Endpoint to check if a email already exists
+router.post('/check-email',
+    musiciansController.checkEmail
+);
+
+//Endpoint to check if a username already exists
+router.post('/check-username',
+    musiciansController.checkUsername
+);
+
 //EndPoint for creating a musician
 router.post('/signup', 
     validationMiddleware.signUp, //Validation Middleware
@@ -36,16 +46,6 @@ router.post('/signin',
 //Endpoint to check if a user already exists
 router.post('/check-user',
     musiciansController.checkUser
-);
-
-//Endpoint to check if a username already exists
-router.post('/check-username',
-    musiciansController.checkUsername
-);
-
-//Endpoint to check if a email already exists
-router.post('/check-email',
-    musiciansController.checkEmail
 );
 
 export default router;

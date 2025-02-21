@@ -16,6 +16,27 @@ export default {
         }
     },
 
+    create: async (data) => {
+        try {
+            await Musician.create(data);
+        } catch (error) {
+            //If username or email already exists
+            if(error.name === 'SequelizeUniqueConstraintError'){
+                throw { code: 'badRequest' };
+            //If username or email already exists
+            }else if(error.name === 'SequelizeValidationError'){
+                throw { code: 'badRequest' };
+            //Other internal errors
+            }else{
+                const mysqlError = new LogError({
+                    message: 'MySQL failed',
+                    error: error.name
+                }).add('mysqlError');
+                throw { code: 'internalServerError', key: mysqlError };
+            }
+        }
+    },
+
     checkConfirmed: async (username) => {
         try {
             const isConfirmed = await Musician.findOne({
@@ -54,27 +75,6 @@ export default {
                 key: errorFindingMusician, 
                 redirect: `/login?error=internal&username=${username}`
             };
-        }
-    },
-
-    create: async (data) => {
-        try {
-            const newMusician = await Musician.create(data);
-        } catch (error) {
-            //If username or email already exists
-            if(error.name === 'SequelizeUniqueConstraintError'){
-                throw { code: 'badRequest' };
-            //If username or email already exists
-            }else if(error.name === 'SequelizeValidationError'){
-                throw { code: 'badRequest' };
-            //Other internal errors
-            }else{
-                const mysqlError = new LogError({
-                    message: 'MySQL failed',
-                    error: error.name
-                }).add('mysqlError');
-                throw { code: 'internalServerError', key: mysqlError };
-            }
         }
     }
 }

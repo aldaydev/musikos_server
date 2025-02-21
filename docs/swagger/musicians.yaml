@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  title: Musician actions API
+  version: 1.0.0
+paths:
+  /musikos/v1/musicians/check-email:
+    post:
+      tags:
+        - Musicians
+      summary: Check if an email already exists in the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "ejemplo@ejemplo.com"
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exists:
+                    type: boolean
+                    example: true
+        '500':
+          $ref: "#/components/responses/internalServerError"
+        '400':
+          $ref: "#/components/responses/badRequest"
+  /musikos/v1/musicians/check-username:
+      post:
+        tags:
+          - Musicians
+        summary: Check if a username already exists in the database.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: "pepito"
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    exists:
+                      type: boolean
+                      example: true
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"
+  /musikos/v1/musicians/signup:
+      post:
+        tags:
+          - Musicians
+        summary: User account creation process.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: "ejemplo@ejemplo.es"
+                  username:
+                    type: string
+                    example: "pepito"
+                  password:
+                    type: string
+                    example: "123_abcD"
+                  acceptTerms:
+                    type: boolean
+                    example: true
+                  acceptPrivacy:
+                    type: boolena
+                    example: true
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: '¡CONFIRMA TU CUENTA!'
+                    message:
+                      type: string
+                      example: 'Te hemos enviado un link de confirmación a ejemplo@ejemplo.es. Por favor, revisa tu correo y sigue el enlace'
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"
+  /musikos/v1/musicians/signup-confirmation/{token}:
+      get:
+        tags:
+          - Musicians
+        summary: User account confirmation process.
+        description: >
+          This endpoint confirms the user's signup using a unique token sent via email. 
+          The response is always a redirection to the front.
+          Notice that you won´t be allowed to redirect from swagger, so this endpoint in swagger is just for documentation purpose.
+        parameters:
+          - name: token
+            in: path
+            required: true
+            schema:
+              type: string
+            description: The confirmation token sent to the user.
+          - name: username
+            in: query
+            required: true
+            schema:
+            type: string
+            description: The username of the user requesting a new confirmation link in case the token has expired or something went wrong.
+        responses:
+          '303':
+            description: >
+              Whether the confirmation is successful or there is an error (e.g. expired, invalid token),
+              the user is redirected to the front to report the result of the request.
+              The redirection URL will include query parameters indicating the result of the confirmation process.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    redirect_url:
+                      type: string
+                      description: >
+                        The URL to which the user will be redirected. The query parameters will indicate the result of the confirmation process. 
+                        Possible values:
+                        - `/login?error=internal&username=pepito`
+                        - `/login?error=expired&username=pepito`
+                        - `/login?error=incorrect&username=pepito`
+                        - `/login?confirmation=true`
+                      example: '/login?confirmation=true'
+  /musikos/v1/musicians/resend-confirmation:
+      post:
+        tags:
+          - Musicians
+        summary: Resending confirmation email.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: "pepito"
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'EMAIL ENVIADO'
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"

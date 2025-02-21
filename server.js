@@ -26,7 +26,7 @@ const app = express();
 //Global middlewares
 app.use(json());
 app.use(urlencoded({extended: false}));
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(router);
 app.use(error_MW);
 
