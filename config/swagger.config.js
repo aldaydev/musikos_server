@@ -3,9 +3,12 @@ import YAML from 'yamljs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+//Get the absolute path of the current file
 const __filename = fileURLToPath(import.meta.url);
+//Absolute path of the directory where the current file is
 const __dirname = path.dirname(__filename);
 
+//Loading YAML files
 const legalsSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/legals.yaml'));
 const musiciansSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/musicians.yaml'));
 
@@ -24,7 +27,7 @@ const swaggerOptions = {
     tags: [
       { name: 'Legal', description: 'Operations related to terms of use and privacy policy' },
       { name: 'Musicians', description: 'Operations related to the "musicians" model and user actions' },
-      // ... otros tags
+      // ... more tags
     ],
     servers: [
       {
@@ -79,7 +82,7 @@ const swaggerOptions = {
             },
           },
         }
-        // Puedes seguir agregando más respuestas globales
+        //More global responses...
       }
     },
   },

@@ -3,6 +3,7 @@ import { Style } from './style.model.js';
 import { Instrument } from './instrument.model.js';
 
 // MUSICIAN & STYLE RELATED
+
 Musician.belongsToMany(Style, { 
     through: 'musicians_styles', 
     foreignKey: 'musicianId', 
@@ -28,8 +29,6 @@ Instrument.belongsToMany(Musician, {
     through: 'musicians_instruments',
     foreignKey: 'instrumentId',
     otherKey: 'musicianId' });
-
-// STYLE & INSTRUMENT RELATED
 
 
 export { Musician, Style, Instrument };

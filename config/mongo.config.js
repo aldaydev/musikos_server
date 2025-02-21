@@ -1,8 +1,12 @@
 export default {
+    //Mongo URI or URL
     uri: process.env.MONGO_URI,
     options: {
-        connectTimeoutMS: 3000, // Tiempo de espera de conexión
-        socketTimeoutMS: 5000, // Tiempo de espera de los sockets
-        serverSelectionTimeoutMS: 3000, // Espera 7 segundos antes de rendirse en encontrar un servidor
+        //Max time mongoose waits to initial connection
+        connectTimeoutMS: 3000,
+        //Time mongoose waits to close an inactive connection
+        socketTimeoutMS: 5000,
+        //Time mongoose will try to find a server before surrender
+        serverSelectionTimeoutMS: 3000,
     }
 };

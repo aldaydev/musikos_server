@@ -12,6 +12,7 @@ export class LogError {
         this.user = null;
     }
 
+    //Method to add a LogError instance to logErrors object
     add (key){
         logErrors[key] = this;
         return key;

@@ -1,4 +1,5 @@
 export default {
+    //Confirmation email html generator
     confirmation: (confirmationUrl, username) => {
         return `
         <div style="padding: 0px 20px 20px 20px; width: 70%; margin: 0 auto">
@@ -27,6 +28,7 @@ export default {
         `
     },
 
+    //Rsend confirmation email html generator
     resendConfirmation: (confirmationUrl, username) => {
         return `
         <div style="padding: 0px 20px 20px 20px; width: 70%; margin: 0 auto">

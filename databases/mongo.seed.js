@@ -10,7 +10,6 @@ const seedLegal = async () => {
     
         // If there are no documents, seeds the collection
         if (count === 0) {
-
             await Legal.insertMany([
                 { type: 'terms', html: termsHtml },
                 { type: 'privacy', html: privacyHtml }
@@ -20,12 +19,12 @@ const seedLegal = async () => {
         } else {
             logger.info('MongoDB - "legals" already seeded');
         }
-} catch (error) {
-    throw new ResError(
-        'interno', 
-        'MongoDB - Error seeding database'
-    )
-}
+    } catch (error) {
+        throw new LogError({
+            message: 'MongoDB - Error seeding database',
+            error: error.message
+        })
+    }
 };
 
 export default seedLegal;

@@ -1,3 +1,4 @@
+//Terms and conditions html
 export const termsHtml = `
 <div class="legal__container">
     <h3 class="legal__title">Términos y Condiciones de Musikos</h3>
@@ -38,7 +39,7 @@ export const termsHtml = `
     </p>
 </div>
 `
-
+//Privacy policy html
 export const privacyHtml = `
 <div class="legal__container">
     <h3 class="legal__title">Política de Privacidad de Musikos</h3>

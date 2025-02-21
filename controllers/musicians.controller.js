@@ -53,11 +53,6 @@ export default {
         try{
             //Initial log
             logger.http({message: 'Register request started', action: 'Register user', method: req.method, endpoint: req.originalUrl});
-            
-            //Checking request body required data
-            if(!req.body.email || !req.body.username || !req.body.password){
-                throw { code: 'badRequest' };
-            }
 
             //Collecting request body required data
             const userData = {

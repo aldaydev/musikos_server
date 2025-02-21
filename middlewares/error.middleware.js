@@ -1,17 +1,17 @@
-// import resErrors from "../utils/errors/resErrors.js";
 import { resErrors } from "../utils/errors/resErrors.js";
 import logger from "../config/logger.config.js";
 import { LogError, logErrors } from "../utils/errors/logErrors.js";
 
 export default (err, req, res, next) => {
 
-    //Throw log Error if exists
+    //Throw log Error if exists (key)
     if(err.key){
         logErrors[err.key].endpoint = req.originalUrl;
         logErrors[err.key].method = req.method;
         logErrors[err.key].user = req.body.username || req.query.username || 'No autenticado';
         logger.error(logErrors[err.key]);
     }
+    
     //If error redirection...
     if(err.redirect){
         res.status(303).redirect(`http://localhost:5173${err.redirect}`);

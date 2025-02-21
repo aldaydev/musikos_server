@@ -1,4 +1,3 @@
-//dotenv import
 import dotenv from 'dotenv';
 import logger from './logger.config.js';
 

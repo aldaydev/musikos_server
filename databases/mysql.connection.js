@@ -12,28 +12,27 @@ import Musician_Instrument from "../models/mysql.models/musicians_instruments.mo
 //Sequelize Seeding tables imports
 import { seedInstruments, seedStyles } from "./mysql.seed.js";
 
-
-class MySQL {
-
-    async connect(){
+export default {
+    //Connect to MySQL
+    connect: async () => {
         try{
             await sequelize.authenticate();
             logger.info('MySQL - Connected');
         }catch(error){
-            logger.error({message: 'MySQL - Error connecting', details: error.original.sqlMessage});
+            logger.error({message: 'MySQL - Error connecting', error: error.original.sqlMessage});
         }
-    }
-
-    async close(){
+    },
+    //Disconnect from MySQL
+    close: async () => {
         try{
             sequelize.close();
             logger.info('MySQL - Closed');
         }catch(error){
-            logger.error({message: 'MySQL - Error closing', details: error.original.sqlMessage});
+            logger.error({message: 'MySQL - Error closing', error: error.original.sqlMessage});
         }
-    }
-
-    async syncModels(){
+    },
+    //Sync MySQL models
+    syncModels: async () => {
         try{
             await Musician.sync();
             await Style.sync();
@@ -42,21 +41,19 @@ class MySQL {
             await Musician_Instrument.sync();
             logger.info('MySQL - Models synchronized');
         }catch(error){
-            logger.error({message: 'MySQL - Error synchronizing models', details: error.original.sqlMessage});
+            logger.error({message: 'MySQL - Error synchronizing models', error: error.original.sqlMessage});
         }
-        
-    }
-
-    async seedTables(){
+    },
+    //Seed MySQL tables
+    seedTables: async () => {
         try{
             await seedStyles();
             await seedInstruments();
             logger.info('MySQL - All static tables seeded');
         }catch(error){
-            logger.error({message: 'MySQL - Error seeding tables', details: error.original.sqlMessage});
+            logger.error({message: 'MySQL - Error seeding tables', error: error.original.sqlMessage});
         }
     }
 }
 
-export default new MySQL;
 

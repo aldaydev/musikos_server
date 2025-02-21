@@ -4,6 +4,7 @@ export class ResError {
         this.status = status;
     }
 
+    //Method to add a resError instance to resErrors object
     add (key){
         resErrors[key] = this;
         return key;
@@ -56,10 +57,3 @@ export const resErrors = {
         404
     ),
 }
-
-// EJEMPLO DE CÓMO LANZAR PERSONALIZADOS
-
-// throw new ResError (
-//     'Fallo al obtener los términos y condiciones de servicio. Inténtalo más tarde',
-//     404,
-// ).add('notFoundTerms');

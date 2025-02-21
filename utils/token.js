@@ -2,10 +2,14 @@ import jwt from 'jsonwebtoken';
 import { LogError } from './errors/logErrors.js';
 import { ResError } from './errors/resErrors.js';
 
+const SCRTKY = process.env.JWT_SCRTKY;
+
 export default {
+
+    //Generates a new token
     generate: async (tokenFrom, expires) => {
         return new Promise((resolve, reject) => {
-            jwt.sign(tokenFrom, 'secretkey', { expiresIn: expires }, (error, token) => {
+            jwt.sign(tokenFrom, SCRTKY, { expiresIn: expires }, (error, token) => {
                 if (error) {
                     const errorGeneratingToken = new LogError({
                         message: 'Error generating token',
@@ -18,9 +22,10 @@ export default {
         });
     },
 
+    //Verifying token and redirecting if error
     verifyAndRedirect: async (tokenToVerify, username) => {
         return new Promise((resolve, reject) => {
-            jwt.verify(tokenToVerify, 'secretkey', (error, authData) => {
+            jwt.verify(tokenToVerify, SCRTKY, (error, authData) => {
                 if (error) {
                     let redirect = 'unexpected';
                     let message = 'Error interno en el servidor. Inténtalo más tarde.'

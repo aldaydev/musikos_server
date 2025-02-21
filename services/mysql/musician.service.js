@@ -3,6 +3,7 @@ import { LogError } from "../../utils/errors/logErrors.js";
 
 export default {
 
+    //Find a Musician through a single value
     findOne: async (key, value) => {
         try{
             const element = await Musician.findOne({where: {[key]: value}});
@@ -16,6 +17,7 @@ export default {
         }
     },
 
+    //Create a new Musician
     create: async (data) => {
         try {
             await Musician.create(data);
@@ -37,6 +39,7 @@ export default {
         }
     },
 
+    //Check if a Musician has confirmed the account
     checkConfirmed: async (username) => {
         try {
             const isConfirmed = await Musician.findOne({
@@ -59,6 +62,7 @@ export default {
         }
     },
 
+    //Update is_confirmed value for a Musician
     updateIsConfirmed: async (username) => {
         try{
             const updateMusician = await Musician.update(

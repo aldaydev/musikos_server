@@ -3,7 +3,7 @@ import { LogError } from './errors/logErrors.js';
 
 const encryptPassword = async (password) => {
     try {
-        const saltRounds = 10;
+        const saltRounds = parseInt(process.env.BCRYPT_SALTS);
         return await bcrypt.hash(password, saltRounds);
     } catch (error) {
         const errorEncrypting = new LogError({
@@ -19,7 +19,11 @@ const comparePassword = async (password, hash) => {
         const isMatch = await bcrypt.compare(password, hash);
         
         if(!isMatch){
-            console.log('La contraseña no coincide')
+            const wrongPassword = new LogError({
+                message: 'Worng Password',
+                error: 'Password doesn´t match with hash'
+            }).add('wrongPassword');
+            throw {code: 'badRequest', key: wrongPassword};
         }else{
             return true;
         }

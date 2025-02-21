@@ -1,18 +1,21 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysql.config.js';
 
-// Definición del modelo Musician
+// Defining Musician model
 const Musician = sequelize.define('Musician', {
+
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    //Datos necesarios para el signup
+
+    //Required data for signup
     username: {
         type: DataTypes.STRING(30),
         allowNull: false,
         unique: true,
+        //Validating username format even in MySQL
         validate: {
             is: {
                 args: /^(?!.*[_-]{2})(?![_-])([a-z0-9_-]{3,30})(?<![_-])$/,
@@ -24,6 +27,7 @@ const Musician = sequelize.define('Musician', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        //Validating email format even in MySQL
         validate: {
             is: {
                 args: /^(?!.*\.\.)[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -34,12 +38,13 @@ const Musician = sequelize.define('Musician', {
     password: {
         type: DataTypes.STRING(60),
         allowNull: false,
+        //Validating password have 60 characters (encrypted)
         validate: {
-            len: [60, 60]
+            len: [60, 60] 
         }
     },
     
-    //Datos que se introducen una vez creado
+    //Data that will be entered once created
     image: {
         type: DataTypes.STRING(255),
         allowNull: false,
@@ -81,6 +86,7 @@ const Musician = sequelize.define('Musician', {
         allowNull: false,
         defaultValue: false
     },
+
     //Timestamps
     last_connection: {
         type: DataTypes.DATE,
@@ -88,13 +94,13 @@ const Musician = sequelize.define('Musician', {
     },
     accepted_terms_at: {
         type: DataTypes.DATE,
-        allowNull: false, // Obliga a aceptar los términos al registrarse.
-        defaultValue: DataTypes.NOW, // Registra automáticamente la fecha de aceptación.
+        allowNull: false, // Terms must be accepted
+        defaultValue: DataTypes.NOW, // Automatically records the acceptance date
     },
     accepted_privacy_at: {
         type: DataTypes.DATE,
-        allowNull: false, // Lo mismo para la política de privacidad.
-        defaultValue: DataTypes.NOW,
+        allowNull: false, // Privacy policy must be accepted
+        defaultValue: DataTypes.NOW, // Automatically records the acceptance date
     }
 }, {
     tableName: 'musicians'

@@ -1,21 +1,24 @@
 import winston from 'winston';
 
-//Set up ñpgger: levels, transports, formats
+//Set up logger: levels, transports, formats
 const logger = winston.createLogger({
-    // Puede ser 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
+    // Can be: 'error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'
     level: 'http', 
+    //Transports = destinations / Can be: console, file...
     transports: [
+        // Show logs in console
         new winston.transports.Console({
             format: winston.format.simple()
-        }), // Mostrar logs en la consola
+        }), 
+        //Save logs in a file
         new winston.transports.File({
             filename: 'logs/musikos.log',
             level: 'error',
             format: winston.format.combine(
                 winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-                winston.format.json() // Guarda en JSON con timestamp
+                winston.format.json()
             )
-        }) // Guardar logs en un archivo
+        })
     ]
 });
 

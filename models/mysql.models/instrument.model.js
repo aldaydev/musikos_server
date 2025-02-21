@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysql.config.js';
 
-// Definición del modelo Musician
+// Defining Instrument model
 const Instrument = sequelize.define('Instrument', {
     id: {
         type: DataTypes.INTEGER,

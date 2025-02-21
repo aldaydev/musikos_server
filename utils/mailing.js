@@ -12,6 +12,7 @@ class Email {
         this.html = html;
     }
 
+    //Method to send a instance of Email class
     send (){
 
         const mailOptions = {

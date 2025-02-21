@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'; 
 
-// Crear un objeto de transporte
+// NodeMailer configuration
 const transporter = nodemailer.createTransport({
     host: process.env.MAILER_HOST,
     port: process.env.MAILER_PORT,
