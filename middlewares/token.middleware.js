@@ -2,7 +2,7 @@ import token from "../utils/token.js";
 
 export default {
 
-    accessToken: async (req, res, next) => {
+    generateAccessToken: async (req, res, next) => {
         try {
             //Get data to conform access token
             const { id, username } = req.user;
@@ -17,7 +17,23 @@ export default {
         }
     },
 
-    refreshToken: async (req, res, next) => {
+    validateAccessToken: async (req, res, next) => {
+        try {
+            const accessToken = req.cookies.accessToken;
+            if(!accessToken) {
+                throw {code: 'badRequest'}
+            }
+
+            await token.verify(accessToken);
+
+            next();
+            
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    generateRefreshToken: async (req, res, next) => {
         try {
             //Get data to conform refresh token
             const { id, username } = req.user;

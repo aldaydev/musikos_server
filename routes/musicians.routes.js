@@ -43,9 +43,15 @@ router.post('/resend-confirmation',
 router.post('/signin', 
     validationMiddleware.signIn, //Validation Middleware
     encryptMiddleware.compare, //Compare bcrypt middleware
-    tokenMiddleware.accessToken, //AccessToken middleware
-    tokenMiddleware.refreshToken, //RefreshToken middleware
+    tokenMiddleware.generateAccessToken, //AccessToken middleware
+    tokenMiddleware.generateRefreshToken, //RefreshToken middleware
     musiciansController.signIn //Final controller
+);
+
+//Endpoint for validateToken
+router.post('/verify-token',
+    tokenMiddleware.validateAccessToken,
+    musiciansController.verifyMusician
 );
 
 

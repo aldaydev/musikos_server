@@ -47,6 +47,16 @@ export const resErrors = {
         401
     ),
 
+    invalidToken: new ResError(
+        'No autorizado. El token es inválido.',
+        401
+    ),
+
+    tokenExpired: new ResError(
+        'No autorizado. El token ha caducado.',
+        401
+    ),
+
     forbidden: new ResError(
         'Acceso prohibido. No tienes permisos para realizar esta acción.',
         403

@@ -192,5 +192,13 @@ export default {
         }catch(error){
             next(error);
         }
+    },
+
+    verifyMusician: async (req, res, next) => {
+        try {
+            res.status(200).json({verified: true})
+        } catch (error) {
+            
+        }
     }
 }
