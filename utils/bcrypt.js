@@ -17,16 +17,7 @@ const encryptPassword = async (password) => {
 const comparePassword = async (password, hash) => {
     try {
         const isMatch = await bcrypt.compare(password, hash);
-        
-        if(!isMatch){
-            const wrongPassword = new LogError({
-                message: 'Worng Password',
-                error: 'Password doesn´t match with hash'
-            }).add('wrongPassword');
-            throw {code: 'badRequest', key: wrongPassword};
-        }else{
-            return true;
-        }
+        return isMatch;
 
     } catch (error) {
         const errorDecrypting = new LogError({

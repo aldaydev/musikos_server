@@ -1,5 +1,6 @@
 import { Musician } from "../../models/mysql.models/asociations.js";
 import { LogError } from "../../utils/errors/logErrors.js";
+import { Op } from "sequelize";
 
 export default {
 
@@ -78,6 +79,31 @@ export default {
             throw { code: 'internalServerError', 
                 key: errorFindingMusician, 
                 redirect: `/login?error=internal&username=${username}`
+            };
+        }
+    },
+
+    checkUser: async (login) => {
+        try {
+            //Find if username or email exists in MySQL
+            const result = await Musician.findOne({ where: {
+                [Op.or]: 
+                    [
+                        { email: login },
+                        { username: login }
+                    ]
+                } 
+            });
+            return result;
+            
+        } catch (error) {
+            const errorCheckingMusician = new LogError({
+                message: 'Fail at updating in MySQL',
+                error: error.message
+            }).add('errorCheckingMusician');
+            throw { 
+                code: 'internalServerError', 
+                key: errorCheckingMusician, 
             };
         }
     }

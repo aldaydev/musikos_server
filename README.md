@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 1 - 21/02/2025 - Tarde - final code review
+### Sprint 2 - 22/02/2025 - Noche - signin endpoint
 
 ## 1er SPRINT (BACKEND)
 
@@ -35,6 +35,7 @@ Dependencias:
    - npm i winston
    - npm i path
    - npm i yamljs
+   - npm i cookie-parser
 
 ------------ NOTAS ------------
 

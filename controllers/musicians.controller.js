@@ -1,12 +1,12 @@
 //Dependency imports
 import Token from "../utils/token.js";
-//Model import
-import { Musician } from "../models/mysql.models/musician.model.js";
+
 //Email views import
 import EmailViews from "../views/email.views.js";
 import logger from "../config/logger.config.js";
 import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
+import token from "../utils/token.js";
 
 export default {
 
@@ -51,41 +51,33 @@ export default {
     //SignUp controller
     signUp: async (req, res, next) => {
         try{
-            //Initial log
-            logger.http({message: 'Register request started', action: 'Register user', method: req.method, endpoint: req.originalUrl});
 
             //Collecting request body required data
-            const userData = {
-                email: req.body.email,
-                username: req.body.username,
-                password: req.body.password
-            }
+            const {email, username, password} = req.body;
 
             //Creating musician
-            await musicianService.create(userData);
+            await musicianService.create({email, username, password});
 
             //Generate token
-            const generatedToken = await Token.generate(userData, '600s');
+            const generatedToken = await Token.generate({email, username}, '600s');
 
             //Generating confirmation URL
-            const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${userData.username}`
+            const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${username}`
 
             //Setting up confirmation email
             const newEmail = new Email ({
-                to: req.body.email,
+                to: email,
                 subject: 'Confirma tu cuenta en Musiko',
-                html: EmailViews.confirmation(confirmationUrl, userData.username)
+                html: EmailViews.confirmation(confirmationUrl, username)
             });
 
             //Sending confirmation email
             await newEmail.send();
 
-            //Finalization log
-            logger.http({message: `confirmation link has been sent to ${userData.email}`, action: 'Register user', method: req.method, endpoint: req.originalUrl})
             //Final response
             return res.status(200).json({
                 title: '¡CONFIRMA TU CUENTA!',
-                message: `Te hemos enviado un link de confirmación a ${userData.email}. Por favor, revisa tu correo y sigue el enlace`
+                message: `Te hemos enviado un link de confirmación a ${email}. Por favor, revisa tu correo y sigue el enlace`
             });
 
         }catch(error){
@@ -103,17 +95,13 @@ export default {
             const authData = await Token.verifyAndRedirect(req.params.token, req.query.username);
 
             //Taking user data from token (authData)
-            const userData = {
-                email: authData.email,
-                password: authData.password,
-                username: authData.username
-            }
+            const username = authData.username;
 
             //Checking if user is already confirmed
-            const isConfirmed = await musicianService.checkConfirmed(userData.username);
+            const isConfirmed = await musicianService.checkConfirmed(username);
             if(!isConfirmed){
                 //If not... set is_confirmed -> true
-                await musicianService.updateIsConfirmed(userData.username);
+                await musicianService.updateIsConfirmed(username);
             }else{
                 throw { code: 'badRequest',
                     redirect: `/login?error=already-updated`
@@ -181,25 +169,28 @@ export default {
         }
     },
 
-    checkUser: async (req, res, next) => {
-        const { check } = req.body;
-        const result = await Musician.findOne({ where: {
-            [Op.or]: 
-                [
-                    { email: check },
-                    { username: check }
-                ]
-            } 
-        });
-        console.log(result);
-    },
-
     signIn: async (req, res, next) => {
         try{
-            console.log(req.body);
-            res.json({data: req.body});
-        }catch(e){
-            res.status(500).json({ msg: 'Error inesperado', error: e });
+            const {accessToken, refreshToken} = req.user;
+
+            //Send cookie with accessToken
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                secure: true,  // In production set to "true"
+                sameSite: 'lax',
+                maxAge: 3600000, // 1 hour duration
+            });
+
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: true,  // In production set to "true"
+                sameSite: 'lax',
+                maxAge: 604800000, // 7 days
+            });
+            
+            res.status(200).json({loggedin: true});
+        }catch(error){
+            next(error);
         }
     }
 }

@@ -7,6 +7,7 @@ import musiciansController from '../controllers/musicians.controller.js';
 //Middleware imports
 import validationMiddleware from '../middlewares/validation.middleware.js';
 import encryptMiddleware from '../middlewares/encrypt.middelware.js';
+import tokenMiddleware from '../middlewares/token.middleware.js';
 
 //Router initialization
 const router = Router();
@@ -40,12 +41,12 @@ router.post('/resend-confirmation',
 
 //EndPoint for signingIn
 router.post('/signin', 
-    musiciansController.signIn
+    validationMiddleware.signIn, //Validation Middleware
+    encryptMiddleware.compare, //Compare bcrypt middleware
+    tokenMiddleware.accessToken, //AccessToken middleware
+    tokenMiddleware.refreshToken, //RefreshToken middleware
+    musiciansController.signIn //Final controller
 );
 
-//Endpoint to check if a user already exists
-router.post('/check-user',
-    musiciansController.checkUser
-);
 
 export default router;

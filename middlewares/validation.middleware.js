@@ -31,5 +31,35 @@ export default {
         } catch (error) {
             next(error);
         }
+    },
+
+    signIn: async (req, res, next) => {
+        try {
+
+            //Check if required data was sent in req.body
+            if(!req.body.login || !req.body.password){
+                throw {code: 'badRequest'}
+            }
+
+            //Check if username or email belongs to a musician
+            const checkUser = await musicianService.checkUser(req.body.login);
+
+            //If no musician found throw an error
+            if(!checkUser){
+                throw {code: 'badRequest'}
+            }
+
+            //Save username in req.body
+            req.user = {
+                id: checkUser.id,
+                username: checkUser.username,
+                hash: checkUser.password
+            }
+
+            next();
+
+        } catch (error) {
+            next(error);
+        }
     }
 }

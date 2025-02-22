@@ -1,4 +1,4 @@
-import { encryptPassword } from '../utils/bcrypt.js';
+import { comparePassword, encryptPassword } from '../utils/bcrypt.js';
 
 export default {
     generate: async (req, res, next) => {
@@ -7,6 +7,27 @@ export default {
             next();
         }catch(error){
             next(error)
+        }
+    },
+
+    compare: async (req, res, next) => {
+        try {
+            //Get password and hash
+            const { password } = req.body;
+            const { hash } = req.user;
+
+            //Call bcrypt compare function
+            const isMatch = await comparePassword(password, hash);
+
+            //If wrong password, throw an error
+            if(!isMatch){
+                throw {code: 'badRequest'};
+            }else{
+                next();
+            }
+
+        } catch (error) {
+            next(error);
         }
     }
 }

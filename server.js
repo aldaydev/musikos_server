@@ -7,6 +7,7 @@ import logger from './config/logger.config.js';
 //Express & global middleware imports
 import express, {json, urlencoded} from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { router } from './routes/router.js';
 
 //Sequelize connection import
@@ -25,8 +26,13 @@ const app = express();
 
 //Global middlewares
 app.use(json());
-app.use(urlencoded({extended: false}));
-app.use(cors({ origin: '*' }));
+app.use(urlencoded({extended: true}));
+app.use(cors({
+    origin: 'http://localhost:5173',  // Cambia a tu dominio de frontend
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    credentials: true,  // Habilita el envío de cookies
+}));
+app.use(cookieParser());
 app.use(router);
 app.use(error_MW);
 

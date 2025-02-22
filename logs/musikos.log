@@ -1,0 +1,51 @@
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:31:31","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:32:45","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:35:28","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:35:56","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:38:25","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:38:45","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:43:48","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:44:13","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 00:44:34","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 01:15:43","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 01:16:37","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 01:17:05","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 01:17:19","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:54:23","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:55:58","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:56:30","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:57:16","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:57:30","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 02:59:14","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 03:58:54","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:39:02","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:39:14","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:39:37","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:39:47","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:40:08","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:40:18","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:41:05","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:41:28","user":null}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-22 05:42:29"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-22 05:42:29"}
+{"level":"error","message":"MySQL - Error seeding tables","timestamp":"2025-02-22 05:42:29"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 05:42:30","user":null}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-22 05:42:49"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-22 05:42:49"}
+{"level":"error","message":"MySQL - Error seeding tables","timestamp":"2025-02-22 05:42:49"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-22 05:43:37"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-22 05:43:37"}
+{"level":"error","message":"MySQL - Error seeding tables","timestamp":"2025-02-22 05:43:37"}
+{"endpoint":"/musikos/v1/musicians/signin","error":null,"level":"error","message":"Fail at updating in MySQL","method":"POST","status":500,"timestamp":"2025-02-22 05:43:38","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians/signin","error":null,"level":"error","message":"Fail at updating in MySQL","method":"POST","status":500,"timestamp":"2025-02-22 05:43:58","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-22 05:44:16"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-22 05:44:16"}
+{"level":"error","message":"MySQL - Error seeding tables","timestamp":"2025-02-22 05:44:16"}
+{"endpoint":"/musikos/v1/musicians/signin","error":null,"level":"error","message":"Fail at updating in MySQL","method":"POST","status":500,"timestamp":"2025-02-22 05:44:17","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error connecting","timestamp":"2025-02-22 05:44:55"}
+{"level":"error","message":"MySQL - Error synchronizing models","timestamp":"2025-02-22 05:44:55"}
+{"level":"error","message":"MySQL - Error seeding tables","timestamp":"2025-02-22 05:44:55"}
+{"endpoint":"/musikos/v1/musicians/signin","error":null,"level":"error","message":"Fail at updating in MySQL","method":"POST","status":500,"timestamp":"2025-02-22 05:45:45","user":"No autenticado"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 06:01:54","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 06:03:52","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-22 06:03:52","user":null}
