@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 23/02/2025 - Tarde - token environment running
+### Sprint 2 - 23/02/2025 - Tarde - signin completed
 
 ## 1er SPRINT (BACKEND)
 
