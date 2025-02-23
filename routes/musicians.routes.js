@@ -50,7 +50,6 @@ router.post('/signin',
 
 //Endpoint for validateToken
 router.post('/verify-token',
-    tokenMiddleware.validateAccessToken,
     musiciansController.verifyMusician
 );
 

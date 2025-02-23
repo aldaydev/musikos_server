@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 23/02/2025 - Noche - designing token enviroment
+### Sprint 2 - 23/02/2025 - Noche - validating-token
 
 ## 1er SPRINT (BACKEND)
 

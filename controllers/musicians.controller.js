@@ -12,60 +12,60 @@ export default {
 
     //Check if a email already exists
     checkEmail: async (req, res, next) => {
-        try{
-            if(!req.body.email){
-                throw {code: 'badRequest'}
+        try {
+            if (!req.body.email) {
+                throw { code: 'badRequest' }
             }
 
             const exists = await musicianService.findOne('email', req.body.email);
-            
-            if(exists){
-                res.status(200).json({exists: true});
-            }else{
-                res.status(200).json({exists: false});
+
+            if (exists) {
+                res.status(200).json({ exists: true });
+            } else {
+                res.status(200).json({ exists: false });
             }
-        }catch(e){
+        } catch (e) {
             next(error);
         }
     },
 
     //Check if a username already exists
     checkUsername: async (req, res, next) => {
-        try{
-            if(!req.body.username){
-                throw {code: 'badRequest'}
+        try {
+            if (!req.body.username) {
+                throw { code: 'badRequest' }
             }
 
             const exists = await musicianService.findOne('username', req.body.username);
-            
-            if(exists){
-                res.status(200).json({exists: true});
-            }else{
-                res.status(200).json({exists: false});
+
+            if (exists) {
+                res.status(200).json({ exists: true });
+            } else {
+                res.status(200).json({ exists: false });
             }
-        }catch(error){
+        } catch (error) {
             next(error);
         }
     },
 
     //SignUp controller
     signUp: async (req, res, next) => {
-        try{
+        try {
 
             //Collecting request body required data
-            const {email, username, password} = req.body;
+            const { email, username, password } = req.body;
 
             //Creating musician
-            await musicianService.create({email, username, password});
+            await musicianService.create({ email, username, password });
 
             //Generate token
-            const generatedToken = await Token.generate({email, username}, '600s');
+            const generatedToken = await Token.generate({ email, username }, '600s');
 
             //Generating confirmation URL
             const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${username}`
 
             //Setting up confirmation email
-            const newEmail = new Email ({
+            const newEmail = new Email({
                 to: email,
                 subject: 'Confirma tu cuenta en Musiko',
                 html: EmailViews.confirmation(confirmationUrl, username)
@@ -80,16 +80,16 @@ export default {
                 message: `Te hemos enviado un link de confirmación a ${email}. Por favor, revisa tu correo y sigue el enlace`
             });
 
-        }catch(error){
+        } catch (error) {
             next(error);
         }
     },
 
     //Confirm SignUp controller
     signUpConfirmation: async (req, res, next) => {
-        try{
+        try {
             //Initial log
-            logger.http({message: 'Account confirmation started', action: 'Confirm account', method: req.method, endpoint: req.originalUrl});
+            logger.http({ message: 'Account confirmation started', action: 'Confirm account', method: req.method, endpoint: req.originalUrl });
 
             //Token verification
             const authData = await Token.verifyAndRedirect(req.params.token, req.query.username);
@@ -99,20 +99,21 @@ export default {
 
             //Checking if user is already confirmed
             const isConfirmed = await musicianService.checkConfirmed(username);
-            if(!isConfirmed){
+            if (!isConfirmed) {
                 //If not... set is_confirmed -> true
                 await musicianService.updateIsConfirmed(username);
-            }else{
-                throw { code: 'badRequest',
+            } else {
+                throw {
+                    code: 'badRequest',
                     redirect: `/login?error=already-updated`
                 };
             }
 
             //Final log
-            logger.http({message: 'Account successfully confirmed', action: 'Confirm account', method: req.method, endpoint: req.originalUrl});
+            logger.http({ message: 'Account successfully confirmed', action: 'Confirm account', method: req.method, endpoint: req.originalUrl });
             //Final response - redirect to front
             return res.status(303).redirect("http://localhost:5173/login?confirmation=true");
-        }catch(error){
+        } catch (error) {
             next(error);
         }
     },
@@ -121,34 +122,34 @@ export default {
     resendConfirmation: async (req, res, next) => {
         try {
             //Initial log
-            logger.http({message: 'Resending email request stared', action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl});
+            logger.http({ message: 'Resending email request stared', action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl });
 
             //Check if username exists in request body
             const username = req.body.username;
-            if(!username){
+            if (!username) {
                 throw { code: 'badRequest' };
             }
 
             //Check if user exists
             const user = await musicianService.findOne('username', username);
-            if(!user){
+            if (!user) {
                 throw { code: 'badRequest' };
             }
 
             //Checking if user is already confirmed
             const isConfirmed = await musicianService.checkConfirmed(username);
-            if(isConfirmed){
+            if (isConfirmed) {
                 throw { code: 'badRequest' };
             }
 
             //Generate token from username
-            const generatedToken = await Token.generate({username}, '600s');
+            const generatedToken = await Token.generate({ username }, '600s');
 
             //Generating confirmation URL
             const confirmationUrl = `http://localhost:3001/musikos/v1/musicians/signup-confirmation/${generatedToken}?username=${username}`
 
             //Setting up confirmation email
-            const newEmail = new Email ({
+            const newEmail = new Email({
                 to: user.email,
                 subject: 'Nuevo email de confirmación',
                 html: EmailViews.resendConfirmation(confirmationUrl, username)
@@ -158,7 +159,7 @@ export default {
             await newEmail.send();
 
             //Finaization log
-            logger.http({message: `confirmation link has been sent to ${user.email}`, action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl})
+            logger.http({ message: `confirmation link has been sent to ${user.email}`, action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl })
             //Final response
             return res.status(200).json({
                 message: `EMAIL ENVIADO`
@@ -170,8 +171,8 @@ export default {
     },
 
     signIn: async (req, res, next) => {
-        try{
-            const {accessToken, refreshToken} = req.user;
+        try {
+            const { accessToken, refreshToken } = req.user;
 
             //Send cookie with accessToken
             res.cookie('accessToken', accessToken, {
@@ -187,18 +188,34 @@ export default {
                 sameSite: 'lax',
                 maxAge: 604800000, // 7 days
             });
-            
-            res.status(200).json({loggedin: true});
-        }catch(error){
+
+            res.status(200).json({ loggedin: true });
+        } catch (error) {
             next(error);
         }
     },
 
     verifyMusician: async (req, res, next) => {
         try {
-            res.status(200).json({verified: true})
-        } catch (error) {
+            const accessToken = req.cookies.accessToken;
+            if (!accessToken) {
+                throw { code: 'badRequest' }
+            }
+
+            const user = await token.verify(accessToken);
             
+            const allUserData = await musicianService.findOne('id', user.id);
+
+            console.log(allUserData);
+            const userData = {
+                id: allUserData.id,
+                first_name: allUserData.first_name,
+                username: allUserData.username
+            }
+
+            res.status(200).json({ verified: true, user: userData });
+        } catch (error) {
+            next(error)
         }
     }
 }
