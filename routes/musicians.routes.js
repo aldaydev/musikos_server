@@ -48,9 +48,22 @@ router.post('/signin',
     musiciansController.signIn //Final controller
 );
 
-//Endpoint for validateToken
-router.post('/verify-token',
-    musiciansController.verifyMusician
+//Endpoint for verifying accessToken
+router.post('/verify-access-token',
+    tokenMiddleware.verifyAccessToken,
+    musiciansController.verifyAccessToken
+);
+
+//Endpoint for generating new accessToken
+router.post('/new-access-token',
+    tokenMiddleware.verifyRefreshToken,
+    tokenMiddleware.generateAccessToken,
+    musiciansController.newAccessToken
+);
+
+//Endpoint for generating new accessToken
+router.post('/clear-cookies',
+    musiciansController.clearCookies
 );
 
 

@@ -52,6 +52,7 @@ export default {
             //Save username in req.body
             req.user = {
                 id: checkUser.id,
+                email: checkUser.email,
                 username: checkUser.username,
                 hash: checkUser.password
             }

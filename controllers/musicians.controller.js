@@ -53,7 +53,10 @@ export default {
         try {
 
             //Collecting request body required data
-            const { email, username, password } = req.body;
+            let { email, username, password } = req.body;
+
+            //Converting email to lowercase
+            email = email.toLowerCase();
 
             //Creating musician
             await musicianService.create({ email, username, password });
@@ -189,33 +192,66 @@ export default {
                 maxAge: 604800000, // 7 days
             });
 
-            res.status(200).json({ loggedin: true });
+            const userData = {
+                id: req.user.id,
+                username: req.user.username,
+                email: req.user.email
+            }
+
+            res.status(200).json({ verified: true, user: userData });
         } catch (error) {
             next(error);
         }
     },
 
-    verifyMusician: async (req, res, next) => {
+    verifyAccessToken: async (req, res, next) => {
         try {
-            const accessToken = req.cookies.accessToken;
-            if (!accessToken) {
-                throw { code: 'badRequest' }
-            }
 
-            const user = await token.verify(accessToken);
-            
-            const allUserData = await musicianService.findOne('id', user.id);
-
-            console.log(allUserData);
             const userData = {
-                id: allUserData.id,
-                first_name: allUserData.first_name,
-                username: allUserData.username
+                id: req.user.id,
+                username: req.user.username,
+                email: req.user.email
             }
 
             res.status(200).json({ verified: true, user: userData });
+
         } catch (error) {
             next(error)
         }
+    },
+
+    newAccessToken: async (req, res, next) => {
+        try {
+
+            const userData = {
+                id: req.user.id,
+                username: req.user.username,
+                email: req.user.email
+            }
+
+            //Send cookie with new accessToken
+            res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+                secure: true,  // In production set to "true"
+                sameSite: 'lax',
+                maxAge: 3600000, // 1 hour duration
+            });
+
+            res.status(200).json({ verified: true, user: userData });
+
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    clearCookies: async (req, res, next) => {
+        try {
+            res.clearCookie("accessToken", { path: "/" });
+            res.clearCookie("refreshToken", { path: "/" });
+            res.status(200).send("Sesión cerrada");
+        } catch (error) {
+            next(error);
+        }
+        
     }
 }

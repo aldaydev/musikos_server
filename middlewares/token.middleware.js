@@ -5,10 +5,10 @@ export default {
     generateAccessToken: async (req, res, next) => {
         try {
             //Get data to conform access token
-            const { id, username } = req.user;
+            const { id, username, email } = req.user;
 
             //Generate token and add to req.user
-            req.user.accessToken = await token.generate({id, username}, '1h');
+            req.user.accessToken = await token.generate({id, username, email}, '1h');
 
             next();
 
@@ -17,14 +17,16 @@ export default {
         }
     },
 
-    validateAccessToken: async (req, res, next) => {
+    verifyAccessToken: async (req, res, next) => {
         try {
             const accessToken = req.cookies.accessToken;
             if(!accessToken) {
                 throw {code: 'badRequest'}
             }
 
-            await token.verify(accessToken);
+            const user = await token.verify(accessToken);
+
+            req.user = {id: user.id, email: user.email, username: user.username};
 
             next();
             
@@ -36,13 +38,31 @@ export default {
     generateRefreshToken: async (req, res, next) => {
         try {
             //Get data to conform refresh token
-            const { id, username } = req.user;
+            const { id, username, email } = req.user;
 
             //Generate token and add to req.user
-            req.user.refreshToken = await token.generate({id, username}, '7d');
+            req.user.refreshToken = await token.generate({id, username, email}, '7d');
 
             next();
 
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    verifyRefreshToken: async (req, res, next) => {
+        try {
+            const refreshToken = req.cookies.refreshToken;
+            if(!refreshToken) {
+                throw {code: 'badRequest'}
+            }
+
+            const user = await token.verify(refreshToken);
+
+            req.user = {id: user.id, email: user.email, username: user.username};
+
+            next();
+            
         } catch (error) {
             next(error);
         }
