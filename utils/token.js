@@ -25,11 +25,10 @@ export default {
     },
 
     //Verifying token and redirecting if error
-    verifyAndRedirect: async (tokenToVerify, username) => {
+    verifyAndRedirect: async (tokenToVerify, username, type) => {
         return new Promise((resolve, reject) => {
             jwt.verify(tokenToVerify, SCRTKY, (error, authData) => {
                 if (error) {
-
                     //Set "redirect" and "message" by error type
                     let redirect = 'unexpected';
                     let message = 'Error interno en el servidor. Inténtalo más tarde.'
@@ -57,7 +56,7 @@ export default {
                     reject({
                         code: resErrorVerifyingToken, 
                         key: logErrorVerifyingToken,
-                        redirect: `/login?error=${redirect}&username=${username}`
+                        redirect: `/login?error=${redirect}&type=${type}&username=${username}`
                     });
                 }
                 resolve(authData);

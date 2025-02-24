@@ -57,5 +57,15 @@ router.post('/clear-cookies',
     authController.clearCookies
 );
 
+//Endpoint for validating password recover
+router.post('/validate-password-recover',
+    validationMiddleware.recoverPassword,
+    authController.validatePasswordRecover
+);
+
+//Endpoint for validating password recover
+router.get('/password-recover/:token',
+    authController.recoverPassword
+);
 
 export default router;

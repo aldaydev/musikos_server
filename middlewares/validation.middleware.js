@@ -62,5 +62,30 @@ export default {
         } catch (error) {
             next(error);
         }
+    },
+
+    recoverPassword: async (req, res, next) => {
+        try {
+            
+            if(!req.body.login){
+                throw {code: 'badRequest'};
+            }
+
+            const user = await musicianService.checkUser(req.body.login);
+            if(!user){
+                throw {code: 'badRequest'};
+            }
+
+            req.user = {
+                username: user.username,
+                email: user.email,
+                id: user.id
+            }
+
+            next();
+
+        } catch (error) {
+            next(error);
+        }
     }
 }

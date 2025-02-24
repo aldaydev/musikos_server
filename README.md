@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 23/02/2025 - Tarde - signin completed
+### Sprint 2 - 24/02/2025 - Noche - working on recover password endpoints
 
 ## 1er SPRINT (BACKEND)
 

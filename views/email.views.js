@@ -55,5 +55,32 @@ export default {
         </div>
         `
     },
+
+    recoverPassword: (confirmationUrl, username) => {
+        return `
+        <div style="padding: 0px 20px 20px 20px; width: 70%; margin: 0 auto">
+            <h1 style="text-align: center; margin-bottom: 20px">
+                🔒 Recupera tu contraseña de Musikos 🔒
+            </h1> 
+    
+            <p style="font-size: 18px; margin-top: 0px">
+                Nos has indicado que quieres reestablecer la contraseña de tu cuenta: "${username}" en musikos.es. 
+            </p>
+
+            <p style="font-size: 18px; margin-top: 0px">
+                Sigue el enlace a continuación para establecer una nueva contraseña:
+            </p> 
+
+            <div style="display: flex; justify-content: center">
+                <a href=${confirmationUrl} style="font-size: 16px; font-weight: bold; background-color: #E91E63; color: white; display: block; margin: 0 auto; padding: 8px 20px; border-radius: 10px;text-decoration: none;">
+                    REESTABLECER CONTRASEÑA
+                </a>
+            </div>
+
+            <p style="margin-top: 30px;">*Atención: Este enlace caducará en 10 minutos. Si tras ese tiempo no has confirmado tu cuenta, tendrás que solicitar un nuevo email de confirmación. Si no has solicitado el cambio de contraseña, por favor indícanoslo respondiendo a este email.</p>
+            
+        </div>
+        `
+    }
 }
 

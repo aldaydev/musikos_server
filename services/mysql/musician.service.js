@@ -41,7 +41,7 @@ export default {
     },
 
     //Check if a Musician has confirmed the account
-    checkConfirmed: async (username) => {
+    checkConfirmed: async (username, type) => {
         try {
             const isConfirmed = await Musician.findOne({
                 where: {
@@ -58,13 +58,13 @@ export default {
             throw { 
                 code: 'internalServerError', 
                 key: errorFindingMusician,
-                redirect: `/login?error=internal&username=${username}`
+                redirect: `/login?error=internal&type=${type}&username=${username}`
             };
         }
     },
 
     //Update is_confirmed value for a Musician
-    updateIsConfirmed: async (username) => {
+    updateIsConfirmed: async (username, type) => {
         try{
             const updateMusician = await Musician.update(
                 {is_confirmed: true},
@@ -78,7 +78,7 @@ export default {
             }).add('errorFindingMusician');
             throw { code: 'internalServerError', 
                 key: errorFindingMusician, 
-                redirect: `/login?error=internal&username=${username}`
+                redirect: `/login?error=internal&type${type}&username=${username}`
             };
         }
     },
