@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 24/02/2025 - Noche - working on recover password endpoints
+### Sprint 2 - 24/02/2025 - Tarde - working on location models and seeds
 
 ## 1er SPRINT (BACKEND)
 

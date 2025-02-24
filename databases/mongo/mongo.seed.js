@@ -1,7 +1,7 @@
-import logger from '../config/logger.config.js';
-import Legal from '../models/mongo.models/legal.model.js';
-import { ResError } from '../utils/errors/resErrors.js';
-import { privacyHtml, termsHtml } from '../views/legal.views.js';
+import logger from '../../config/logger.config.js';
+import Legal from '../../models/mongo.models/legal.model.js';
+import { ResError } from '../../utils/errors/resErrors.js';
+import { privacyHtml, termsHtml } from '../../views/legal.views.js';
 
 const seedLegal = async () => {
     try {
@@ -17,7 +17,7 @@ const seedLegal = async () => {
 
             logger.info('MongoDB - Seeding "legals" table');
         } else {
-            logger.info('MongoDB - "legals" already seeded');
+            logger.info('MongoDB - "legals" collection already seeded');
         }
     } catch (error) {
         throw new LogError({

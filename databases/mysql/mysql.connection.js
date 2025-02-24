@@ -1,16 +1,20 @@
 //Logger import
-import logger from "../config/logger.config.js";
+import logger from "../../config/logger.config.js";
 
 //Sequelize config import
-import sequelize from "../config/mysql.config.js";
+import sequelize from "../../config/mysql.config.js";
 
 //Sequelize Models imports
-import { Musician, Style, Instrument } from '../models/mysql.models/asociations.js';
-import Musician_Style from "../models/mysql.models/musician_style.model.js";
-import Musician_Instrument from "../models/mysql.models/musicians_instruments.model.js";
+import { Musician, Style, Instrument } from '../../models/mysql.models/asociations.js';
+import { Region } from "../../models/mysql.models/region.model.js";
+import { Province } from "../../models/mysql.models/province.model.js";
+import { Town } from "../../models/mysql.models/town.model.js";
+import Musician_Style from "../../models/mysql.models/musician_style.model.js";
+import Musician_Instrument from "../../models/mysql.models/musicians_instruments.model.js";
 
 //Sequelize Seeding tables imports
-import { seedInstruments, seedStyles } from "./mysql.seed.js";
+import { seedInstruments, seedMusicians, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
+
 
 export default {
     //Connect to MySQL
@@ -39,6 +43,9 @@ export default {
             await Instrument.sync();
             await Musician_Style.sync();
             await Musician_Instrument.sync();
+            await Region.sync();
+            await Province.sync();
+            await Town.sync();
             logger.info('MySQL - Models synchronized');
         }catch(error){
             logger.error({message: 'MySQL - Error synchronizing models', error: error.original.sqlMessage});
@@ -49,6 +56,10 @@ export default {
         try{
             await seedStyles();
             await seedInstruments();
+            await seedRegions();
+            await seedMusicians();
+            await seedProvinces();
+            await seedTowns();
             logger.info('MySQL - All static tables seeded');
         }catch(error){
             logger.error({message: 'MySQL - Error seeding tables', error: error.original.sqlMessage});

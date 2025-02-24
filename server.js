@@ -11,10 +11,10 @@ import cookieParser from 'cookie-parser';
 import { router } from './routes/router.js';
 
 //Sequelize connection import
-import mysql from './databases/mysql.connection.js'
+import mysql from './databases/mysql/mysql.connection.js'
 
 //Mongoose connection import
-import mongodb from './databases/mongo.connection.js';
+import mongodb from './databases/mongo/mongo.connection.js';
 
 //Swagger imports
 import swaggerUi from 'swagger-ui-express';

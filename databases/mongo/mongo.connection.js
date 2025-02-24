@@ -1,9 +1,9 @@
 //Logger import
-import logger from '../config/logger.config.js';
+import logger from '../../config/logger.config.js';
 
 //Mongoose imports
 import mongoose, { disconnect } from 'mongoose';
-import mongoConfig from '../config/mongo.config.js';
+import mongoConfig from '../../config/mongo.config.js';
 
 //Mongoose Seeding tables imports
 import seedLegal from './mongo.seed.js';

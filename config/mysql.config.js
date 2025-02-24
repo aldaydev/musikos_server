@@ -12,12 +12,19 @@ const sequelize = new Sequelize(
     timezone: '+01:00', //Set the time zone
     port: process.env.MYSQL_PORT,
     logging: false, // Disable SQL logs
+    // pool: {
+    //     max: 5, //Max number of connections in the pool
+    //     min: 1, //Min number of connections in the pool
+    //     acquire: 30000, //Max time sequelize tries to connect
+    //     idle: 10000 //Time sequelize waits to close an inactive connection
+    // },
     pool: {
-        max: 5, //Max number of connections in the pool
-        min: 1, //Min number of connections in the pool
-        acquire: 30000, //Max time sequelize tries to connect
-        idle: 10000 //Time sequelize waits to close an inactive connection
+        max: 20, // Aumenta el número de conexiones
+        min: 1,
+        acquire: 30000,
+        idle: 10000
     },
+    logging: console.log,
     define: {
         timestamps: true, //Automatically adds createdAt and updatedAt to models
         underscored: true, //Use snake_case instead of camelCase for column names
