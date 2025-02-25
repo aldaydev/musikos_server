@@ -19,13 +19,16 @@ export default {
 
     verifyAccessToken: async (req, res, next) => {
         try {
+            //Get token from cookies
             const accessToken = req.cookies.accessToken;
             if(!accessToken) {
                 throw {code: 'badRequest'}
             }
 
+            //Verifying token
             const user = await token.verify(accessToken);
 
+            //Saving payload in req.user
             req.user = {id: user.id, email: user.email, username: user.username};
 
             next();
@@ -52,13 +55,16 @@ export default {
 
     verifyRefreshToken: async (req, res, next) => {
         try {
+            //Get token from cookies
             const refreshToken = req.cookies.refreshToken;
             if(!refreshToken) {
                 throw {code: 'badRequest'}
             }
 
+            //Verifying token
             const user = await token.verify(refreshToken);
 
+            //Saving payload in req.user
             req.user = {id: user.id, email: user.email, username: user.username};
 
             next();
@@ -70,14 +76,16 @@ export default {
 
     verifyRecoverPassToken: async (req, res, next) => {
         try {
+            //Get token from cookies
             const recoverPassToken = req.cookies.recoverPassToken;
-            
             if(!recoverPassToken) {
                 throw {code: 'badRequest'}
             }
 
+            //Verifying token
             const user = await token.verify(recoverPassToken);
 
+            //Saving payload in req.user
             req.user = {id: user.id, email: user.email, username: user.username};
 
             next();

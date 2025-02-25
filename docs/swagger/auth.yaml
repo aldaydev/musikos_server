@@ -1,0 +1,431 @@
+openapi: 3.0.0
+info:
+  title: Auth actions API
+  version: 1.0.0
+paths:
+  /musikos/v1/auth/signup:
+      post:
+        tags:
+          - Auth
+        summary: User account creation process.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+                    example: "ejemplo@ejemplo.es"
+                  username:
+                    type: string
+                    example: "pepito"
+                  password:
+                    type: string
+                    example: "123_abcD"
+                  acceptTerms:
+                    type: boolean
+                    example: true
+                  acceptPrivacy:
+                    type: boolena
+                    example: true
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: '¡CONFIRMA TU CUENTA!'
+                    message:
+                      type: string
+                      example: 'Te hemos enviado un link de confirmación a ejemplo@ejemplo.es. Por favor, revisa tu correo y sigue el enlace'
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/signup-confirmation/{token}:
+      get:
+        tags:
+          - Auth
+        summary: User account confirmation process.
+        description: >
+          This endpoint confirms the user's signup using a unique token sent via email. 
+          The response is always a redirection to the front.
+          Notice that you won´t be allowed to redirect from swagger, so this endpoint in swagger is just for documentation purpose.
+        parameters:
+          - name: token
+            in: path
+            required: true
+            schema:
+              type: string
+            description: The confirmation token sent to the user.
+          - name: username
+            in: query
+            required: true
+            schema:
+            type: string
+            description: The username of the user requesting a new confirmation link in case the token has expired or something went wrong.
+        responses:
+          '303':
+            description: >
+              Whether the confirmation is successful or there is an error (e.g. expired, invalid token),
+              the user is redirected to the front to report the result of the request.
+              The redirection URL will include query parameters indicating the result of the confirmation process.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    redirect_url:
+                      type: string
+                      description: >
+                        The URL to which the user will be redirected. The query parameters will indicate the result of the confirmation process. 
+                        Possible values:
+                        - `/login?error=internal&type=confirmation&username=pepito`
+                        - `/login?error=expired&type=confirmation&username=pepito`
+                        - `/login?error=incorrect&type=confirmation&username=pepito`
+                        - `/login?confirmation=true&type=confirmation&username=pepito`
+                      example: '/login?confirmation=true&type=confirmation&username=pepito'
+  /musikos/v1/auth/resend-confirmation:
+      post:
+        tags:
+          - Auth
+        summary: Resending confirmation email.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: "pepito"
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: 'EMAIL ENVIADO'
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/signin:
+        post:
+          tags:
+            - Auth
+          summary: User account access process.
+          parameters:
+            - in: header
+              name: credentials
+              schema:
+                type: boolean
+                required: true
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    login:
+                      type: string
+                      example: "ejemplo@ejemplo.es"
+                    password:
+                      type: string
+                      example: "123_abcD"
+          responses:
+            '200':
+              description: Successful response.
+              headers:
+                Set-Cookie:
+                  description: "Cookie with accessToken"
+                  schema:
+                    type: string
+                    example: "accessToken=abc123xyz; HttpOnly; Secure; SameSite=Lax; Max-Age=3600"
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      verified:
+                        type: boolean
+                        example: true
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "12345"
+                          username:
+                            type: string
+                            example: "john_doe"
+                          email:
+                            type: string
+                            format: email
+                            example: "johndoe@example.com"
+            '500':
+              $ref: "#/components/responses/internalServerError"
+            '400':
+              $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/verify-access-token:
+        get:
+          tags:
+            - Auth
+          summary: Verify accessToken process. **Notice that you need a valid accesToken to test this endpoint.
+          parameters:
+            - in: header
+              name: credentials
+              schema:
+                type: boolean
+                required: true
+          responses:
+            '200':
+              description: Successful response.
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      verified:
+                        type: boolean
+                        example: true
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "12345"
+                          username:
+                            type: string
+                            example: "john_doe"
+                          email:
+                            type: string
+                            format: email
+                            example: "johndoe@example.com"
+            '500':
+              $ref: "#/components/responses/internalServerError"
+            '400':
+              $ref: "#/components/responses/badRequest"
+  
+  /musikos/v1/auth/new-access-token:
+        get:
+          tags:
+            - Auth
+          summary: Verify accessToken process. **Notice that you need a valid refreshToken to test this endpoint.
+          parameters:
+            - in: header
+              name: credentials
+              schema:
+                type: boolean
+                required: true
+          responses:
+            '200':
+              description: Successful response.
+              headers:
+                Set-Cookie:
+                  description: "Cookie with accessToken"
+                  schema:
+                    type: string
+                    example: "accessToken=abc123xyz; HttpOnly; Secure; SameSite=Lax; Max-Age=3600"
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      verified:
+                        type: boolean
+                        example: true
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: "12345"
+                          username:
+                            type: string
+                            example: "john_doe"
+                          email:
+                            type: string
+                            format: email
+                            example: "johndoe@example.com"
+            '500':
+              $ref: "#/components/responses/internalServerError"
+            '400':
+              $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/clear-cookies:
+        delete:
+          tags:
+            - Auth
+          summary: Clear cookies process.
+          parameters:
+            - in: header
+              name: credentials
+              schema:
+                type: boolean
+                required: true
+          responses:
+            '200':
+              description: Successful response.
+              headers:
+                Set-Cookie:
+                  description: "Cookie with accessToken"
+                  schema:
+                    type: string
+                    example: "accessToken=abc123xyz; HttpOnly; Secure; SameSite=Lax; Max-Age=3600"
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: 'Sesión cerrada'
+                      message:
+                        type: string
+                        example: 'Has cerrado sesión con tu cuenta. Nos vemos pronto.'
+            '500':
+              $ref: "#/components/responses/internalServerError"
+            '400':
+              $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/password-recover-email:
+      post:
+        tags:
+          - Auth
+        summary: Password recover process (sending email).
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  login:
+                    type: string
+                    example: "ejemplo@ejemplo.es"
+        responses:
+          '200':
+            description: Successful response.
+            headers:
+              Set-Cookie:
+                description: "Cookie with recoverPassToken"
+                schema:
+                  type: string
+                  example: "recoverPassToken=abc123xyz; HttpOnly; Secure; SameSite=Lax; Max-Age=3600"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: '¡EMAIL ENVIADO!'
+                    message:
+                      type: string
+                      example: 'Te hemos enviado un email para reestablecer tu contraseña. Por favor, revisa tu correo y sigue el enlace.'
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"
+  /musikos/v1/auth/confirm-password-recover:
+      get:
+        tags:
+          - Auth
+        summary: Confirmation password recover process. ***Notice that this endpoint is created to be called from email. Cors error will be appear if testing on swagger.
+        description: >
+          This endpoint confirms the user's has acces to the email. 
+          The response is always a redirection to the front.
+          A recoverPassToken is sent via cookie.
+        parameters:
+          - name: id
+            in: query
+            required: true
+            schema:
+            type: string
+          - name: username
+            in: query
+            required: true
+            schema:
+            type: string
+          - name: email
+            in: query
+            required: true
+            schema:
+            type: string
+        responses:
+          '303':
+            description: >
+              Whether the confirmation is successful or there is an error (e.g. expired, invalid token),
+              the user is redirected to the front to report the result of the request.
+              The redirection URL will include query parameters indicating the result of the confirmation process and also will set a cookie with recoverPassToken.
+            headers:
+              Set-Cookie:
+                description: "Cookie with recoverPassToken"
+                schema:
+                  type: string
+                  example: "recoverPassToken=abc123xyz; HttpOnly; Secure; SameSite=Lax; Max-Age=3600"
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    redirect_url:
+                      type: string
+                      description: >
+                        The URL to which the user will be redirected. The query parameters will indicate the result of the confirmation process. 
+                        Possible values:
+                        - `/login?error=internal&type=recoverPassword&username=pepito`
+                        - `/login?error=expired&type=recoverPassword&username=pepito`
+                        - `/login?error=incorrect&type=recoverPassword&username=pepito`
+                        - `/login?success=true&type=recoverPassword&username=pepito`
+                      example: '/login?confirmation=true&type=recoverPassword&username=pepito'
+  /musikos/v1/auth/password-recover:
+      patch:
+        tags:
+          - Auth
+        summary: Setting new password from passwordRecover access process. *** Notice that yo will need a valid recoverPassToken to test this endpoint.
+        parameters:
+          - in: header
+            name: credentials
+            schema:
+              type: boolean
+              required: true
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  password:
+                    type: string
+                    example: "123_abcD"
+        responses:
+          '200':
+            description: Successful response.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      example: "Contraseña modificada"
+                    message:
+                      type: string
+                      example: "Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella."
+          '500':
+            $ref: "#/components/responses/internalServerError"
+          '400':
+            $ref: "#/components/responses/badRequest"

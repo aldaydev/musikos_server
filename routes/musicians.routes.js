@@ -23,6 +23,4 @@ router.post('/check-username',
 );
 
 
-
-
 export default router;

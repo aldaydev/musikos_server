@@ -21,7 +21,8 @@ export default {
     //Create a new Musician
     create: async (data) => {
         try {
-            await Musician.create(data);
+            const newMusician = await Musician.create(data);
+            return newMusician;
         } catch (error) {
             //If username or email already exists
             if(error.name === 'SequelizeUniqueConstraintError'){

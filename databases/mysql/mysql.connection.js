@@ -54,15 +54,14 @@ export default {
     //Seed MySQL tables
     seedTables: async () => {
         try{
+            await seedMusicians();
             await seedStyles();
             await seedInstruments();
             await seedRegions();
-            await seedMusicians();
             await seedProvinces();
             await seedTowns();
-            logger.info('MySQL - All static tables seeded');
         }catch(error){
-            logger.error({message: 'MySQL - Error seeding tables', error: error.original.sqlMessage});
+            logger.error({message: 'MySQL - Error seeding tables', error: error});
         }
     }
 }

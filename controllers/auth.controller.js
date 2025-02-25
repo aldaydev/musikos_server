@@ -12,7 +12,6 @@ export default {
     //SignUp controller
     signUp: async (req, res, next) => {
         try {
-
             //Collecting request body required data
             let { email, username, password } = req.body;
 
@@ -74,8 +73,10 @@ export default {
 
             //Final log
             logger.http({ message: 'Account successfully confirmed', action: 'Confirm account', method: req.method, endpoint: req.originalUrl });
+
             //Final response - redirect to front
             return res.status(303).redirect("http://localhost:5173/login?success=true&type=confirmation");
+
         } catch (error) {
             next(error);
         }
@@ -123,6 +124,7 @@ export default {
 
             //Finaization log
             logger.http({ message: `confirmation link has been sent to ${user.email}`, action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl })
+
             //Final response
             return res.status(200).json({
                 message: `EMAIL ENVIADO`
@@ -135,6 +137,7 @@ export default {
 
     signIn: async (req, res, next) => {
         try {
+            //Taking tokens from req.user
             const { accessToken, refreshToken } = req.user;
 
             //Send cookie with accessToken
@@ -145,6 +148,7 @@ export default {
                 maxAge: 3600000, // 1 hour duration
             });
 
+            //Send cookie with refreshToken
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 secure: true,  // In production set to "true"
@@ -152,13 +156,16 @@ export default {
                 maxAge: 604800000, // 7 days
             });
 
+            //Set userData to save in sessionStorage
             const userData = {
                 id: req.user.id,
                 username: req.user.username,
                 email: req.user.email
             }
 
+            //Final response
             res.status(200).json({ verified: true, user: userData });
+
         } catch (error) {
             next(error);
         }
@@ -166,13 +173,14 @@ export default {
 
     verifyAccessToken: async (req, res, next) => {
         try {
-
+            //Taking userData from req.user
             const userData = {
                 id: req.user.id,
                 username: req.user.username,
                 email: req.user.email
             }
 
+            //Final response
             res.status(200).json({ verified: true, user: userData });
 
         } catch (error) {
@@ -182,12 +190,15 @@ export default {
 
     newAccessToken: async (req, res, next) => {
         try {
-
+            //Taking userData from req.user
             const userData = {
                 id: req.user.id,
                 username: req.user.username,
                 email: req.user.email
             }
+
+            //Taking new accessToken from req.user
+            const accessToken = req.user.accessToken;
 
             //Faltan COSAS!!!!!!!!!!!!!!!!!!
 
@@ -199,6 +210,7 @@ export default {
                 maxAge: 3600000, // 1 hour duration
             });
 
+            //Final response
             res.status(200).json({ verified: true, user: userData });
 
         } catch (error) {
@@ -208,9 +220,13 @@ export default {
 
     clearCookies: async (req, res, next) => {
         try {
+            //Clearing all tokens
             res.clearCookie("accessToken", { path: "/" });
             res.clearCookie("refreshToken", { path: "/" });
-            res.status(200).send("Sesión cerrada");
+
+            //Final response
+            res.status(200).json({title: "Sesión cerrada", message: 'Has cerrado sesión con tu cuenta. Nos vemos pronto.'});
+
         } catch (error) {
             next(error);
         }
@@ -219,6 +235,7 @@ export default {
 
     passwordRecoverEmail: async (req, res, next) => {
         try {
+            //Taking data from req.user
             const {id, username, email} = req.user;
 
             //Generating confirmation URL
@@ -237,7 +254,7 @@ export default {
             //Final response
             return res.status(200).json({
                 title: '¡EMAIL ENVIADO!',
-                message: `Te hemos enviado un email para reestablecer tu contraseña. Por favor, revisa tu correo y sigue el enlace`
+                message: `Te hemos enviado un email para reestablecer tu contraseña. Por favor, revisa tu correo y sigue el enlace.`
             });
 
         } catch (error) {
@@ -247,30 +264,24 @@ export default {
 
     confirmPasswordRecover: async (req, res, next) => {
         try {
-
+            //Taking data from req.query
             const {email, username, id} = req.query;
 
-            console.log(req.query);
-
-            //Generate token
-            const generatedToken = await token.generate({ email, username, id }, '600s');
-
-            //Token verification
-            // const authData = await token.verifyAndRedirect(req.params.token, req.query.username, 'recoverPassword');
-
-            
+            //Generating token
+            const generatedToken = await token.generate({ email, username, id }, '300s');
 
             //Checking if user has confirmed
             const isConfirmed = await musicianService.checkConfirmed(username, 'recoverPassword');
             
-            //If is already confirmed, set is_confirmed to "true"
+            //If is hasn´t confirmed, set is_confirmed to "true"
             if (!isConfirmed) {
                 await musicianService.updateIsConfirmed(username, 'recoverPassword')
             }
 
+            //Send recoverPassToken to cookies
             res.cookie('recoverPassToken', generatedToken, {
                 httpOnly: true,
-                secure: true,  // In production set to "true"
+                secure: true,
                 sameSite: 'lax',
                 maxAge: 604800000, // 7 days
             });
@@ -285,18 +296,21 @@ export default {
 
     recoverPassword: async (req, res, next) =>{
         try {
+            //Collecting necessary data
             const {id, username, email} = req.user;
             const newPassword = req.body.password;
         
+            //Updating user password
             await musicianService.recoverPassword(newPassword, id, 'recoverPassword');
 
-            res.clearCookie("recoverPasswordToken", { path: "/" });
+            //Clearing recoverPasswordToken
+            res.clearCookie("recoverPassToken", { path: "/" });
 
-            res.status(200).json({title: 'Contraseña modificada', message: 'Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella.'}) 
+            //Final response
+            res.status(200).json({title: 'Contraseña modificada', message: 'Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella.'});
+
         } catch (error) {
             next(error);
         }
-        
-
     }
 }

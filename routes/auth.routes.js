@@ -13,6 +13,8 @@ import tokenMiddleware from '../middlewares/token.middleware.js';
 //Router initialization
 const router = Router();
 
+// ---------- SIGNUP PROCESS ---------- //
+
 //EndPoint for creating a musician
 router.post('/signup', 
     validationMiddleware.signUp, //Validation Middleware
@@ -30,37 +32,45 @@ router.post('/resend-confirmation',
     authController.resendConfirmation
 );
 
+// ---------- SIGNIN PROCESS ---------- //
+
 //EndPoint for signingIn
 router.post('/signin', 
     validationMiddleware.signIn, //Validation Middleware
     encryptMiddleware.compare, //Compare bcrypt middleware
-    tokenMiddleware.generateAccessToken, //AccessToken middleware
-    tokenMiddleware.generateRefreshToken, //RefreshToken middleware
+    tokenMiddleware.generateAccessToken, //Generate AccessToken middleware
+    tokenMiddleware.generateRefreshToken, //Generate RefreshToken middleware
     authController.signIn //Final controller
 );
 
 //Endpoint for verifying accessToken
-router.post('/verify-access-token',
-    tokenMiddleware.verifyAccessToken,
-    authController.verifyAccessToken
+router.get('/verify-access-token',
+    tokenMiddleware.verifyAccessToken, //Verifying AccessToken middleware
+    authController.verifyAccessToken //Final controller
 );
+
+// ---------- REFRESH TOKEN PROCESS ---------- //
 
 //Endpoint for generating new accessToken
-router.post('/new-access-token',
-    tokenMiddleware.verifyRefreshToken,
-    tokenMiddleware.generateAccessToken,
-    authController.newAccessToken
+router.get('/new-access-token',
+    tokenMiddleware.verifyRefreshToken, //Verifying RefreshToken middleware
+    tokenMiddleware.generateAccessToken, //Gnerate AccessToken middleware
+    authController.newAccessToken //Final controller
 );
 
+// ---------- CLOSING SESSION PROCESS ---------- //
+
 //Endpoint for clearing token cookies
-router.post('/clear-cookies',
+router.delete('/clear-cookies',
     authController.clearCookies
 );
 
+// ---------- PASSWORD RECOVERING PROCESS ---------- //
+
 //Endpoint for sending password recover email
 router.post('/password-recover-email',
-    validationMiddleware.passwordRecoverEmail,
-    authController.passwordRecoverEmail
+    validationMiddleware.passwordRecoverEmail, //Validation for passwordRecover middleware
+    authController.passwordRecoverEmail //Final controller
 );
 
 //Endpoint for confirming password recover
@@ -71,8 +81,8 @@ router.get('/confirm-password-recover',
 //Endpoint for setting up a new password
 router.patch('/password-recover',
     encryptMiddleware.generate, //Encrypting pass Middleware
-    tokenMiddleware.verifyRecoverPassToken,
-    authController.recoverPassword
+    tokenMiddleware.verifyRecoverPassToken, //Verifying 
+    authController.recoverPassword //Final controller
 );
 
 export default router;

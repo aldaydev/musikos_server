@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 25/02/2025 - Mañana - recoverPassword endpoints done
+### Sprint 2 - 25/02/2025 - Tarde - refactoring code and working on swagger endpoints
 
 ## 1er SPRINT (BACKEND)
 

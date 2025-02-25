@@ -49,7 +49,7 @@ export default {
                 throw {code: 'badRequest'}
             }
 
-            //Save username in req.body
+            //Saving data in req.user
             req.user = {
                 id: checkUser.id,
                 email: checkUser.email,
@@ -66,16 +66,18 @@ export default {
 
     passwordRecoverEmail: async (req, res, next) => {
         try {
-            
+            //Check if required data was sent in req.body
             if(!req.body.login){
                 throw {code: 'badRequest'};
             }
 
+            //Check if username or email belongs to a musician
             const user = await musicianService.checkUser(req.body.login);
             if(!user){
                 throw {code: 'badRequest'};
             }
 
+            //Saving data in req.user
             req.user = {
                 username: user.username,
                 email: user.email,

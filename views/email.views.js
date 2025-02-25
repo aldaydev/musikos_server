@@ -37,7 +37,7 @@ export default {
             </h1> 
     
             <p style="font-size: 18px; margin-top: 0px">
-                Nos has pedido que te mandemos un nuevo email de confirmación para tu cuenta "${username}". Aquí lo tienes. 
+                Nos has pedido que te mandemos un nuevo email de confirmación para tu cuenta (${username}). Aquí lo tienes. 
             </p>
 
             <p style="font-size: 18px; margin-top: 0px">
@@ -64,7 +64,7 @@ export default {
             </h1> 
     
             <p style="font-size: 18px; margin-top: 0px">
-                Nos has indicado que quieres reestablecer la contraseña de tu cuenta: "${username}" en musikos.es. 
+                Nos has indicado que quieres reestablecer la contraseña de tu cuenta (${username}) en musikos.es. 
             </p>
 
             <p style="font-size: 18px; margin-top: 0px">
@@ -77,7 +77,7 @@ export default {
                 </a>
             </div>
 
-            <p style="margin-top: 30px;">*Atención: Este enlace caducará en 10 minutos. Si tras ese tiempo no has confirmado tu cuenta, tendrás que solicitar un nuevo email de confirmación. Si no has solicitado el cambio de contraseña, por favor indícanoslo respondiendo a este email.</p>
+            <p style="margin-top: 30px;">*Atención: Este enlace caducará en 5 minutos. Si tras ese tiempo no has confirmado tu cuenta, tendrás que solicitar un nuevo email de confirmación. Si no has solicitado el cambio de contraseña, por favor indícanoslo respondiendo a este email.</p>
             
         </div>
         `

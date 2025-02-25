@@ -24,7 +24,7 @@ export default {
             } else {
                 res.status(200).json({ exists: false });
             }
-        } catch (e) {
+        } catch (error) {
             next(error);
         }
     },

@@ -27,10 +27,23 @@ const app = express();
 //Global middlewares
 app.use(json());
 app.use(urlencoded({extended: true}));
+// app.use(cors({
+//     origin: '*', 
+//     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+//     credentials: true,
+// }));
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:3001']; // Orígenes permitidos
+
 app.use(cors({
-    origin: 'http://localhost:5173',  // Cambia a tu dominio de frontend
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true); // Si el origen está permitido, se acepta la solicitud
+        } else {
+            callback(new Error('Not allowed by CORS')); // Si el origen no está permitido, se rechaza la solicitud
+        }
+    },
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-    credentials: true,  // Habilita el envío de cookies
+    credentials: true, // Habilita el envío de cookies
 }));
 app.use(cookieParser());
 app.use(router);

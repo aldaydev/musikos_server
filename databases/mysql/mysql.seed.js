@@ -13,13 +13,13 @@ const seedMusicians = async () => {
     try {
         // Verifying if "musicians" already seeded
         const count = await Musician.count();
-
+        
         if(count === 0){
             const encryptedPass = await encryptPassword('123_abcD');
 
             await Musician.findOrCreate({ where: {
-                username: "ejemplo",
-                email: "ejemplo@ejemplo.es",
+                username: "aldaymailing",
+                email: "aldaymailing@gmail.com",
                 password: encryptedPass
             }});
 
@@ -40,16 +40,18 @@ const seedRegions = async () => {
         const count = await Region.count();
 
         if(count === 0){
-
+            //Taking and converting json data
             const data = await fs.readFile('./databases/mysql/seeds/regions.json', 'utf8');
             const regions = JSON.parse(data);
 
-            for (const region of regions) {
-                await Region.findOrCreate({ where: { 
-                    code: parseInt(region.code),
-                    name: region.label
-                } });
-            }
+            //Forming batch to upload
+            const batchData = regions.map(region => ({ 
+                code: parseInt(region.code),
+                name: region.label
+            }));
+
+            //Uploading to MySQL
+            await Region.bulkCreate(batchData);
 
             return logger.info('MySQL - "regions" table seeded');
         }else{
@@ -68,17 +70,19 @@ const seedProvinces = async () => {
         const count = await Province.count();
 
         if(count === 0){
-
+            //Taking and converting json data
             const data = await fs.readFile('./databases/mysql/seeds/provinces.json', 'utf8');
             const provinces = JSON.parse(data);
 
-            for (const province of provinces) {
-                await Province.findOrCreate({ where: { 
-                    code: parseInt(province.code),
-                    parent_code: parseInt(province.parent_code),
-                    name: province.label
-                } });
-            }
+            //Forming batch to upload
+            const batchData = provinces.map(province => ({ 
+                code: parseInt(province.code),
+                parent_code: parseInt(province.parent_code),
+                name: province.label
+            }));
+            
+            //Uploading to MySQL
+            await Province.bulkCreate(batchData);
 
             return logger.info('MySQL - "provinces" table seeded');
         }else{
@@ -96,46 +100,19 @@ const seedTowns = async () => {
         const count = await Town.count();
 
         if(count === 0){
-
+            //Taking and converting json data
             const data = await fs.readFile('./databases/mysql/seeds/towns.json', 'utf8');
             const towns = JSON.parse(data);
 
-
-            // for (const town of towns) {
-            //     await Town.findOrCreate({ where: { 
-            //         code: parseInt(town.code),
-            //         parent_code: parseInt(town.parent_code),
-            //         name: town.label
-            //     } }).catch(error => console.log(error))
-            // }
-            console.log('MySQL - Seeding "towns" by batching');
-            const batchSize = 500;
-            let batch = [];
-
-            for (let i = 0; i < towns.length; i++){
-                // Agregar el objeto al lote
-                batch.push({
-                    code: parseInt(towns[i].code),
-                    parent_code: parseInt(towns[i].parent_code),
-                    name: towns[i].label
-                });
+            //Forming batch to upload
+            const batchData = towns.map(town => ({
+                code: parseInt(town.code),
+                parent_code: parseInt(town.parent_code),
+                name: town.label
+            }));
             
-                // Si el tamaño del lote es alcanzado, inserta los registros
-                if (batch.length >= batchSize || i === towns.length - 1) {
-                    console.log('MySQL - On batch done');
-                    await Town.bulkCreate(batch); // Inserta el lote
-                    batch = []; // Vaciar el lote para el siguiente
-                }
-            }
-
-
-            // const batchData = towns.map(town => ({
-            //     code: parseInt(town.code),
-            //     parent_code: parseInt(town.parent_code),
-            //     name: town.label
-            // }));
-            
-            // await Town.bulkCreate(batchData);
+            //Uploading to MySQL
+            await Town.bulkCreate(batchData);
             
             return logger.info('MySQL - "towns" table seeded');
         }else{
@@ -154,13 +131,12 @@ const seedStyles = async () => {
         const count = await Style.count();
 
         if(count === 0){
-
+            //Taking and converting json data
             const data = await fs.readFile('./databases/mysql/seeds/styles.json', 'utf8');
             const styles = JSON.parse(data);
-
-            for (const style of styles) {
-                await Style.findOrCreate({ where: { style_name: style } });
-            }
+            
+            //Uploading to MySQL
+            await Style.bulkCreate(styles);
 
             return logger.info('MySQL - "styles" table seeded');
         }else{
@@ -168,7 +144,7 @@ const seedStyles = async () => {
         }
 
     } catch (error) {
-        logger.error('MySQL - Error at seeding "styles" table,', error);
+        logger.error('MySQL - Error at seeding "styles" table,');
     }
 
 };
@@ -180,13 +156,12 @@ const seedInstruments = async () => {
         const count = await Instrument.count();
 
         if(count === 0){
-
-            const data = await fs.readFile('./databases/mysql/seeds/styles.json', 'utf8');
+            //Taking and converting json data
+            const data = await fs.readFile('./databases/mysql/seeds/instruments.json', 'utf8');
             const instruments = JSON.parse(data);
-
-            for (const instrument of instruments) {
-                await Instrument.findOrCreate({ where: { instrument_name: instrument } });
-            }
+            
+            //Uploading to MySQL
+            await Instrument.bulkCreate(instruments);
 
             return logger.info('MySQL - "instruments" table seeded');
         }else{

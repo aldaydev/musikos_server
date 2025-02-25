@@ -11,6 +11,7 @@ const __dirname = path.dirname(__filename);
 //Loading YAML files
 const legalsSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/legals.yaml'));
 const musiciansSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/musicians.yaml'));
+const authSwagger = YAML.load(path.resolve(__dirname, '../docs/swagger/auth.yaml'));
 
 const swaggerOptions = {
   definition: {
@@ -26,7 +27,8 @@ const swaggerOptions = {
     },
     tags: [
       { name: 'Legal', description: 'Operations related to terms of use and privacy policy' },
-      { name: 'Musicians', description: 'Operations related to the "musicians" model and user actions' },
+      { name: 'Musicians', description: 'Operations related to the "musicians" model' },
+      { name: 'Auth', description: 'Operations related to authentication actions' },
       // ... more tags
     ],
     servers: [
@@ -96,6 +98,7 @@ const swaggerDocs = swaggerJsDoc({
     paths: {
       ...legalsSwagger.paths,
       ...musiciansSwagger.paths,
+      ...authSwagger.paths,
     },
   },
 });
