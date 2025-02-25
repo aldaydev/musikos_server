@@ -57,14 +57,21 @@ router.post('/clear-cookies',
     authController.clearCookies
 );
 
-//Endpoint for validating password recover
-router.post('/validate-password-recover',
-    validationMiddleware.recoverPassword,
-    authController.validatePasswordRecover
+//Endpoint for sending password recover email
+router.post('/password-recover-email',
+    validationMiddleware.passwordRecoverEmail,
+    authController.passwordRecoverEmail
 );
 
-//Endpoint for validating password recover
-router.get('/password-recover/:token',
+//Endpoint for confirming password recover
+router.get('/confirm-password-recover',
+    authController.confirmPasswordRecover
+);
+
+//Endpoint for setting up a new password
+router.patch('/password-recover',
+    encryptMiddleware.generate, //Encrypting pass Middleware
+    tokenMiddleware.verifyRecoverPassToken,
     authController.recoverPassword
 );
 

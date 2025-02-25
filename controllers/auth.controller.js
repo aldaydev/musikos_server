@@ -189,6 +189,8 @@ export default {
                 email: req.user.email
             }
 
+            //Faltan COSAS!!!!!!!!!!!!!!!!!!
+
             //Send cookie with new accessToken
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
@@ -215,15 +217,12 @@ export default {
         
     },
 
-    validatePasswordRecover: async (req, res, next) => {
+    passwordRecoverEmail: async (req, res, next) => {
         try {
             const {id, username, email} = req.user;
-            
-            //Generate token
-            const generatedToken = await token.generate({ email, username, id }, '600s');
 
             //Generating confirmation URL
-            const confirmationUrl = `http://localhost:3001/musikos/v1/auth/password-recover/${generatedToken}?username=${username}`
+            const confirmationUrl = `http://localhost:3001/musikos/v1/auth/confirm-password-recover?id=${id}&username=${username}&email=${email}`
 
             //Setting up confirmation email
             const newEmail = new Email({
@@ -246,26 +245,58 @@ export default {
         }
     },
 
-    recoverPassword: async (req, res, next) => {
+    confirmPasswordRecover: async (req, res, next) => {
         try {
-            console.log(req.params.token, req.query.username)
+
+            const {email, username, id} = req.query;
+
+            console.log(req.query);
+
+            //Generate token
+            const generatedToken = await token.generate({ email, username, id }, '600s');
 
             //Token verification
-            const authData = await token.verifyAndRedirect(req.params.token, req.query.username, 'recoverPassword');
+            // const authData = await token.verifyAndRedirect(req.params.token, req.query.username, 'recoverPassword');
+
+            
 
             //Checking if user has confirmed
-            const isConfirmed = await musicianService.checkConfirmed(authData.username, 'recoverPassword');
+            const isConfirmed = await musicianService.checkConfirmed(username, 'recoverPassword');
             
-            //If is already confirmed, throw an error
+            //If is already confirmed, set is_confirmed to "true"
             if (!isConfirmed) {
-                await musicianService.updateIsConfirmed(authData.username, 'recoverPassword')
+                await musicianService.updateIsConfirmed(username, 'recoverPassword')
             }
 
+            res.cookie('recoverPassToken', generatedToken, {
+                httpOnly: true,
+                secure: true,  // In production set to "true"
+                sameSite: 'lax',
+                maxAge: 604800000, // 7 days
+            });
+
             //Final response - redirect to front
-            return res.status(303).redirect(`http://localhost:5173/login?success=true&type=recoverPassword&username=${authData.username}`);
+            return res.status(303).redirect(`http://localhost:5173/login?success=true&type=recoverPassword&username=${username}`);
 
         } catch (error) {
             next(error);
         }
+    },
+
+    recoverPassword: async (req, res, next) =>{
+        try {
+            const {id, username, email} = req.user;
+            const newPassword = req.body.password;
+        
+            await musicianService.recoverPassword(newPassword, id, 'recoverPassword');
+
+            res.clearCookie("recoverPasswordToken", { path: "/" });
+
+            res.status(200).json({title: 'Contraseña modificada', message: 'Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella.'}) 
+        } catch (error) {
+            next(error);
+        }
+        
+
     }
 }

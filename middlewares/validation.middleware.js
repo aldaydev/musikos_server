@@ -64,7 +64,7 @@ export default {
         }
     },
 
-    recoverPassword: async (req, res, next) => {
+    passwordRecoverEmail: async (req, res, next) => {
         try {
             
             if(!req.body.login){

@@ -63,7 +63,7 @@ export default {
         }
     },
 
-    //Update is_confirmed value for a Musician
+    //Update is_confirmed value for a Musician (with redirection)
     updateIsConfirmed: async (username, type) => {
         try{
             const updateMusician = await Musician.update(
@@ -72,17 +72,18 @@ export default {
             );
             return updateMusician;
         }catch(error){
-            const errorFindingMusician = new LogError({
+            const errorUpdatingMusician = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorFindingMusician');
+            }).add('errorUpdatingMusician');
             throw { code: 'internalServerError', 
-                key: errorFindingMusician, 
+                key: errorUpdatingMusician, 
                 redirect: `/login?error=internal&type${type}&username=${username}`
             };
         }
     },
 
+    //Check if a usernmae or email exists related to a musician
     checkUser: async (login) => {
         try {
             //Find if username or email exists in MySQL
@@ -104,6 +105,25 @@ export default {
             throw { 
                 code: 'internalServerError', 
                 key: errorCheckingMusician, 
+            };
+        }
+    },
+
+    //Update password from recoverPassword request
+    recoverPassword: async (password, id) => {
+        try{
+            const updateMusician = await Musician.update(
+                {password: password},
+                {where: {id}}
+            );
+            return updateMusician;
+        }catch(error){
+            const errorUpdatingMusician = new LogError({
+                message: 'Fail at updating in MySQL',
+                error: error.message
+            }).add('errorUpdatingMusician');
+            throw { code: 'internalServerError', 
+                key: errorUpdatingMusician, 
             };
         }
     }

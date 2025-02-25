@@ -68,4 +68,23 @@ export default {
         }
     },
 
+    verifyRecoverPassToken: async (req, res, next) => {
+        try {
+            const recoverPassToken = req.cookies.recoverPassToken;
+            
+            if(!recoverPassToken) {
+                throw {code: 'badRequest'}
+            }
+
+            const user = await token.verify(recoverPassToken);
+
+            req.user = {id: user.id, email: user.email, username: user.username};
+
+            next();
+            
+        } catch (error) {
+            next(error);
+        }
+    },
+
 }

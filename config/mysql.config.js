@@ -24,7 +24,7 @@ const sequelize = new Sequelize(
         acquire: 30000,
         idle: 10000
     },
-    logging: console.log,
+    // logging: console.log,
     define: {
         timestamps: true, //Automatically adds createdAt and updatedAt to models
         underscored: true, //Use snake_case instead of camelCase for column names
