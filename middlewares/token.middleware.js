@@ -82,6 +82,9 @@ export default {
                 throw {code: 'badRequest'}
             }
 
+            //Clearing recoverPasswordToken
+            res.clearCookie("recoverPassToken", { path: "/" });
+
             //Verifying token
             const user = await token.verify(recoverPassToken);
 

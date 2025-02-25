@@ -268,7 +268,7 @@ export default {
             const {email, username, id} = req.query;
 
             //Generating token
-            const generatedToken = await token.generate({ email, username, id }, '300s');
+            const generatedToken = await token.generate({ email, username, id }, '10s');
 
             //Checking if user has confirmed
             const isConfirmed = await musicianService.checkConfirmed(username, 'recoverPassword');
@@ -302,9 +302,6 @@ export default {
         
             //Updating user password
             await musicianService.recoverPassword(newPassword, id, 'recoverPassword');
-
-            //Clearing recoverPasswordToken
-            res.clearCookie("recoverPassToken", { path: "/" });
 
             //Final response
             res.status(200).json({title: 'Contraseña modificada', message: 'Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella.'});
