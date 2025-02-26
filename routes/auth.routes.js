@@ -2,7 +2,6 @@
 import { Router } from 'express';
 
 //Controllers import
-import musiciansController from '../controllers/musicians.controller.js';
 import authController from '../controllers/auth.controller.js';
 
 //Middleware imports

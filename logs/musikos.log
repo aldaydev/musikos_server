@@ -1,2 +1,3 @@
 {"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-25 19:26:44","user":null}
 {"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-25 19:27:20","user":null}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 142.250.110.108:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-02-26 18:56:11","user":"rafa"}

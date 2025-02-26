@@ -9,6 +9,8 @@ import express, {json, urlencoded} from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { router } from './routes/router.js';
+import error_MW from './middlewares/error.middleware.js';
+import notFound_MW from './middlewares/notFound.middleware.js';
 
 //Sequelize connection import
 import mysql from './databases/mysql/mysql.connection.js'
@@ -19,7 +21,6 @@ import mongodb from './databases/mongo/mongo.connection.js';
 //Swagger imports
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './config/swagger.config.js';
-import error_MW from './middlewares/error.middleware.js';
 
 //Express initialization
 const app = express();
@@ -48,6 +49,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(router);
 app.use(error_MW);
+app.use(notFound_MW);
 
 // Swagger UI Configuration
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));

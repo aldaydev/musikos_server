@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 2 - 25/02/2025 - Noche - testing tokens
+### Sprint 2 - 26/02/2025 - Tarde - refactoring code and adding some future archives
 
 ## 1er SPRINT (BACKEND)
 

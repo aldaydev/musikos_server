@@ -5,6 +5,7 @@ import { Router } from 'express';
 import musiciansRoutes from './musicians.routes.js';
 import legalsRoutes from './legals.routes.js';
 import authRoutes from './auth.routes.js';
+import searchRoutes from './search.routes.js';
 
 //Router initialization
 const router = Router();
@@ -18,6 +19,8 @@ router.use('/musikos/v1/legal', legalsRoutes);
 router.use('/musikos/v1/musicians', musiciansRoutes);
 
 router.use('/musikos/v1/auth', authRoutes);
+
+router.use('/musikos/v1/search', searchRoutes);
 
 
 export { router };
