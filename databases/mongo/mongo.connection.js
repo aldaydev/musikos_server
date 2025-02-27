@@ -2,24 +2,27 @@
 import logger from '../../config/logger.config.js';
 
 //Mongoose imports
-import mongoose, { disconnect } from 'mongoose';
+import mongoose from 'mongoose';
 import mongoConfig from '../../config/mongo.config.js';
 
 //Mongoose Seeding tables imports
 import seedLegal from './mongo.seed.js';
 
 //Close connection to MongoDB if server shutdowns
-const shutdown = async () => {
+export const shutdown = async () => {
     try {
         await mongoose.disconnect();
         logger.info("MongoDB - Closed");
     } catch (error) {
         logger.error("MongoDB - Error closing", error);
+    }finally{
+        process.exit(0);
     }
 };
 
 process.on("SIGINT", shutdown); //When server is closed manually
 process.on("SIGTERM", shutdown); //When server is shut down
+process.on("beforeExit", shutdown); //Before server close
 
 export default {
     //Connect to MongoDB

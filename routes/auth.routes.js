@@ -73,15 +73,16 @@ router.post('/password-recover-email',
 );
 
 //Endpoint for confirming password recover
-router.get('/confirm-password-recover',
+router.get('/confirm-password-recover/:token',
     authController.confirmPasswordRecover
 );
 
 //Endpoint for setting up a new password
 router.patch('/password-recover',
     encryptMiddleware.generate, //Encrypting pass Middleware
-    tokenMiddleware.verifyRecoverPassToken, //Verifying 
     authController.recoverPassword //Final controller
 );
+
+// tokenMiddleware.verifyRecoverPassToken, //Verifying 
 
 export default router;

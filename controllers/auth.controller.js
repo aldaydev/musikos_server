@@ -1,11 +1,10 @@
-//Dependency imports
 import token from "../utils/token.js";
-
-//Email views import
 import EmailViews from "../views/email.views.js";
 import logger from "../config/logger.config.js";
 import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
+import resetRequesting from "../utils/resetRequesting.js";
+import { ResError } from "../utils/errors/resErrors.js";
 
 export default {
 
@@ -17,9 +16,6 @@ export default {
 
             //Converting email to lowercase
             email = email.toLowerCase();
-
-            //Creating musician
-            await musicianService.create({ email, username, password });
 
             //Generate token
             const generatedToken = await token.generate({ email, username }, '600s');
@@ -33,6 +29,9 @@ export default {
                 subject: 'Confirma tu cuenta en Musiko',
                 html: EmailViews.confirmation(confirmationUrl, username)
             });
+
+            //Creating musician
+            await musicianService.create({ email, username, password });
 
             //Sending confirmation email
             await newEmail.send();
@@ -71,6 +70,8 @@ export default {
             //If not... set is_confirmed -> true
             await musicianService.updateIsConfirmed(authData.username);
 
+            await musicianService.updateIsRequesting(authData.username, false);
+
             //Final log
             logger.http({ message: 'Account successfully confirmed', action: 'Confirm account', method: req.method, endpoint: req.originalUrl });
 
@@ -88,7 +89,7 @@ export default {
             //Initial log
             logger.http({ message: 'Resending email request stared', action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl });
 
-            //Check if username exists in request body
+            //Check if required data was sent
             const username = req.body.username;
             if (!username) {
                 throw { code: 'badRequest' };
@@ -96,15 +97,22 @@ export default {
 
             //Check if user exists
             const user = await musicianService.findOne('username', username);
-            if (!user) {
+            
+            if (!user || user.is_confirmed) {
                 throw { code: 'badRequest' };
+            }else if(user.is_requesting){
+                new ResError(
+                    'Ya solicitado. Revisa tu correo.',
+                    409
+                ).add('alreadyRequested');
+                throw {code: 'alreadyRequested'};
             }
 
             //Checking if user is already confirmed
-            const isConfirmed = await musicianService.checkConfirmed(username, 'confirmation');
-            if (isConfirmed) {
-                throw { code: 'badRequest' };
-            }
+            // const isConfirmed = await musicianService.checkConfirmed(username, 'confirmation');
+            // if (isConfirmed) {
+            //     throw { code: 'badRequest' };
+            // }
 
             //Generate token from username
             const generatedToken = await token.generate({ username }, '600s');
@@ -121,6 +129,12 @@ export default {
 
             //Sending confirmation email
             await newEmail.send();
+
+            //Setting is_requesting field to true
+            await musicianService.updateIsRequesting(username, true);
+
+            //In 10 minutes (when token ends) resetRequesting
+            resetRequesting(600000, username);
 
             //Finaization log
             logger.http({ message: `confirmation link has been sent to ${user.email}`, action: 'Resend confirmation email', method: req.method, endpoint: req.originalUrl })
@@ -143,7 +157,7 @@ export default {
             //Send cookie with accessToken
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
-                secure: true,  // In production set to "true"
+                secure: true,
                 sameSite: 'lax',
                 maxAge: 3600000, // 1 hour duration
             });
@@ -151,7 +165,7 @@ export default {
             //Send cookie with refreshToken
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
-                secure: true,  // In production set to "true"
+                secure: true,
                 sameSite: 'lax',
                 maxAge: 604800000, // 7 days
             });
@@ -200,12 +214,10 @@ export default {
             //Taking new accessToken from req.user
             const accessToken = req.user.accessToken;
 
-            //Faltan COSAS!!!!!!!!!!!!!!!!!!
-
             //Send cookie with new accessToken
             res.cookie('accessToken', accessToken, {
                 httpOnly: true,
-                secure: true,  // In production set to "true"
+                secure: true,
                 sameSite: 'lax',
                 maxAge: 3600000, // 1 hour duration
             });
@@ -238,8 +250,11 @@ export default {
             //Taking data from req.user
             const {id, username, email} = req.user;
 
+            //Generating token
+            const generatedToken = await token.generate({ email, username, id }, '300s');
+
             //Generating confirmation URL
-            const confirmationUrl = `http://localhost:3001/musikos/v1/auth/confirm-password-recover?id=${id}&username=${username}&email=${email}`
+            const confirmationUrl = `http://localhost:3001/musikos/v1/auth/confirm-password-recover/${generatedToken}?id=${id}&username=${username}&email=${email}`
 
             //Setting up confirmation email
             const newEmail = new Email({
@@ -250,6 +265,12 @@ export default {
 
             //Sending confirmation email
             await newEmail.send();
+
+            //Setting is_requesting field to true
+            await musicianService.updateIsRequesting(username, true);
+
+            //In 5 minutes (when token ends) resetRequesting
+            resetRequesting(300000, username);
 
             //Final response
             return res.status(200).json({
@@ -267,8 +288,8 @@ export default {
             //Taking data from req.query
             const {email, username, id} = req.query;
 
-            //Generating token
-            const generatedToken = await token.generate({ email, username, id }, '10s');
+            //Token verification
+            const authData = await token.verifyAndRedirect(req.params.token, req.query.username, 'recoverPassword');
 
             //Checking if user has confirmed
             const isConfirmed = await musicianService.checkConfirmed(username, 'recoverPassword');
@@ -278,16 +299,8 @@ export default {
                 await musicianService.updateIsConfirmed(username, 'recoverPassword')
             }
 
-            //Send recoverPassToken to cookies
-            res.cookie('recoverPassToken', generatedToken, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                maxAge: 604800000, // 7 days
-            });
-
             //Final response - redirect to front
-            return res.status(303).redirect(`http://localhost:5173/login?success=true&type=recoverPassword&username=${username}`);
+            return res.status(303).redirect(`http://localhost:5173/login?success=true&type=recoverPassword&email=${email}&username=${username}`);
 
         } catch (error) {
             next(error);
@@ -297,14 +310,17 @@ export default {
     recoverPassword: async (req, res, next) =>{
         try {
             //Collecting necessary data
-            const {id, username, email} = req.user;
             const newPassword = req.body.password;
-        
+            const {email, username} = req.body;
+    
             //Updating user password
-            await musicianService.recoverPassword(newPassword, id, 'recoverPassword');
+            await musicianService.updatePassword(newPassword, username);
+
+            //Setting is_requesting field to true
+            await musicianService.updateIsRequesting(username, false);
 
             //Final response
-            res.status(200).json({title: 'Contraseña modificada', message: 'Tu contraseña ha sido modificada correctamente. Ya puedes acceder a tu cuenta con ella.'});
+            res.status(200).json({title: 'Contraseña modificada', message: `Tu contraseña ha sido modificada correctamente para ${email}. Ya puedes acceder a tu cuenta con ella.`});
 
         } catch (error) {
             next(error);

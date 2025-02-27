@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import logger from './logger.config.js';
+import musicianService from '../services/mysql/musician.service.js';
 
 //Sequelize configuration
 const sequelize = new Sequelize(
@@ -32,11 +33,14 @@ const shutdown = async () => {
         logger.info("MySQL - Closed");
     } catch (error) {
         logger.error("MySQL - Error closing", error);
+    }finally{
+        process.exit(0);
     }
 };
 
 process.on("SIGINT", shutdown); //When server is closed manually
-process.on("SIGTERM", shutdown); //When server is shut down
+process.on("SIGTERM", shutdown); //When server is shut down (docker)
+process.on("beforeExit", shutdown); //Before server close
 
 export default sequelize;
 

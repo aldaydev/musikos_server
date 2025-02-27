@@ -81,7 +81,14 @@ const Musician = sequelize.define('Musician', {
     tiktok: {
         type: DataTypes.STRING
     },
+
     is_confirmed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+
+    is_requesting: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false

@@ -21,6 +21,7 @@ import mongodb from './databases/mongo/mongo.connection.js';
 //Swagger imports
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './config/swagger.config.js';
+import musicianService from './services/mysql/musician.service.js';
 
 //Express initialization
 const app = express();
@@ -47,12 +48,11 @@ app.use(cors({
     credentials: true, // Habilita el envío de cookies
 }));
 app.use(cookieParser());
+// Swagger UI Configuration
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(router);
 app.use(error_MW);
 app.use(notFound_MW);
-
-// Swagger UI Configuration
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //Port definition
 const port = process.env.PORT || 3001;
@@ -67,6 +67,8 @@ const startServer = async () => {
 		await mysql.syncModels();
 		//Seeding mySQL static tables (only in production)
 		await mysql.seedTables();
+		//Reseting is_requesting values
+		await musicianService.updateAllisRequesting();
 
 		//Connect to MongoDB (Mongoose)
 		await mongodb.connect();

@@ -1,5 +1,30 @@
 # musikos_server
-### Sprint 2 - 26/02/2025 - Tarde - refactoring code and adding some future archives
+### Sprint 2 - 27/02/2025 - Madrugada - error testing and is_requesting functionality
+
+
+## 2o SPRINT (BACKEND)
+
+### RESUMEN DE OBJETIVOS:
+
+He trabajado toda la parte referente al signin, así como la recuperación de la contraseña. He creado el sistema de tokens que tendrá la app (con un accesToken y un resrehToken). He reorganizado los endpoints para que tanto signup como signin se accedan con "/auth" y tengan su router y controlador como "auth".
+
+1. Endpoint, controlador y middlewares para "/auth/signin".
+   (Acceder a cuenta)
+2. Endpoint, controlador y middlewares para "/auth/verify-access-token". 
+   (Verificar el accesstoken al iniciar la app o solicitar rutas protegidas)
+3. Endpoint, controlador y middlewares para "/new-access-token".
+   (Generar un nuevo accesToken a través del refreshToken)
+4. Endpoint y controlador para  "/clear-cookies". 
+   (Cerrar sesión)
+5. Endpoint, controlador y middlewares para "/password-recover-email".
+   (Enviar email para recuperar y cambiar contraseña)
+6. Endpoint y controlador para "/confirm-password-recover".
+   (Generar recoverPassToken al pulsar el enlace del email)
+7. Endpoint, controlador y middlewares para "/password-recover".
+   (Cambiar la contraseña)
+8. Actualización de swagger con los nuevos endpoints.
+9. Pruebas de seguridad y manejo de errores
+
 
 ## 1er SPRINT (BACKEND)
 
@@ -19,6 +44,43 @@ He trabajado intensamente en todo el diseño inicial del backend, realizando sol
 10. Configuración de variables de entorno (dotenv).
 11. Configuración de jwt y bcrypt.
 
+
+------------ NOTAS ------------
+
+Pruebas de seguridad y manejo de errores:
+
+1. Proceso de signUp:
+- Si el usuario no introduce correctamente los datos
+- Si el email o username ya pertenecen a una cuenta
+- Si un usuario se registra y expira el enlace de confirmación
+- Si un usuario pulsa el enlace de confirmación una vez ya confirmado
+- Si el usuario pulsa el enlace de confirmación y ya está logeado en una pestaña
+- Si un usuario se registra exitosamente
+- Si los datos requeridos en req.body, req.params o req.query no existen o son incorrectos
+- Si hay cualquier problema interno
+
+2. Proceso de reenvio de email de confirmación:
+- Si el usuario solicita un nuevo enlace de confirmación
+- Si el usuario ya estaba confirmado (muy poco probable)(tendría que poner a mano los query)
+- Si el usuario ya lo ha solicitado y aún no ha expirado
+- Si el reenvio y lconsfirmación exitosos
+- Si los datos requeridos en req.body, req.params o req.query no existen o son incorrectos
+- Si hay cualquier problema interno
+
+3. Proceso de signin:
+- Si los datos introducidos no pertenecen a ningún usuario
+- Si los datos requeridos en req.body no existen o son incorrectos
+- Si el usuario accede exitosamente
+- Si hay cualquier problema interno
+
+4. Proceso de recuperación de contraseña:
+- Si el email o username no coincide con el de ningún usuario
+- Si el usuario intenta solicitar recuperación teniendo un email aún no expirado
+- Si la contraseña introducida no tiene el formato correcto
+- Si se renueva la contraseña exitosamente
+- Si los datos requeridos en req.body, req.params o req.query no existen o son incorrectos
+- Si hay cualquier problema interno
+
 Dependencias:
 
    - npm instal --save-dev nodemon
@@ -36,8 +98,6 @@ Dependencias:
    - npm i path
    - npm i yamljs
    - npm i cookie-parser
-
------------- NOTAS ------------
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales

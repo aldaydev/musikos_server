@@ -1,5 +1,6 @@
 import validate from "../utils/validate.js";
 import musicianService from "../services/mysql/musician.service.js";
+import { ResError } from "../utils/errors/resErrors.js";
 
 export default {
     signUp: async (req, res, next) => {
@@ -49,6 +50,14 @@ export default {
                 throw {code: 'badRequest'}
             }
 
+            if(!checkUser.is_confirmed){
+                new ResError(
+                    'No has confirmado tu cuenta.',
+                    403
+                ).add('alreadyRequested');
+                throw {code: 'alreadyRequested'};
+            }
+
             //Saving data in req.user
             req.user = {
                 id: checkUser.id,
@@ -75,6 +84,14 @@ export default {
             const user = await musicianService.checkUser(req.body.login);
             if(!user){
                 throw {code: 'badRequest'};
+            }
+
+            if(user.is_requesting){
+                new ResError(
+                    'Ya solicitado. Revisa tu correo.',
+                    409
+                ).add('alreadyRequested');
+                throw {code: 'alreadyRequested'};
             }
 
             //Saving data in req.user
