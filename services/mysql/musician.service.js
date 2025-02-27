@@ -1,5 +1,5 @@
 import logger from "../../config/logger.config.js";
-import { Musician } from "../../models/mysql.models/asociations.js";
+import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
 import { LogError } from "../../utils/errors/logErrors.js";
 import { Op } from "sequelize";
 
@@ -206,11 +206,48 @@ export default {
         try {
             await Musician.update(
                 { is_requesting: false },
-                { where: { is_requesting: true} } 
+                { where: { is_requesting: true } }
             );
             logger.info('MySQL - All "is_requesting" fields reset');
         } catch (error) {
             logger.error('MySQL - Error at resetgin "is_requesting" fields');
+        }
+    },
+
+    getAll: async () => {
+        try {
+            const musicians = await Musician.findAll({
+                where: {
+                    is_confirmed: true,
+                },
+                include: [
+                    {
+                        model: Instrument,  // Incluir los instrumentos
+                        through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
+                        attributes: ['instrument_name']
+                    },
+                    {
+                        model: Style,  // Incluir los estilos
+                        through: { attributes: [] },
+                        attributes: ['style_name']
+                    }
+                ],
+                attributes: [
+                    'id', 
+                    'username', 
+                    'image'
+                ], 
+            });
+            return musicians;
+        } catch (error) {
+            const errorGettingMusicians = new LogError({
+                message: 'Fail at updating in MySQL',
+                error: error.message
+            }).add('errorGettingMusicians');
+            throw {
+                code: 'internalServerError',
+                key: errorGettingMusicians,
+            };
         }
     }
 }

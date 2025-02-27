@@ -46,6 +46,16 @@ export default {
         } catch (error) {
             next(error);
         }
+    },
+
+    getAndFilter: async (req, res, next) => {
+        try {
+            const musicians = await musicianService.getAll();
+
+            res.json(musicians);
+        } catch (error) {
+            next(error);
+        }
     }
 
 }

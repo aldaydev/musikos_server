@@ -1,6 +1,5 @@
 # musikos_server
-### Sprint 2 - 27/02/2025 - Madrugada - error testing and is_requesting functionality
-
+### Sprint 3 - 27/02/2025 - Mañana - intermediate tables and profile images
 
 ## 2o SPRINT (BACKEND)
 

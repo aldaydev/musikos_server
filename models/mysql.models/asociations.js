@@ -6,29 +6,29 @@ import { Instrument } from './instrument.model.js';
 
 Musician.belongsToMany(Style, { 
     through: 'musicians_styles', 
-    foreignKey: 'musicianId', 
-    otherKey: 'styleId' 
+    foreignKey: 'id', 
+    otherKey: 'id' 
     }
 );
 
 Style.belongsToMany(Musician, {
     through: 'musicians_styles',
-    foreignKey: 'styleId',
-    otherKey: 'musicianId' });
+    foreignKey: 'id',
+    otherKey: 'id' });
 
 // MUSICIAN & INSTRUMENT RELATED
 
 Musician.belongsToMany(Instrument, { 
     through: 'musicians_instruments', 
-    foreignKey: 'musicianId', 
-    otherKey: 'instrumentId' 
+    foreignKey: 'id', 
+    otherKey: 'id' 
     }
 );
 
 Instrument.belongsToMany(Musician, {
     through: 'musicians_instruments',
-    foreignKey: 'instrumentId',
-    otherKey: 'musicianId' });
+    foreignKey: 'id',
+    otherKey: 'id' });
 
 
 export { Musician, Style, Instrument };

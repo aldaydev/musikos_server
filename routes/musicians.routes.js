@@ -22,6 +22,9 @@ router.post('/check-username',
     musiciansController.checkUsername
 );
 
+//Endpoint to search musicians
+router.get('/', musiciansController.getAndFilter )
+
 
 
 export default router;
