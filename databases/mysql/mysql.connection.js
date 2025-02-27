@@ -38,15 +38,21 @@ export default {
     //Sync MySQL models
     syncModels: async () => {
         try{
-            await Musician.sync();
-            await Style.sync();
-            await Instrument.sync();
-            await Musician_Style.sync();
-            await Musician_Instrument.sync();
-            await Region.sync();
-            await Province.sync();
-            await Town.sync();
-            logger.info('MySQL - Models synchronized');
+            await sequelize.query('SET FOREIGN_KEY_CHECKS = 0;');  // Desactivar claves foráneas
+
+            //Force: true to delete all data an create black tables
+            await Musician.sync({ force: true });
+            await Musician_Style.sync({ force: true });
+            await Musician_Instrument.sync({ force: true });
+
+            await Style.sync({ force: true });
+            await Instrument.sync({ force: true });
+            await Region.sync({ force: true });
+            await Province.sync({ force: true });
+            await Town.sync({ force: true });
+
+            await sequelize.query('SET FOREIGN_KEY_CHECKS = 1;');  // Activar claves foráneas
+            logger.info('MySQL - Models synchronized and cleared');
         }catch(error){
             logger.error({message: 'MySQL - Error synchronizing models', error: error.original.sqlMessage});
         }
@@ -54,12 +60,12 @@ export default {
     //Seed MySQL tables
     seedTables: async () => {
         try{
-            await seedMusicians();
             await seedStyles();
             await seedInstruments();
             await seedRegions();
             await seedProvinces();
             await seedTowns();
+            await seedMusicians();
         }catch(error){
             logger.error({message: 'MySQL - Error seeding tables', error: error});
         }

@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 27/02/2025 - Mañana - intermediate tables and profile images
+### Sprint 3 - 27/02/2025 - Tarde - working on musician model
 
 ## 2o SPRINT (BACKEND)
 

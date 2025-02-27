@@ -52,7 +52,30 @@ export default {
         try {
             const musicians = await musicianService.getAll();
 
-            res.json(musicians);
+            // console.log(musicians);
+
+            // const adaptMusicians = musicians.map((musician)=>{
+            //     console.log('Un musician', musician.dataValues);
+            //     return {...musician.dataValues, age: JSON.parse(musician.age)}
+            // })
+
+            console.log(musicians[0].dataValues.region);
+
+            const musiciansData = musicians.reduce((acc, curr) => {
+                const musicianData = {
+                    name: curr.name,
+                    username: curr.username,
+                    age: curr.dataValues.age,
+                    instruments: curr.Instruments,
+                    styles: curr.Styles,
+                    image: curr.image
+                }
+                acc.push(musicianData);
+                return acc;
+            }, [])
+
+            // console.log(musicians);
+            res.json(musiciansData);
         } catch (error) {
             next(error);
         }

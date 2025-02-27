@@ -1,6 +1,7 @@
 import { Musician } from './musician.model.js';
 import { Style } from './style.model.js';
 import { Instrument } from './instrument.model.js';
+import { Region } from './region.model.js';
 
 // MUSICIAN & STYLE RELATED
 
@@ -28,7 +29,19 @@ Musician.belongsToMany(Instrument, {
 Instrument.belongsToMany(Musician, {
     through: 'musicians_instruments',
     foreignKey: 'id',
-    otherKey: 'id' });
+    otherKey: 'id' }
+);
+
+// MUSICIAN & REGION RELATED
+
+Musician.belongsTo(Region, {
+    foreignKey: 'region_id',  // El nombre de la clave foránea en el modelo Musician
+});
+
+// Una región puede tener muchos músicos
+Region.hasMany(Musician, {
+    foreignKey: 'id',  // El nombre de la clave foránea en el modelo Musician
+});
 
 
 export { Musician, Style, Instrument };

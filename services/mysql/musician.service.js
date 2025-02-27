@@ -1,5 +1,6 @@
 import logger from "../../config/logger.config.js";
 import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
+import { Region } from "../../models/mysql.models/region.model.js";
 import { LogError } from "../../utils/errors/logErrors.js";
 import { Op } from "sequelize";
 
@@ -230,12 +231,18 @@ export default {
                         model: Style,  // Incluir los estilos
                         through: { attributes: [] },
                         attributes: ['style_name']
-                    }
+                    },
+                    {
+                        model: Region,  // Incluir la región
+                        attributes: ['name']
+                    },
                 ],
                 attributes: [
                     'id', 
                     'username', 
-                    'image'
+                    'image',
+                    'name',
+                    'age'
                 ], 
             });
             return musicians;

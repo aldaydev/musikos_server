@@ -1,0 +1,32 @@
+[
+    {
+        "username": "aldaymailing",
+        "email": "aldaymailing@gmail.com",
+        "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE."
+    },
+    {
+        "username": "juanitobanana",
+        "email": "juanito@banana.com",
+        "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
+        "name": "Juanito Banana",
+        "birthdate": "1999-09-09",
+        "is_confirmed": true,
+        "region_id": 1
+    },
+    {
+        "username": "pepitogrillo",
+        "email": "pepito@grillo.com",
+        "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
+        "name": "Pepito Grillo",
+        "birthdate": "1999-09-09",
+        "is_confirmed": true
+    },
+    {
+        "username": "jaimeperez",
+        "email": "jaime@perez.com",
+        "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
+        "name": "Jaime Pérez Pérez",
+        "birthdate": "1999-09-09",
+        "is_confirmed": true
+    }
+]

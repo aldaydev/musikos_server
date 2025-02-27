@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysql.config.js';
+import validating from '../../utils/validate.js';
+import handleAge from '../../utils/handleAge.js';
 
 // Defining Musician model
 const Musician = sequelize.define('Musician', {
@@ -40,29 +42,57 @@ const Musician = sequelize.define('Musician', {
         allowNull: false,
         //Validating password have 60 characters (encrypted)
         validate: {
-            len: [60, 60] 
+            len: [60, 60]
         }
     },
-    
+
     //Data that will be entered once created
     image: {
         type: DataTypes.STRING(255),
         allowNull: false,
         defaultValue: 'default-musician.png'
     },
-    first_name: {
-        type: DataTypes.STRING(50)
+    name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+        defaultValue: 'No indicado'
     },
-    last_name: {
-        type: DataTypes.STRING(50)
+
+    birthdate: {
+        type: DataTypes.DATEONLY,
+        validate: {
+            isValidAge(birthdate) {
+                return validating.birthdate(birthdate)
+            }
+        }
     },
+
     age: {
         type: DataTypes.INTEGER,
+        // Age field is automatically calculated
+        get() {
+            const birthdate = this.getDataValue('birthdate');
+            if (!birthdate) return null; // Si no hay fecha de nacimiento, no se puede calcular la edad
+
+            const today = new Date();
+            const birthDateObj = new Date(birthdate);
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const month = today.getMonth();
+            const day = today.getDate();
+
+            // Ajustamos la edad si el cumpleaños aún no ha ocurrido este año
+            if (month < birthDateObj.getMonth() || (month === birthDateObj.getMonth() && day < birthDateObj.getDate())) {
+                age--;
+            }
+
+            return age;
+        },
         validate: {
             min: 18, // Edad mínima
             max: 99  // Edad máxima
         }
     },
+
     slogan: {
         type: DataTypes.STRING(150)
     },
@@ -108,9 +138,48 @@ const Musician = sequelize.define('Musician', {
         type: DataTypes.DATE,
         allowNull: false, // Privacy policy must be accepted
         defaultValue: DataTypes.NOW, // Automatically records the acceptance date
+    },
+
+}, 
+
+{ 
+    tableName: 'musicians',
+    hooks: {
+      // Hook before creating or updating the musician
+    //   beforeSave: (musician) => {
+    //     if (musician.birthdate) {
+    //         const age = handleAge(musician.birthdate);
+    //         musician.age = age;
+    //     }
+    //   },
+    //   beforeUpdate: (musician) => {
+    //     if (musician.birthdate) {
+    //         const age = handleAge(musician.birthdate);
+    //         musician.age = age;
+    //     }
+    //   },
+    //   beforeCreate: (musician) => {
+    //     if (musician.birthdate) {
+    //         const age = handleAge(musician.birthdate);
+    //         musician.age = age;
+    //     }
+    //   },
+      beforeBulkCreate: (musicians) => {
+        musicians.forEach(musician => {
+          if (musician.birthdate) {
+            const age = handleAge(musician.birthdate); // Calculamos la edad de cada músico
+            musician.age = age;
+          }
+        });
+      },
+
+
+      
+
+      // Puedes agregar otros hooks si es necesario
+      // Por ejemplo, si necesitas validaciones adicionales o algún otro procesamiento
     }
-}, {
-    tableName: 'musicians'
-});
+  }
+);
 
 export { Musician };
