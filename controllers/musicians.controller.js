@@ -56,17 +56,24 @@ export default {
 
             const musiciansData = musicians.reduce((acc, curr) => {
 
-                const instruments = Array.from(Object.values(curr.Instruments));
-                const styles = Array.from(Object.values(curr.Styles));
-                console.log("Instruments", styles);
+                let instruments = curr.Instruments.instrument_names;
+                let splitInstruments = [];
+                instruments ? splitInstruments = instruments.split(',')
+                            : splitInstruments = null;
                 
+
+                const styles = curr.Styles.style_names;
+                let splitStyles = [];
+                styles ? splitStyles = styles.split(',')
+                        : splitStyles = null;
+
                 const musicianData = {
-                    name: curr.name || 'No indicado',
                     username: curr.username,
-                    age: curr.age || 'No indicado',
-                    instruments: instruments[0] ? instruments : 'No indicado',
-                    styles: styles[0] ? styles : 'No indicado',
                     image: curr.image,
+                    name: curr.name || 'No indicado',
+                    age: curr.age || 'No indicado',
+                    instruments: splitInstruments,
+                    styles: splitStyles,
                     region: curr.Region && curr.Region.name || 'No indicado'
 
                 }
@@ -75,7 +82,6 @@ export default {
                 return acc;
             }, [])
 
-            console.log("SOLO ESTE",musiciansData);
             res.json(musiciansData);
         } catch (error) {
             next(error);

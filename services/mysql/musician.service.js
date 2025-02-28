@@ -1,4 +1,5 @@
 import logger from "../../config/logger.config.js";
+import sequelize from "../../config/mysql.config.js";
 import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
 import { Region } from "../../models/mysql.models/region.model.js";
 import { LogError } from "../../utils/errors/logErrors.js";
@@ -225,12 +226,12 @@ export default {
                     {
                         model: Instrument,  // Incluir los instrumentos
                         through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
-                        attributes: ['instrument_name']
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT instrument_name)'), 'instrument_names']]
                     },
                     {
                         model: Style,  // Incluir los estilos
                         through: { attributes: [] },
-                        attributes: ['style_name']
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT style_name)'), 'style_names']]
                     },
                     {
                         model: Region,  // Incluir la región
@@ -244,6 +245,7 @@ export default {
                     'name',
                     'age'
                 ],
+                group: ['Musician.id'],
                 raw: true,
                 nest: true
 

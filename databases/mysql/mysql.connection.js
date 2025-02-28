@@ -12,7 +12,7 @@ import { Town } from "../../models/mysql.models/town.model.js";
 import Musician_Style from "../../models/mysql.models/musician_style.model.js";
 
 //Sequelize Seeding tables imports
-import { seedInstruments, seedMusicians, seedMusiciansIntruments, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
+import { seedInstruments, seedMusicians, seedMusiciansIntruments, seedMusiciansStyles, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
 import Musician_Instrument from "../../models/mysql.models/musician_instrument.model.js";
 
 
@@ -48,6 +48,7 @@ export default {
             await Instrument.sync({ force: true });
             await seedInstruments();
             await Musician_Style.sync({ force: true });
+            await seedMusiciansStyles();
             await Musician_Instrument.sync({ force: true });
             await seedMusiciansIntruments();
             

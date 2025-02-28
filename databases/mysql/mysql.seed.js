@@ -8,6 +8,7 @@ import fs from "fs/promises";
 import { Province } from "../../models/mysql.models/province.model.js";
 import { Town } from "../../models/mysql.models/town.model.js";
 import Musician_Instrument from "../../models/mysql.models/musician_instrument.model.js";
+import Musician_Style from '../../models/mysql.models/musician_style.model.js';
 
 const seedMusicians = async () => {
     try {
@@ -158,6 +159,24 @@ const seedMusiciansIntruments = async () => {
     }
 };
 
+const seedMusiciansStyles = async () => {
+    try {
+        
+        //Taking and converting json data
+        const data = await fs.readFile(
+            "./databases/mysql/seeds/musicians_styles.json",
+            "utf8"
+        );
+        const musicians_styles = JSON.parse(data);
+        //Uploading to MySQL
+        await Musician_Style.bulkCreate(musicians_styles);
+        return logger.info('MySQL - "musicians_styles" table seeded');
+        
+    } catch (error) {
+        logger.error('MySQL - Error at seeding "musicians_styles" table', error);
+    }
+};
+
 export {
     seedStyles,
     seedInstruments,
@@ -165,5 +184,6 @@ export {
     seedRegions,
     seedProvinces,
     seedTowns,
-    seedMusiciansIntruments
+    seedMusiciansIntruments,
+    seedMusiciansStyles
 };
