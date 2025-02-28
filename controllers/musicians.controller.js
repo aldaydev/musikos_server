@@ -48,33 +48,34 @@ export default {
         }
     },
 
-    getAndFilter: async (req, res, next) => {
+    getAll: async (req, res, next) => {
         try {
             const musicians = await musicianService.getAll();
 
             // console.log(musicians);
 
-            // const adaptMusicians = musicians.map((musician)=>{
-            //     console.log('Un musician', musician.dataValues);
-            //     return {...musician.dataValues, age: JSON.parse(musician.age)}
-            // })
-
-            console.log(musicians[0].dataValues.region);
-
             const musiciansData = musicians.reduce((acc, curr) => {
+
+                const instruments = Array.from(Object.values(curr.Instruments));
+                const styles = Array.from(Object.values(curr.Styles));
+                console.log("Instruments", styles);
+                
                 const musicianData = {
-                    name: curr.name,
+                    name: curr.name || 'No indicado',
                     username: curr.username,
-                    age: curr.dataValues.age,
-                    instruments: curr.Instruments,
-                    styles: curr.Styles,
-                    image: curr.image
+                    age: curr.age || 'No indicado',
+                    instruments: instruments[0] ? instruments : 'No indicado',
+                    styles: styles[0] ? styles : 'No indicado',
+                    image: curr.image,
+                    region: curr.Region && curr.Region.name || 'No indicado'
+
                 }
+                
                 acc.push(musicianData);
                 return acc;
             }, [])
 
-            // console.log(musicians);
+            console.log("SOLO ESTE",musiciansData);
             res.json(musiciansData);
         } catch (error) {
             next(error);

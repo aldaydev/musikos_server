@@ -10,10 +10,10 @@ import { Region } from "../../models/mysql.models/region.model.js";
 import { Province } from "../../models/mysql.models/province.model.js";
 import { Town } from "../../models/mysql.models/town.model.js";
 import Musician_Style from "../../models/mysql.models/musician_style.model.js";
-import Musician_Instrument from "../../models/mysql.models/musicians_instruments.model.js";
 
 //Sequelize Seeding tables imports
-import { seedInstruments, seedMusicians, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
+import { seedInstruments, seedMusicians, seedMusiciansIntruments, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
+import Musician_Instrument from "../../models/mysql.models/musician_instrument.model.js";
 
 
 export default {
@@ -42,14 +42,28 @@ export default {
 
             //Force: true to delete all data an create black tables
             await Musician.sync({ force: true });
+            await seedMusicians();
+            await Style.sync({ force: true });
+            await seedStyles();
+            await Instrument.sync({ force: true });
+            await seedInstruments();
             await Musician_Style.sync({ force: true });
             await Musician_Instrument.sync({ force: true });
-
-            await Style.sync({ force: true });
-            await Instrument.sync({ force: true });
+            await seedMusiciansIntruments();
+            
             await Region.sync({ force: true });
+            await seedRegions();
             await Province.sync({ force: true });
+            await seedProvinces();
             await Town.sync({ force: true });
+            await seedTowns();
+
+            
+            
+            
+            
+
+            
 
             await sequelize.query('SET FOREIGN_KEY_CHECKS = 1;');  // Activar claves foráneas
             logger.info('MySQL - Models synchronized and cleared');
@@ -60,12 +74,17 @@ export default {
     //Seed MySQL tables
     seedTables: async () => {
         try{
-            await seedStyles();
-            await seedInstruments();
-            await seedRegions();
-            await seedProvinces();
-            await seedTowns();
-            await seedMusicians();
+            
+            
+            // await seedRegions();
+            // await seedProvinces();
+            // await seedTowns();
+            // await seedMusicians();
+            // await seedStyles();
+            // await seedInstruments();
+            // await seedMusiciansIntruments();
+            
+            
         }catch(error){
             logger.error({message: 'MySQL - Error seeding tables', error: error});
         }

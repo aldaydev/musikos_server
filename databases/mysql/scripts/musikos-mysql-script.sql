@@ -8,6 +8,8 @@ SELECT * FROM instruments;
 SELECT * FROM towns;
 SELECT * FROM provinces;
 SELECT * FROM regions;
+SELECT * FROM musicians_instruments;
+SELECT * FROM musicians_styles;
 
 SELECT COUNT(*) FROM towns;
 SELECT COUNT(*) FROM provinces;

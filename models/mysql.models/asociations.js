@@ -7,29 +7,29 @@ import { Region } from './region.model.js';
 
 Musician.belongsToMany(Style, { 
     through: 'musicians_styles', 
-    foreignKey: 'id', 
-    otherKey: 'id' 
+    foreignKey: 'musician_id', 
+    otherKey: 'style_id' 
     }
 );
 
 Style.belongsToMany(Musician, {
     through: 'musicians_styles',
-    foreignKey: 'id',
-    otherKey: 'id' });
+    foreignKey: 'style_id',
+    otherKey: 'musician_id' });
 
 // MUSICIAN & INSTRUMENT RELATED
 
 Musician.belongsToMany(Instrument, { 
     through: 'musicians_instruments', 
-    foreignKey: 'id', 
-    otherKey: 'id' 
+    foreignKey: 'musician_id', 
+    otherKey: 'instrument_id' 
     }
 );
 
 Instrument.belongsToMany(Musician, {
     through: 'musicians_instruments',
-    foreignKey: 'id',
-    otherKey: 'id' }
+    foreignKey: 'instrument_id',
+    otherKey: 'musician_id' }
 );
 
 // MUSICIAN & REGION RELATED

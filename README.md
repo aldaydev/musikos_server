@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 27/02/2025 - Tarde - working on musician model
+### Sprint 3 - 28/02/2025 - Madrugada - instrument and style model and asociations
 
 ## 2o SPRINT (BACKEND)
 

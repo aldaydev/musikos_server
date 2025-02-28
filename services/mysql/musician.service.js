@@ -243,7 +243,10 @@ export default {
                     'image',
                     'name',
                     'age'
-                ], 
+                ],
+                raw: true,
+                nest: true
+
             });
             return musicians;
         } catch (error) {

@@ -19,7 +19,8 @@
         "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
         "name": "Pepito Grillo",
         "birthdate": "1999-09-09",
-        "is_confirmed": true
+        "is_confirmed": true,
+        "region_id": 3
     },
     {
         "username": "jaimeperez",
@@ -27,6 +28,7 @@
         "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
         "name": "Jaime Pérez Pérez",
         "birthdate": "1999-09-09",
-        "is_confirmed": true
+        "is_confirmed": true,
+        "region_id": 5
     }
 ]

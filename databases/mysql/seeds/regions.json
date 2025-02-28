@@ -11,12 +11,12 @@
   },
   {
     "parent_code": "0",
-    "label": "Asturias, Principado de",
+    "label": "Asturias",
     "code": "03"
   },
   {
     "parent_code": "0",
-    "label": "Balears, Illes",
+    "label": "Islas Baleares",
     "code": "04"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Castilla - La Mancha",
+    "label": "Castilla-La Mancha",
     "code": "08"
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Comunitat Valenciana",
+    "label": "Comunidad Valenciana",
     "code": "10"
   },
   {
@@ -61,17 +61,17 @@
   },
   {
     "parent_code": "0",
-    "label": "Madrid, Comunidad de",
+    "label": "Comunidad de Madrid",
     "code": "13"
   },
   {
     "parent_code": "0",
-    "label": "Murcia, Región de",
+    "label": "Región de Murcia",
     "code": "14"
   },
   {
     "parent_code": "0",
-    "label": "Navarra, Comunidad Foral de",
+    "label": " Comunidad Foral de Navarra",
     "code": "15"
   },
   {
@@ -81,7 +81,7 @@
   },
   {
     "parent_code": "0",
-    "label": "Rioja, La",
+    "label": "La Rioja",
     "code": "17"
   },
   {
