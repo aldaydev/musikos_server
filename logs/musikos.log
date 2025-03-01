@@ -407,3 +407,37 @@
 {"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-28 19:09:50","user":null}
 {"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-28 19:39:15","user":null}
 {"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-02-28 19:39:15","user":null}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:37:18"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:37:27"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:37:28"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:38:39"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:38:39"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:38:41","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:38:41","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:38:42","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:38:42","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:39:33"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:39:33"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:39:36","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:39:36","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:40:11"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:40:11"}
+{"endpoint":"/musikos/v1/musicians","error":"Unknown column 'instrument_name' in 'field list'","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:40:13","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Unknown column 'instrument_name' in 'field list'","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:40:13","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:40:51"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:40:51"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:40:55","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:40:55","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:41:10"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:41:10"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:43:43"}
+{"level":"error","message":"MySQL - Error at seeding \"instruments\" table","timestamp":"2025-03-01 01:43:43"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:44:38"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:44:49","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Column 'name' in field list is ambiguous","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:44:49","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:47:23"}
+{"endpoint":"/musikos/v1/musicians","error":"Unknown column 'Instrument.name' in 'field list'","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:47:26","user":"No autenticado"}
+{"endpoint":"/musikos/v1/musicians","error":"Unknown column 'Instrument.name' in 'field list'","level":"error","message":"Fail at updating in MySQL","method":"GET","status":500,"timestamp":"2025-03-01 01:47:26","user":"No autenticado"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:48:23"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:53:12"}
+{"level":"error","message":"MySQL - Error at seeding \"styles\" table,","timestamp":"2025-03-01 01:53:37"}

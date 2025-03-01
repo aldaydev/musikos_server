@@ -8,7 +8,7 @@ const Instrument = sequelize.define('Instrument', {
         primaryKey: true,
         autoIncrement: true
     },
-    instrument_name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true

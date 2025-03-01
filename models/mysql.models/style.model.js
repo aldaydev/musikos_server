@@ -8,7 +8,7 @@ const Style = sequelize.define('Style', {
         primaryKey: true,
         autoIncrement: true
     },
-    style_name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true

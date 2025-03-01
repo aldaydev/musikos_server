@@ -226,12 +226,12 @@ export default {
                     {
                         model: Instrument,  // Incluir los instrumentos
                         through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
-                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT instrument_name)'), 'instrument_names']]
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']]
                     },
                     {
                         model: Style,  // Incluir los estilos
                         through: { attributes: [] },
-                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT style_name)'), 'style_names']]
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
                     },
                     {
                         model: Region,  // Incluir la región
@@ -253,7 +253,7 @@ export default {
             return musicians;
         } catch (error) {
             const errorGettingMusicians = new LogError({
-                message: 'Fail at updating in MySQL',
+                message: 'Fail at searching in MySQL',
                 error: error.message
             }).add('errorGettingMusicians');
             throw {

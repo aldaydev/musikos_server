@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 28/02/2025 - Tarde - instrument and style model and asociations
+### Sprint 3 - 01/03/2025 - Madrugada - get regions endpoint
 
 ## 2o SPRINT (BACKEND)
 

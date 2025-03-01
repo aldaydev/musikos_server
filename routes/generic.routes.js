@@ -11,8 +11,13 @@ import genericController from '../controllers/generic.controller.js';
 const router = Router();
 
 //Endpoint for getting instruments list
-router.get('/get-instruments',
-    genericController.getInstruments //Final controller
+router.get('/instruments-and-styles',
+    genericController.getInstrumentsAndStyles //Final controller
+);
+
+//Endpoint for getting regions
+router.get('/regions',
+    genericController.getRegions //Final controller
 );
 
 export default router;
