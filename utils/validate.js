@@ -37,7 +37,7 @@ export default {
             age--;
         }
 
-        if(age > 100 || age < 10) {
+        if(age > 100 || age < 14) {
             console.log('Formato de fecha incorrecta');
             throw new Error('La edad no puede ser mayor que 100 años ni menor que 10.')
         }

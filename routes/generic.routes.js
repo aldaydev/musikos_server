@@ -16,8 +16,13 @@ router.get('/instruments-and-styles',
 );
 
 //Endpoint for getting regions
-router.get('/regions',
-    genericController.getRegions //Final controller
+router.get('/provinces',
+    genericController.getProvinces //Final controller
+);
+
+//Endpoint for getting region provinces
+router.get('/towns',
+    genericController.getTowns //Final controller
 );
 
 export default router;

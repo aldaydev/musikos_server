@@ -12,11 +12,23 @@ export default {
         }
     },
 
-    getRegions: async (req, res, next) => {
+    getProvinces: async (req, res, next) => {
         try {
-            const regions = await genericService.getRegions();
+            const regions = await genericService.getProvinces();
             console.log(regions);
             res.status(200).json(regions);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    getTowns: async (req, res, next) => {
+        try {
+            const parent_code = parseInt(req.query.code);
+            console.log(parent_code)
+            const provinces = await genericService.getTowns(parent_code);
+            console.log(provinces);
+            res.status(200).json(provinces);
         } catch (error) {
             next(error);
         }
