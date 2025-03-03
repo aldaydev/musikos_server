@@ -86,6 +86,20 @@ export default {
         } catch (error) {
             next(error);
         }
+    },
+
+    filter: async (req, res, next) => {
+        try{
+            console.log('joli empieza la consulta')
+            const {minAge, maxAge, styles, instruments, province, town, name} = req.query;
+            // console.log(minAge, maxAge, styles, instruments, province, town, name);
+            console.log(instruments);
+            const filteredMusicians = await musicianService.filter(minAge, maxAge, styles, instruments, province, town, name);
+            console.log(filteredMusicians);
+            res.json({message: 'Vamos con todo coñeeee'})
+        }catch(error){
+            next(error);
+        }
     }
 
 }

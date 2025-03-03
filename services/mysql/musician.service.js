@@ -261,5 +261,60 @@ export default {
                 key: errorGettingMusicians,
             };
         }
+    },
+
+    filter: async (minAge, maxAge, styles, instruments, province, town, name) => {
+        try {
+            console.log(instruments);
+            const musicians = await Musician.findAll({
+                where: {
+                    is_confirmed: true,
+                },
+                include: [
+                    {
+                        model: Instrument,  // Incluir los instrumentos
+                        through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']],
+                        where: {
+                            name: {[Op.or]: [...instruments]}
+                                
+                                // [Op.in]: instruments.map(instrument => instrument)
+                                // [Op.and]: [instruments]
+                            
+                        }
+                    },
+                    {
+                        model: Style,  // Incluir los estilos
+                        through: { attributes: [] },
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
+                    },
+                    {
+                        model: Region,  // Incluir la región
+                        attributes: ['name']
+                    },
+                ],
+                attributes: [
+                    'id', 
+                    'username', 
+                    'image',
+                    'name',
+                    'age'
+                ],
+                group: ['Musician.id'],
+                raw: true,
+                nest: true
+
+            });
+            return musicians;
+        } catch (error) {
+            const errorGettingMusicians = new LogError({
+                message: 'Fail at searching in MySQL',
+                error: error.message
+            }).add('errorGettingMusicians');
+            throw {
+                code: 'internalServerError',
+                key: errorGettingMusicians,
+            };
+        }
     }
 }

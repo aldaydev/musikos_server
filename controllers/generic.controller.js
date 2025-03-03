@@ -26,7 +26,6 @@ export default {
     getTowns: async (req, res, next) => {
         try {
             const parent_code = req.query.code;
-            console.log(req.query.code);
             const towns = await genericService.getTowns(parent_code);
             res.status(200).json(towns);
         } catch (error) {
