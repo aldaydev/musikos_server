@@ -1,12 +1,13 @@
 import genericService from "../services/mysql/generic.service.js"
 
 export default {
-    getInstrumentsAndStyles: async (req, res, next) => {
+    getSearchData: async (req, res, next) => {
         try {
             const instruments = await genericService.getInstruments();
             const styles = await genericService.getStyles();
+            const provinces = await genericService.getProvinces();
 
-            res.status(200).json({instruments, styles});
+            res.status(200).json({instruments, styles, provinces});
         } catch (error) {
             next(error);
         }
@@ -14,9 +15,9 @@ export default {
 
     getProvinces: async (req, res, next) => {
         try {
-            const regions = await genericService.getProvinces();
-            console.log(regions);
-            res.status(200).json(regions);
+            const provinces = await genericService.getProvinces();
+
+            res.status(200).json({provinces});
         } catch (error) {
             next(error);
         }
@@ -24,11 +25,10 @@ export default {
 
     getTowns: async (req, res, next) => {
         try {
-            const parent_code = parseInt(req.query.code);
-            console.log(parent_code)
-            const provinces = await genericService.getTowns(parent_code);
-            console.log(provinces);
-            res.status(200).json(provinces);
+            const parent_code = req.query.code;
+            console.log(req.query.code);
+            const towns = await genericService.getTowns(parent_code);
+            res.status(200).json(towns);
         } catch (error) {
             next(error);
         }

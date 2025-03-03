@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 02/03/2025 - Madrugada - get regions endpoints
+### Sprint 3 - 02/03/2025 - Madrugada - get provinces endpoints
 
 ## 2o SPRINT (BACKEND)
 
