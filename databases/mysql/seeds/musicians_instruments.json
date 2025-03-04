@@ -1,5 +1,6 @@
 [
-    { "musician_id": 2, "instrument_id": 2},
     { "musician_id": 2, "instrument_id": 3},
-    { "musician_id": 3, "instrument_id": 5}
+    { "musician_id": 2, "instrument_id": 2},
+    { "musician_id": 3, "instrument_id": 5},
+    { "musician_id": 4, "instrument_id": 2}
 ]

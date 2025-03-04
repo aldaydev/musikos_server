@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 03/03/2025 - Tarde - working on searchAndFilter endpoint
+### Sprint 3 - 04/03/2025 - Tarde - working on searchAndFilter endpoint
 
 ## 2o SPRINT (BACKEND)
 

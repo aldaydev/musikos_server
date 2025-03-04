@@ -7,6 +7,7 @@ import logger from "../config/logger.config.js";
 import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
 import token from "../utils/token.js";
+import genericService from "../services/mysql/generic.service.js";
 
 export default {
 
@@ -74,7 +75,7 @@ export default {
                     age: curr.age || 'No indicado',
                     instruments: splitInstruments,
                     styles: splitStyles,
-                    region: curr.Region && curr.Region.name || 'No indicado'
+                    province: curr.Province && curr.Province.name || 'No indicado'
 
                 }
                 
@@ -90,13 +91,42 @@ export default {
 
     filter: async (req, res, next) => {
         try{
-            console.log('joli empieza la consulta')
-            const {minAge, maxAge, styles, instruments, province, town, name} = req.query;
+            console.log('holi empieza la consulta');
+            let {minAge, maxAge, styles, instruments, province, town, name} = req.query;
             // console.log(minAge, maxAge, styles, instruments, province, town, name);
-            console.log(instruments);
+
             const filteredMusicians = await musicianService.filter(minAge, maxAge, styles, instruments, province, town, name);
-            console.log(filteredMusicians);
-            res.json({message: 'Vamos con todo coñeeee'})
+
+            const musiciansData = filteredMusicians.reduce((acc, curr) => {
+
+                let instruments = curr.Instruments.instrument_names;
+                let splitInstruments = [];
+                instruments ? splitInstruments = instruments.split(',')
+                            : splitInstruments = null;
+                
+
+                const styles = curr.Styles.style_names;
+                let splitStyles = [];
+                styles ? splitStyles = styles.split(',')
+                        : splitStyles = null;
+
+                const musicianData = {
+                    username: curr.username,
+                    image: curr.image,
+                    name: curr.name || 'No indicado',
+                    age: curr.age || 'No indicado',
+                    instruments: splitInstruments,
+                    styles: splitStyles,
+                    province: curr.Province && curr.Province.name || 'No indicado'
+
+                }
+                
+                acc.push(musicianData);
+                return acc;
+            }, [])
+
+            console.log(musiciansData);
+            res.json(musiciansData)
         }catch(error){
             next(error);
         }

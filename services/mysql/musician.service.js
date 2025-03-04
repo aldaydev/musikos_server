@@ -1,6 +1,7 @@
 import logger from "../../config/logger.config.js";
 import sequelize from "../../config/mysql.config.js";
 import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
+import { Province } from "../../models/mysql.models/province.model.js";
 import { Region } from "../../models/mysql.models/region.model.js";
 import { LogError } from "../../utils/errors/logErrors.js";
 import { Op } from "sequelize";
@@ -234,7 +235,7 @@ export default {
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
                     },
                     {
-                        model: Region,  // Incluir la región
+                        model: Province,  // Incluir la región
                         attributes: ['name']
                     },
                 ],
@@ -265,32 +266,76 @@ export default {
 
     filter: async (minAge, maxAge, styles, instruments, province, town, name) => {
         try {
-            console.log(instruments);
+
+            let instrumentsArray = [], stylesArray = [];
+
+            const ifExists = (key, value) => {
+                if(value){
+                    let ArrayToSpread;
+                    if(key === 'instruments'){
+                        instrumentsArray = Array.isArray(instruments) ? instruments : [instruments];
+                        ArrayToSpread = instrumentsArray;
+                        return {
+                            name: { [Op.in]: [...ArrayToSpread] }
+                        }
+
+                    }else if(key === 'styles'){
+                        stylesArray = Array.isArray(styles) ? styles : [styles];
+                        ArrayToSpread = stylesArray;
+                        return {
+                            name: { [Op.in]: [...ArrayToSpread] }
+                        }
+                    }else if(key === 'province'){
+                        return {
+                            name: province
+                        }
+                    }else if(key === 'name'){
+                        return {name : { [Op.like]: `%${name}%` } }
+                    }
+                }else{
+                    if(key === 'name'){
+                        return {};
+                    }
+                }
+                // let ArrayToSpread;
+                // if(key === 'instruments'){
+                //     instrumentsArray = Array.isArray(instruments) ? instruments : [instruments];
+                //     ArrayToSpread = instrumentsArray;
+
+                // }else if(key === 'styles'){
+                //     stylesArray = Array.isArray(styles) ? styles : [styles];
+                //     ArrayToSpread = stylesArray;
+                // }
+                
+                // if(value){
+                //     return {
+                //         name: { [Op.in]: [...ArrayToSpread] }
+                //     }
+                // }
+            }
+
             const musicians = await Musician.findAll({
                 where: {
                     is_confirmed: true,
+                    ...ifExists('name', name)
                 },
                 include: [
                     {
                         model: Instrument,  // Incluir los instrumentos
                         through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']],
-                        where: {
-                            name: {[Op.or]: [...instruments]}
-                                
-                                // [Op.in]: instruments.map(instrument => instrument)
-                                // [Op.and]: [instruments]
-                            
-                        }
+                        where: ifExists('instruments', instruments)
                     },
                     {
                         model: Style,  // Incluir los estilos
                         through: { attributes: [] },
-                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']],
+                        where: ifExists('styles', styles)
                     },
                     {
-                        model: Region,  // Incluir la región
-                        attributes: ['name']
+                        model: Province,  // Incluir la región
+                        attributes: ['name'],
+                        where: ifExists('province', province)
                     },
                 ],
                 attributes: [
@@ -298,11 +343,16 @@ export default {
                     'username', 
                     'image',
                     'name',
-                    'age'
+                    'age',
+                    [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_instruments`.`instrument_id`) FROM `musicians_instruments` WHERE `musicians_instruments`.`musician_id` = `Musician`.`id`)'), 'instrument_count'],
+                    [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_styles`.`style_id`) FROM `musicians_styles` WHERE `musicians_styles`.`musician_id` = `Musician`.`id`)'), 'style_count']
                 ],
                 group: ['Musician.id'],
+                having: sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
+                having: sequelize.literal(`style_count >= ${stylesArray.length}`),  
                 raw: true,
-                nest: true
+                nest: true,
+                // logging: console.log 
 
             });
             return musicians;

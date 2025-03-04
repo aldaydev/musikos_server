@@ -11,7 +11,7 @@
         "name": "Juanito Banana",
         "birthdate": "1989-09-09",
         "is_confirmed": true,
-        "region_id": 1
+        "province_id": 1
     },
     {
         "username": "pepitogrillo",
@@ -20,7 +20,7 @@
         "name": "Pepito Grillo",
         "birthdate": "1999-09-09",
         "is_confirmed": true,
-        "region_id": 3
+        "province_id": 3
     },
     {
         "username": "jaimeperez",
@@ -29,6 +29,15 @@
         "name": "Jaime Pérez Pérez",
         "birthdate": "2002-09-09",
         "is_confirmed": true,
-        "region_id": 5
+        "province_id": 5
+    },
+    {
+        "username": "tomasin",
+        "email": "tomasin@tomasin.com",
+        "password": "$2b$11$0NA2blCAb8eIyj3b.kkNp.lVPjAuwSe/3PyF4w4AIpn5FdJlPPUE.",
+        "name": "Tomas Tomasin",
+        "birthdate": "2002-09-09",
+        "is_confirmed": true,
+        "province_id": 7
     }
 ]
