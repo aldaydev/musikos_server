@@ -1,10 +1,12 @@
+//Models imports
 import { Instrument } from "../../models/mysql.models/instrument.model.js"
 import { Province } from "../../models/mysql.models/province.model.js";
-import { Region } from "../../models/mysql.models/region.model.js";
 import { Style } from "../../models/mysql.models/style.model.js";
 import { Town } from "../../models/mysql.models/town.model.js";
 
 export default {
+
+    //Getting instruments list
     getInstruments: async () => {
         try {
             const instruments = await Instrument.findAll({
@@ -23,6 +25,7 @@ export default {
         }
     },
 
+    //Getting styles list
     getStyles: async () => {
         try {
             const styles = await Style.findAll({
@@ -41,6 +44,7 @@ export default {
         }
     },
 
+    //Getting provinces list
     getProvinces: async () => {
         try {
             const regions = await Province.findAll({
@@ -59,6 +63,7 @@ export default {
         }
     },
 
+    //Getting towns list
     getTowns: async (parent_code) => {
         try {
             const provinces = await Town.findAll({

@@ -6,7 +6,9 @@ export default {
     signUp: async (req, res, next) => {
         try {
             //Body request destructuring
-            let {email, username, password, acceptTerms, acceptPrivacy} = req.body;
+            let {email, username, password, birthdate, acceptTerms, acceptPrivacy} = req.body;
+
+            console.log(birthdate);
 
             if(
                 //Checking if all needed data was sent

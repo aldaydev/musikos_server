@@ -133,14 +133,6 @@ export default {
                 code: 'internalServerError',
                 key: errorUpdatingMusician,
             };
-            // const errorUpdatingMusician = new LogError({
-            //     message: 'Fail at updating in MySQL',
-            //     error: error.message
-            // }).add('errorUpdatingMusician');
-            // throw { code: 'internalServerError', 
-            //     key: errorUpdatingMusician, 
-            //     redirect: `/login?error=internal&type${type}&username=${username}`
-            // };
         }
     },
 
@@ -176,7 +168,7 @@ export default {
         }
     },
 
-    //Update is_requesting value for a Musician (can redirect)
+    //Update is_requesting value for a Musician (with redirection)
     updateIsRequesting: async (username, state, response = 'normal') => {
         try {
             const updatedMusician = await Musician.update(
@@ -205,6 +197,7 @@ export default {
         }
     },
 
+    //Update is_requesting value for all Musicians
     updateAllisRequesting: async () => {
         try {
             await Musician.update(
@@ -213,47 +206,58 @@ export default {
             );
             logger.info('MySQL - All "is_requesting" fields reset');
         } catch (error) {
-            logger.error('MySQL - Error at resetgin "is_requesting" fields');
+            logger.error('MySQL - Error at reseting "is_requesting" fields');
         }
     },
 
+    //Getting all confirmed musicians
     getAll: async () => {
         try {
             const musicians = await Musician.findAll({
                 where: {
+                    //Musician must be confirmed
                     is_confirmed: true,
                 },
                 include: [
+                    //---INSTRUEMNTS---//
                     {
-                        model: Instrument,  // Incluir los instrumentos
-                        through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
+                        model: Instrument,
+                        through: { attributes: [] },
+                        //Taking de name atribute of instruments associated to musicians
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']]
                     },
+                    //---STYLES---//
                     {
-                        model: Style,  // Incluir los estilos
+                        model: Style,
                         through: { attributes: [] },
+                        //Taking de name atribute of styles associated to musicians
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
                     },
+                    //---PROVINCE---//
                     {
-                        model: Province,  // Incluir la región
+                        model: Province,
+                        //Taking de name atribute of province associated to musicians
                         attributes: ['name']
                     },
+                    //---TOWN---//
                     {
-                        model: Town,  // Incluir la región
+                        model: Town,
+                        //Taking de name atribute of province associated to musicians
                         attributes: ['name']
                     },
                 ],
+                //Atributes of Musician we want to get 
                 attributes: [
                     'id', 
-                    'username', 
+                    'username',
                     'image',
                     'name',
                     'age'
                 ],
+                //We group the data by musician id
                 group: ['Musician.id'],
                 raw: true,
                 nest: true
-
             });
             return musicians;
         } catch (error) {
@@ -268,107 +272,122 @@ export default {
         }
     },
 
+    //Getting filtered musicians
     filter: async (minAge, maxAge, styles, instruments, province, town, name) => {
         try {
-
+            //Initialize array for multiple instruments or styles
             let instrumentsArray = [], stylesArray = [];
 
+            //Function thant handle if a filter is needed or not
             const ifExists = (key, value) => {
+                //If value param exists
                 if(value){
                     let ArrayToSpread;
+                    //Action for instruments
                     if(key === 'instruments'){
                         instrumentsArray = Array.isArray(instruments) ? instruments : [instruments];
                         ArrayToSpread = instrumentsArray;
                         return {
                             name: { [Op.in]: [...ArrayToSpread] }
                         }
-
+                    //Action for styles
                     }else if(key === 'styles'){
                         stylesArray = Array.isArray(styles) ? styles : [styles];
                         ArrayToSpread = stylesArray;
                         return {
                             name: { [Op.in]: [...ArrayToSpread] }
                         }
+                    //Action for province
                     }else if(key === 'province'){
                         return {
                             name: province
                         }
+                    //Action for town
                     }else if(key === 'town'){
                         return {
                             name: town
                         }
+                    //Action for name
                     }else if(key === 'name'){
                         return {name : { [Op.like]: `%${name}%` } }
                     }
+                //If value param doesn´t exists
                 }else{
+                    //Action for name
                     if(key === 'name'){
                         return {};
                     }
                 }
-                // let ArrayToSpread;
-                // if(key === 'instruments'){
-                //     instrumentsArray = Array.isArray(instruments) ? instruments : [instruments];
-                //     ArrayToSpread = instrumentsArray;
-
-                // }else if(key === 'styles'){
-                //     stylesArray = Array.isArray(styles) ? styles : [styles];
-                //     ArrayToSpread = stylesArray;
-                // }
-                
-                // if(value){
-                //     return {
-                //         name: { [Op.in]: [...ArrayToSpread] }
-                //     }
-                // }
             }
 
+            //Here begins the request to database
             const musicians = await Musician.findAll({
                 where: {
+                    //Musician must be confirmed
                     is_confirmed: true,
+                    //Selected age range
                     age: {
                         [Op.between] : [minAge, maxAge]
                     },
+                    //If name, op.iLike
                     ...ifExists('name', name),
                 },
                 include: [
+                    //---INSTRUEMNTS---//
                     {
-                        model: Instrument,  // Incluir los instrumentos
-                        through: { attributes: [] },  // No incluir los atributos de la tabla intermedia
+                        model: Instrument,
+                        through: { attributes: [] },
+                        //Taking de name atribute of instruments associated to musicians
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']],
+                        //If instruments in queryString, filter by them
                         where: ifExists('instruments', instruments)
                     },
+                    //---STYLES---//
                     {
-                        model: Style,  // Incluir los estilos
+                        model: Style, 
                         through: { attributes: [] },
+                        //Taking de name atribute of styles associated to musicians
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']],
+                        //If styles in queryString, filter by them
                         where: ifExists('styles', styles)
                     },
+                    //---PROVINCE---//
                     {
-                        model: Province,  // Incluir la región
+                        model: Province,
+                        //Taking de name atribute of province associated to musicians
                         attributes: ['name'],
+                        //If province in queryString, filter by it
                         where: ifExists('province', province)
                     },
+                    //---TOWN---//
                     {
-                        model: Town,  // Incluir la región
+                        model: Town,
+                        //Taking de name atribute of town associated to musicians
                         attributes: ['name'],
+                        //If town in queryString, filter by it
                         where: ifExists('town', town)
                     },
                 ],
+                //Atributes of Musician we want to get 
                 attributes: [
                     'id', 
                     'username', 
                     'image',
                     'name',
                     'age',
+                    //We take the count of all instruments asociated to a musician
                     [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_instruments`.`instrument_id`) FROM `musicians_instruments` WHERE `musicians_instruments`.`musician_id` = `Musician`.`id`)'), 'instrument_count'],
+                    //We take the count of all styles asociated to a musician
                     [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_styles`.`style_id`) FROM `musicians_styles` WHERE `musicians_styles`.`musician_id` = `Musician`.`id`)'), 'style_count']
                 ],
+                //We group the data by musician id
                 group: ['Musician.id'],
+                //This having is to make the request look at all instrments asociated
                 having: sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
+                //This having is to make the request look at all styles asociated
                 having: sequelize.literal(`style_count >= ${stylesArray.length}`),  
                 raw: true,
                 nest: true,
-                // logging: console.log 
 
             });
             return musicians;

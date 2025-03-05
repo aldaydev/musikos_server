@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 3 - 05/03/2025 - Madrugada - third sprint finished
+### Sprint 4 - 05/03/2025 - Madrugada - cleaning and commenting
 
 ## 3er SPRINT (BACKEND)
 
