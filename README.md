@@ -1,5 +1,25 @@
 # musikos_server
-### Sprint 3 - 05/03/2025 - Madrugada - searchAndFilter endpoint completed
+### Sprint 3 - 05/03/2025 - Madrugada - third sprint finished
+
+## 3er SPRINT (BACKEND)
+
+### RESUMEN DE OBJETIVOS:
+
+He creado los endpoints correspondientes a la búsqueda de músicos. Por una parte tenemos la búsqueda inicial (todos los músicos con paginación) y la búsqueda filtrada. Esto supone varios controladores y acciones en los servicios (busquedas en las bbdd).
+
+1. Creación del router generic.routes.js
+   * Alberga las rutas para obtener listado de estilos, instrumentos...
+   * Se asocia con generic.controller.js
+   * Se asocia con generic.services.js
+   * En resumen, todas las acciones para obtener información estática de la BD.
+2. Endpoint y controlador '/musicians'
+   * Permite obtener un listado completo de músicos.
+   * Queda pendiente aplicar paginación. Si da tiempo lo haré.
+3. Endpoint y controlador '/musician/search'
+   * Permite, a través de query params, filtrar una búsqueda
+   * Igualmente queda pendiente paginación si da tiempo
+4. Servicios correspondientes (acciones en la bd)
+5. Queda pendiente swagger y limpiar código para futuros sprints.
 
 ## 2o SPRINT (BACKEND)
 
