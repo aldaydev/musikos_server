@@ -75,8 +75,8 @@ export default {
                     age: curr.age || 'No indicado',
                     instruments: splitInstruments,
                     styles: splitStyles,
-                    province: curr.Province && curr.Province.name || 'No indicado'
-
+                    province: curr.Province && curr.Province.name || 'No indicado',
+                    town: curr.Town && curr.Town.name,
                 }
                 
                 acc.push(musicianData);
@@ -117,8 +117,8 @@ export default {
                     age: curr.age || 'No indicado',
                     instruments: splitInstruments,
                     styles: splitStyles,
-                    province: curr.Province && curr.Province.name || 'No indicado'
-
+                    province: curr.Province && curr.Province.name || 'No indicado',
+                    town: curr.Town && curr.Town.name
                 }
                 
                 acc.push(musicianData);

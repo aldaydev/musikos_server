@@ -11,7 +11,8 @@
         "name": "Juanito Banana",
         "birthdate": "1989-09-09",
         "is_confirmed": true,
-        "province_id": 1
+        "province_id": 1,
+        "town_id": 280
     },
     {
         "username": "pepitogrillo",

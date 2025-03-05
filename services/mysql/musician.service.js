@@ -2,7 +2,7 @@ import logger from "../../config/logger.config.js";
 import sequelize from "../../config/mysql.config.js";
 import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
 import { Province } from "../../models/mysql.models/province.model.js";
-import { Region } from "../../models/mysql.models/region.model.js";
+import { Town } from "../../models/mysql.models/town.model.js";
 import { LogError } from "../../utils/errors/logErrors.js";
 import { Op } from "sequelize";
 
@@ -238,6 +238,10 @@ export default {
                         model: Province,  // Incluir la región
                         attributes: ['name']
                     },
+                    {
+                        model: Town,  // Incluir la región
+                        attributes: ['name']
+                    },
                 ],
                 attributes: [
                     'id', 
@@ -289,6 +293,10 @@ export default {
                         return {
                             name: province
                         }
+                    }else if(key === 'town'){
+                        return {
+                            name: town
+                        }
                     }else if(key === 'name'){
                         return {name : { [Op.like]: `%${name}%` } }
                     }
@@ -317,7 +325,10 @@ export default {
             const musicians = await Musician.findAll({
                 where: {
                     is_confirmed: true,
-                    ...ifExists('name', name)
+                    age: {
+                        [Op.between] : [minAge, maxAge]
+                    },
+                    ...ifExists('name', name),
                 },
                 include: [
                     {
@@ -336,6 +347,11 @@ export default {
                         model: Province,  // Incluir la región
                         attributes: ['name'],
                         where: ifExists('province', province)
+                    },
+                    {
+                        model: Town,  // Incluir la región
+                        attributes: ['name'],
+                        where: ifExists('town', town)
                     },
                 ],
                 attributes: [

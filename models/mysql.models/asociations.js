@@ -3,6 +3,7 @@ import { Style } from './style.model.js';
 import { Instrument } from './instrument.model.js';
 import { Region } from './region.model.js';
 import { Province } from './province.model.js';
+import { Town } from './town.model.js';
 
 // MUSICIAN & STYLE RELATED
 
@@ -46,7 +47,7 @@ Region.hasMany(Musician, {
     foreignKey: 'id',  // El nombre de la clave foránea en el modelo Musician
 });
 
-// MUSICIAN & REGION RELATED
+// MUSICIAN & PROVINCE RELATED
 
 Musician.belongsTo(Province, {
     foreignKey: 'province_id',  // El nombre de la clave foránea en el modelo Musician
@@ -54,6 +55,17 @@ Musician.belongsTo(Province, {
 
 // Una región puede tener muchos músicos
 Province.hasMany(Musician, {
+    foreignKey: 'id',  // El nombre de la clave foránea en el modelo Musician
+});
+
+// MUSICIAN & TOWN RELATED
+
+Musician.belongsTo(Town, {
+    foreignKey: 'town_id',  // El nombre de la clave foránea en el modelo Musician
+});
+
+// Una región puede tener muchos músicos
+Town.hasMany(Musician, {
     foreignKey: 'id',  // El nombre de la clave foránea en el modelo Musician
 });
 
