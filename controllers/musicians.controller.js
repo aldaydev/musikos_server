@@ -119,6 +119,17 @@ export default {
         }catch(error){
             next(error);
         }
+    },
+
+    getRestrictedData: async (req, res, next) => {
+        try {
+            console.log('Holi');
+            const musicianData = await musicianService.findOne('username', req.user.username);
+            console.log(musicianData);
+            res.json(musicianData);
+        } catch (error) {
+            
+        }
     }
 
 }

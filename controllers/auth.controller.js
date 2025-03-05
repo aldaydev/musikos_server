@@ -12,7 +12,7 @@ export default {
     signUp: async (req, res, next) => {
         try {
             //Collecting request body required data
-            let { email, username, password } = req.body;
+            let { email, username, name, password, birthdate } = req.body;
 
             //Converting email to lowercase
             email = email.toLowerCase();
@@ -30,11 +30,11 @@ export default {
                 html: EmailViews.confirmation(confirmationUrl, username)
             });
 
-            //Creating musician
-            await musicianService.create({ email, username, password });
-
             //Sending confirmation email
             await newEmail.send();
+
+            //Creating musician
+            await musicianService.create({ email, username, password, birthdate, name });
 
             //Final response
             return res.status(200).json({

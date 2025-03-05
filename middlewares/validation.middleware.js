@@ -6,21 +6,39 @@ export default {
     signUp: async (req, res, next) => {
         try {
             //Body request destructuring
-            let {email, username, password, birthdate, acceptTerms, acceptPrivacy} = req.body;
+            let {email, username, name, password, birthdate, acceptTerms, acceptPrivacy} = req.body;
 
-            console.log(birthdate);
+            //Correct format of birthdate
+            if(birthdate.day.length === 1){
+                birthdate.day = `0${birthdate.day}`
+            }
+
+            if(birthdate.month.length === 1){
+                birthdate.month = `0${birthdate.month}`
+            }
+
+            console.log('Llega hasta aquí', req.body);
+
+            const birthdateFormat = `${birthdate.year}-${birthdate.month}-${birthdate.day}`;
+            console.log('Llega hasta aquí', birthdateFormat);
+            req.body.birthdate = birthdateFormat;
 
             if(
                 //Checking if all needed data was sent
                 !password || !email || !username || !acceptTerms || !acceptPrivacy || 
+                !birthdate.year || !birthdate.month ||!birthdate.day || !name ||
                 //Checking if terms and privacy where accepted
                 !JSON.parse(acceptTerms) || !JSON.parse(acceptPrivacy) ||
                 //Validating password format
-                !validate.pass(password) || 
+                !validate.pass(password) ||
                 //Validating email format
                 !validate.email(email) || 
+                //Validating name format
+                !validate.name(name) ||
                 //Validating username format
                 !validate.username(username) || 
+                //Validating username birthdate
+                !validate.birthdate2(birthdateFormat) ||
                 //Checking if email already exists in DB
                 await musicianService.findOne('email', email) ||
                 //Checking if username already exists in DB

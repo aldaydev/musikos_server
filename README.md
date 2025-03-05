@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 4 - 05/03/2025 - Madrugada - cleaning and commenting
+### Sprint 4 - 05/03/2025 - Tarde - working on restrictedMusicianData endpoint 
 
 ## 3er SPRINT (BACKEND)
 

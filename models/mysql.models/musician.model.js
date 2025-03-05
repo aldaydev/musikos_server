@@ -37,23 +37,8 @@ const Musician = sequelize.define('Musician', {
             }
         }
     },
-    password: {
-        type: DataTypes.STRING(60),
-        allowNull: false,
-        //Validating password have 60 characters (encrypted)
-        validate: {
-            len: [60, 60]
-        }
-    },
-
-    //Data that will be entered once created
-    image: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        defaultValue: 'default-musician.png'
-    },
     name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(60),
         allowNull: false,
         defaultValue: 'No indicado'
     },
@@ -91,6 +76,21 @@ const Musician = sequelize.define('Musician', {
             min: 18, // Edad mínima
             max: 99  // Edad máxima
         }
+    },
+    password: {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+        //Validating password have 60 characters (encrypted)
+        validate: {
+            len: [60, 60]
+        }
+    },
+
+    //Data that will be entered once created
+    image: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        defaultValue: 'default-musician.png'
     },
 
     slogan: {
@@ -158,12 +158,12 @@ const Musician = sequelize.define('Musician', {
     //         musician.age = age;
     //     }
     //   },
-    //   beforeCreate: (musician) => {
-    //     if (musician.birthdate) {
-    //         const age = handleAge(musician.birthdate);
-    //         musician.age = age;
-    //     }
-    //   },
+      beforeCreate: (musician) => {
+        if (musician.birthdate) {
+            const age = handleAge(musician.birthdate);
+            musician.age = age;
+        }
+      },
       beforeBulkCreate: (musicians) => {
         musicians.forEach(musician => {
           if (musician.birthdate) {

@@ -88,3 +88,45 @@
 {"endpoint":"/musikos/v1/musicians/filter?minAge=16&maxAge=100","error":"WHERE parameter \"name\" has invalid \"undefined\" value","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-04 22:52:06","user":"No autenticado"}
 {"endpoint":"/musikos/v1/musicians/filter?minAge=16&maxAge=100","error":"Invalid value {}","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-04 22:52:55","user":"No autenticado"}
 {"endpoint":"/musikos/v1/musicians/filter?province=C%C3%A1diz&minAge=16&maxAge=100","error":"Town is not associated to Musician!","level":"error","message":"Fail at searching in MySQL","method":"GET","status":500,"timestamp":"2025-03-05 01:18:14","user":"No autenticado"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:15:15","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:26:53","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.108:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:34:09","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.108:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:37:32","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.108:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:38:51","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.108:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 16:40:17","user":"rafa"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:46:15","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:47:53","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:49:13","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:50:08","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:51:35","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:52:24","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:56:24","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 16:58:03","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:05:43","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:08:06","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:08:33","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:09:01","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:09:26","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:10:21","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:10:41","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:11:00","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:11:22","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:12:26","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:13:11","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:13:44","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:16:13","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:16:35","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:18:34","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:18:50","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:20:13","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:20:41","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:21:23","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:22:12","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-05 17:23:52","user":null}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 17:28:15","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 17:28:46","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 17:30:04","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 17:31:20","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:16:34","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:17:24","user":"rafa"}
+{"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:18:36","user":"rafa"}

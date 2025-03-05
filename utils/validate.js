@@ -11,6 +11,11 @@ export default {
         return regex.test(email);
     },
 
+    name: (name) => {
+        const regex = /^[A-Za-zÁáÉéÍíÓóÚúÑñ\s]{3,60}$/;
+        return regex.test(name);
+    },
+
     username: (username) => {
         // Validate username with regex
         const regex = /^(?!.*[_-]{2})(?![_-])([a-z0-9_-]{3,30})(?<![_-])$/;
@@ -18,6 +23,7 @@ export default {
     },
 
     birthdate: (date) => {
+        console.log('DATE', date)
         //Creating object from birthdate
         const birthdate = new Date(date);
         //Selecting today
@@ -41,5 +47,34 @@ export default {
             console.log('Formato de fecha incorrecta');
             throw new Error('La edad no puede ser mayor que 100 años ni menor que 10.')
         }
+    },
+
+    birthdate2: (date) => {
+        console.log('DATE', date)
+        //Creating object from birthdate
+        const birthdate = new Date(date);
+        //Selecting today
+        const today = new Date();
+        //Calculating age, month and day
+        let age = today.getFullYear() - birthdate.getFullYear();
+        const month = today.getMonth();
+        const day = today.getDate();
+
+        //Checking if has turned years this year
+        const hasNoTurnedYears = 
+            month < birthdate.getMonth() ||
+            (month === birthdate.getMonth() && day < birthdate.getDay())
+
+        //If not...
+        if(hasNoTurnedYears){
+            age--;
+        }
+
+        if(age > 100 || age < 14) {
+            console.log('Formato de fecha incorrecta');
+            return false;
+        }
+
+        return true;
     }
 }

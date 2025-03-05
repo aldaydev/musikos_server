@@ -28,4 +28,10 @@ router.get('/', musiciansController.getAll);
 //Endpoint to filter musicians
 router.get('/filter', musiciansController.filter);
 
+//Endpoint to filter musicians
+router.get('/restricted-data',
+    tokenMiddleware.verifyAccessToken,
+    musiciansController.getRestrictedData
+);
+
 export default router;
