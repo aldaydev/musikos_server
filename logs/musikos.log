@@ -130,3 +130,10 @@
 {"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:16:34","user":"rafa"}
 {"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:17:24","user":"rafa"}
 {"endpoint":"/musikos/v1/auth/signup","error":"connect ETIMEDOUT 173.194.79.109:587","level":"error","message":"Error sending email","method":"POST","status":500,"timestamp":"2025-03-05 18:18:36","user":"rafa"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-06 17:42:00","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-06 17:42:28","user":null}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-06 17:43:34","user":null}
+{"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Invalid format of email","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 17:56:01","user":"juanitobanana"}
+{"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Invalid format of email","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 17:56:26","user":"juanitobanana"}
+{"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Invalid format of email","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 18:07:30","user":"juanitobanana"}
+{"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Validation len on password failed","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 18:07:45","user":"juanitobanana"}

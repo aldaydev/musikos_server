@@ -34,4 +34,14 @@ router.get('/restricted-data',
     musiciansController.getRestrictedData
 );
 
+//Endpoint to get musician public profile
+router.get('/:username',
+    musiciansController.getPublicData
+);
+
+//Endpoint to change email
+router.patch('/update',
+    musiciansController.updateValue
+);
+
 export default router;

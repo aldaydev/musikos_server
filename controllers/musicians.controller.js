@@ -1,5 +1,6 @@
 //Services imports
 import musicianService from "../services/mysql/musician.service.js";
+import {encryptPassword} from '../utils/bcrypt.js';
 
 export default {
 
@@ -123,12 +124,47 @@ export default {
 
     getRestrictedData: async (req, res, next) => {
         try {
-            console.log('Holi');
             const musicianData = await musicianService.findOne('username', req.user.username);
-            console.log(musicianData);
-            res.json(musicianData);
+            res.status(200).json(musicianData);
         } catch (error) {
+            next(error);
+        }
+    },
+
+    getPublicData: async (req, res, next) => {
+        try {
+            const musician = await musicianService.getOne(req.params.username);
+
+            console.log(musician);
+
+            const musicianData = {
+                image: musician.image,
+                name: musician.name,
+                username: musician.username,
+                
+            }
+
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    updateValue: async (req, res, next) => {
+        try {
             
+            if(req.body.email){
+               await musicianService.updateEmail(req.body.email, req.body.username);
+               res.status(200).json({message: 'Email actualizado correctamente'})
+            }else if(req.body.password){
+                const encrypt = await encryptPassword(req.body.password);
+                await musicianService.updatePassword(encrypt, req.body.username);
+               res.status(200).json({message: 'Constraseña actualizada correctamente'})
+            }else{
+                throw {code: 'badRequest'}
+            }
+
+        } catch (error) {
+            next(error);
         }
     }
 

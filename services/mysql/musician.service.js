@@ -117,7 +117,7 @@ export default {
     },
 
     //Update password from recoverPassword request
-    updatePassword: async (password, username, type) => {
+    updatePassword: async (password, username) => {
         try {
             const updatedMusician = await Musician.update(
                 { password: password },
@@ -401,5 +401,90 @@ export default {
                 key: errorGettingMusicians,
             };
         }
-    }
+    },
+
+    //Getting all confirmed musicians
+    getOne: async (username) => {
+        try {
+            const musicians = await Musician.findOne({
+                where: {
+                    //Musician must be confirmed
+                    username: username,
+                    is_confirmed: true,
+                },
+                include: [
+                    //---INSTRUEMNTS---//
+                    {
+                        model: Instrument,
+                        through: { attributes: [] },
+                        //Taking de name atribute of instruments associated to musicians
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']]
+                    },
+                    //---STYLES---//
+                    {
+                        model: Style,
+                        through: { attributes: [] },
+                        //Taking de name atribute of styles associated to musicians
+                        attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
+                    },
+                    //---PROVINCE---//
+                    {
+                        model: Province,
+                        //Taking de name atribute of province associated to musicians
+                        attributes: ['name']
+                    },
+                    //---TOWN---//
+                    {
+                        model: Town,
+                        //Taking de name atribute of province associated to musicians
+                        attributes: ['name']
+                    },
+                ],
+                //Atributes of Musician we want to get 
+                attributes: [
+                    'id', 
+                    'username',
+                    'image',
+                    'name',
+                    'age'
+                ],
+                //We group the data by musician id
+                group: ['Musician.id'],
+                raw: true,
+                nest: true
+            });
+            return musicians;
+        } catch (error) {
+            const errorGettingMusicians = new LogError({
+                message: 'Fail at searching in MySQL',
+                error: error.message
+            }).add('errorGettingMusicians');
+            throw {
+                code: 'internalServerError',
+                key: errorGettingMusicians,
+            };
+        }
+    },
+    
+    //Update password from recoverPassword request
+    updateEmail: async (email, username) => {
+        try {
+           
+            const updatedMusician = await Musician.update(
+                { email: email },
+                { where: { username } }
+            );
+            console.log('Updated', updatedMusician);
+            return updatedMusician;
+        } catch (error) {
+            const errorUpdatingMusician = new LogError({
+                message: 'Fail at updating in MySQL',
+                error: error.message
+            }).add('errorUpdatingMusician');
+            throw {
+                code: 'internalServerError',
+                key: errorUpdatingMusician,
+            };
+        }
+    },
 }
