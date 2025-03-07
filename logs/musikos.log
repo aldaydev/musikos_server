@@ -137,3 +137,4 @@
 {"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Invalid format of email","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 17:56:26","user":"juanitobanana"}
 {"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Invalid format of email","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 18:07:30","user":"juanitobanana"}
 {"endpoint":"/musikos/v1/musicians/update","error":"Validation error: Validation len on password failed","level":"error","message":"Fail at updating in MySQL","method":"PATCH","status":500,"timestamp":"2025-03-06 18:07:45","user":"juanitobanana"}
+{"endpoint":null,"error":null,"level":"error","message":"Unexpected error","method":null,"status":500,"timestamp":"2025-03-07 17:18:38","user":null}

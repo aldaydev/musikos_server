@@ -1,5 +1,17 @@
 # musikos_server
-### Sprint 4 - 07/03/2025 - Mañana - working on updating user data
+### Sprint 4 - 07/03/2025 - Tarde - finishing sprint 4
+
+## 4o SPRINT (BACKEND)
+
+### RESUMEN DE OBJETIVOS:
+
+En este sprint mi objetivo principal en el back era crear todos los endpoints para la modificación de datos por partes del usuario en su perfil y cuenta. He implementado solo algunas ya que, debido a la falta de timepo, creo que es mejor priorizar en completar los requisitos que se piden para el trabajo.
+
+1. Enpoint y controlador para "musicians/restricted-data" -> Nos proporciona toda la información del usuario. Para acceder, se debe verificar el token de las cookies ya que devolverá TODA la información del usuario.
+2. Enpoint y controlador para "musicians/:username" -> Nos proporciona información pública del usuario (pensado para que el usuario pùeda ver una página más completa de cada múscio, pero probablemente no me de tiempo)
+3. Enpoint, controlador y servicios para "musicians/update" -> Nos permite actualizar diferentes datos del usuario. He configurado username, contraseña e email.
+4. Pruebas para actualizar imagen -> He intentado implementar la funcionalidad de cambiar la imagen del usuario pero, al estar gastando mucho tiempo en ello, he preferido dejarlo a un lado.
+5. Pruebas y configuración inicial de jsDoc para que, llegado el momento, simplemente tenga que poner los comentarios.
 
 ## 3er SPRINT (BACKEND)
 
@@ -118,6 +130,7 @@ Dependencias:
    - npm i yamljs
    - npm i cookie-parser
    - npmi multer
+   - npm i jsdoc
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales
@@ -213,3 +226,22 @@ MUSICIAN:
     * Estilos
     * Región
 
+
+REQUISITOS DEL TRABAJO:
+
+- Uso de al menos un contexto en React y un custom hook -------- (DONE)
+- Elegir entre los dos tipos: Inventario o Aplicación de Librería, Películas, Música o similar. -------- (DONE)
+- Uso de JWT. -------- (DONE)
+- Debe usar MongoDB, con un mínimo de 2 colecciones, para una parte de los datos y MySQL, con un mínimo de dos tablas, para otra.
+- Debe haber un uso correcto de Git y GitHub. -------- (DONE)
+- Código comentado. -------- (/DONE)
+- Codificación en inglés (variables, contantes, naming...), no necesario para comentarios, pero se deja libre elección en esto. -------- (DONE)
+- Se debe usar para documentar: 
+   - Swagger -------- (/DONE)
+   - JSDoc -------- (/DONE)
+   - diagramas de diseño (ER y mínimo un diagrama de Casos de Uso por rol y uno de Secuencia). 
+- Uso de JEST (para al menos dos funciones) y Selenium o Cypress (para una de las vistas)
+- Realización de una prueba de carga al login con JMeter (mínimo 50 usuarios haciendo login a la vez)
+- Realización de un pdf con la documentación del proyecto, diagramas y descripción breve, extensión mínima 5 páginas.
+- Realización de despliegue.
+- Entrega en uno o dos enlaces a los repositorios de código y uno o dos enlaces de despliegue.

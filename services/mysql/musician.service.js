@@ -487,4 +487,26 @@ export default {
             };
         }
     },
+
+    //Update password from recoverPassword request
+    updateUsername: async (newUsername, username) => {
+        try {
+           
+            const updatedMusician = await Musician.update(
+                { username: newUsername },
+                { where: { username } }
+            );
+            console.log('Updated', updatedMusician);
+            return updatedMusician;
+        } catch (error) {
+            const errorUpdatingMusician = new LogError({
+                message: 'Fail at updating in MySQL',
+                error: error.message
+            }).add('errorUpdatingMusician');
+            throw {
+                code: 'internalServerError',
+                key: errorUpdatingMusician,
+            };
+        }
+    },
 }

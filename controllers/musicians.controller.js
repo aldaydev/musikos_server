@@ -1,6 +1,6 @@
 //Services imports
 import musicianService from "../services/mysql/musician.service.js";
-import {encryptPassword} from '../utils/bcrypt.js';
+import { encryptPassword } from '../utils/bcrypt.js';
 
 export default {
 
@@ -52,13 +52,13 @@ export default {
                 let instruments = curr.Instruments.instrument_names;
                 let splitInstruments = [];
                 instruments ? splitInstruments = instruments.split(',')
-                            : splitInstruments = null;
-                
+                    : splitInstruments = null;
+
 
                 const styles = curr.Styles.style_names;
                 let splitStyles = [];
                 styles ? splitStyles = styles.split(',')
-                        : splitStyles = null;
+                    : splitStyles = null;
 
                 const musicianData = {
                     username: curr.username,
@@ -70,7 +70,7 @@ export default {
                     province: curr.Province && curr.Province.name || 'No indicado',
                     town: curr.Town && curr.Town.name,
                 }
-                
+
                 acc.push(musicianData);
                 return acc;
             }, [])
@@ -83,8 +83,8 @@ export default {
 
     //Get filtered musicians (by query params)
     filter: async (req, res, next) => {
-        try{
-            let {minAge, maxAge, styles, instruments, province, town, name} = req.query;
+        try {
+            let { minAge, maxAge, styles, instruments, province, town, name } = req.query;
 
             const filteredMusicians = await musicianService.filter(minAge, maxAge, styles, instruments, province, town, name);
 
@@ -93,13 +93,13 @@ export default {
                 let instruments = curr.Instruments.instrument_names;
                 let splitInstruments = [];
                 instruments ? splitInstruments = instruments.split(',')
-                            : splitInstruments = null;
-                
+                    : splitInstruments = null;
+
 
                 const styles = curr.Styles.style_names;
                 let splitStyles = [];
                 styles ? splitStyles = styles.split(',')
-                        : splitStyles = null;
+                    : splitStyles = null;
 
                 const musicianData = {
                     username: curr.username,
@@ -111,13 +111,13 @@ export default {
                     province: curr.Province && curr.Province.name || 'No indicado',
                     town: curr.Town && curr.Town.name
                 }
-                
+
                 acc.push(musicianData);
                 return acc;
             }, [])
 
             res.status(200).json(musiciansData);
-        }catch(error){
+        } catch (error) {
             next(error);
         }
     },
@@ -141,7 +141,7 @@ export default {
                 image: musician.image,
                 name: musician.name,
                 username: musician.username,
-                
+
             }
 
         } catch (error) {
@@ -151,18 +151,19 @@ export default {
 
     updateValue: async (req, res, next) => {
         try {
-            
-            if(req.body.email){
+
+            if (req.body.email) {
                 await musicianService.updateEmail(req.body.email, req.body.username);
-                res.status(200).json({message: 'Email actualizado correctamente'})
-            }else if(req.body.password){
+                res.status(200).json({ message: 'Email actualizado correctamente' })
+            } else if (req.body.password) {
                 const encrypt = await encryptPassword(req.body.password);
                 await musicianService.updatePassword(encrypt, req.body.username);
-                res.status(200).json({message: 'Constraseña actualizada correctamente'})
-            }else if(req.body.image){
-                console.log(req.body.image)
+                res.status(200).json({ message: 'Constraseña actualizada correctamente' })
+            } else if(req.body.newUsername){
+                await musicianService.updateUsername(req.body.newUsername, req.body.username);
+                res.status(200).json({ message: 'Username actualizado correctamente' })
             }else{
-                throw {code: 'badRequest'}
+                throw { code: 'badRequest' }
             }
 
         } catch (error) {
