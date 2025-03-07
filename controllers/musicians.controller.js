@@ -153,12 +153,14 @@ export default {
         try {
             
             if(req.body.email){
-               await musicianService.updateEmail(req.body.email, req.body.username);
-               res.status(200).json({message: 'Email actualizado correctamente'})
+                await musicianService.updateEmail(req.body.email, req.body.username);
+                res.status(200).json({message: 'Email actualizado correctamente'})
             }else if(req.body.password){
                 const encrypt = await encryptPassword(req.body.password);
                 await musicianService.updatePassword(encrypt, req.body.username);
-               res.status(200).json({message: 'Constraseña actualizada correctamente'})
+                res.status(200).json({message: 'Constraseña actualizada correctamente'})
+            }else if(req.body.image){
+                console.log(req.body.image)
             }else{
                 throw {code: 'badRequest'}
             }

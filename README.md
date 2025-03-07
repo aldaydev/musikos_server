@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 4 - 05/03/2025 - Tarde - working on restrictedMusicianData endpoint 
+### Sprint 4 - 07/03/2025 - Mañana - working on updating user data
 
 ## 3er SPRINT (BACKEND)
 
@@ -117,6 +117,7 @@ Dependencias:
    - npm i path
    - npm i yamljs
    - npm i cookie-parser
+   - npmi multer
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales
