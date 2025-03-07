@@ -1,5 +1,12 @@
 # musikos_server
-### Sprint 4 - 07/03/2025 - Tarde - finishing sprint 4
+### Sprint 5 - 07/03/2025 - Tarde - starting sprint 5
+
+
+## 5o SPRINT (BACKEND)
+
+### RESUMEN DE OBJETIVOS:
+
+Mi intención en este sprint es tener las funcionalidades mínimas que se piden en el trabajo, para asegurar así cumplir todos los puntos.
 
 ## 4o SPRINT (BACKEND)
 
@@ -131,6 +138,7 @@ Dependencias:
    - npm i cookie-parser
    - npmi multer
    - npm i jsdoc
+   - npm i jest
 
 - Crear esqueleto del backend
    * Estructuración de carpetas y archivos inciales
