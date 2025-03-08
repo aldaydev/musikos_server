@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 5 - 07/03/2025 - Tarde - starting sprint 5
+### Sprint 5 - 08/03/2025 - Noche - testing with jest
 
 
 ## 5o SPRINT (BACKEND)
@@ -7,6 +7,8 @@
 ### RESUMEN DE OBJETIVOS:
 
 Mi intención en este sprint es tener las funcionalidades mínimas que se piden en el trabajo, para asegurar así cumplir todos los puntos.
+
+1. Realizadas pruebas unitarias con Jest con dos funciones (encryptPassword y validatePassword)
 
 ## 4o SPRINT (BACKEND)
 
@@ -248,7 +250,9 @@ REQUISITOS DEL TRABAJO:
    - Swagger -------- (/DONE)
    - JSDoc -------- (/DONE)
    - diagramas de diseño (ER y mínimo un diagrama de Casos de Uso por rol y uno de Secuencia). 
-- Uso de JEST (para al menos dos funciones) y Selenium o Cypress (para una de las vistas)
+- Uso de JEST (para al menos dos funciones) -------- (/DONE)
+- Cypress para una de las vistas -------- (/DONE)
+- Selenium para una de las vistas
 - Realización de una prueba de carga al login con JMeter (mínimo 50 usuarios haciendo login a la vez)
 - Realización de un pdf con la documentación del proyecto, diagramas y descripción breve, extensión mínima 5 páginas.
 - Realización de despliegue.

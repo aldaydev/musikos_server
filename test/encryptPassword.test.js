@@ -1,4 +1,4 @@
-import handleAge from '../utils/handleAge';
+import { encryptPassword } from '../utils/bcrypt';
 
 describe('calculating age function', () => {
 
@@ -7,7 +7,7 @@ describe('calculating age function', () => {
         const hashedPassword = await encryptPassword(password);
         
         expect(typeof hashedPassword).toBe('string');
-        expect(hashedPassword.length).toBeGreaterThan(60);
+        expect(hashedPassword.length).toEqual(60);
     });
 
 });

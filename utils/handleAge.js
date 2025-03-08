@@ -8,7 +8,6 @@ export default (musicianBirthdate) => {
     if (month < birthdate.getMonth() || (month === birthdate.getMonth() && day < birthdate.getDate())) {
         age--;
     }
-    // Asignar la edad calculada
-    // musician.age = age;
+
     return age;
 }
