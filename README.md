@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 5 - 08/03/2025 - Noche - testing with jest
+### Sprint 5 - 08/03/2025 - Tarde - testing with jmeter
 
 
 ## 5o SPRINT (BACKEND)
@@ -252,7 +252,7 @@ REQUISITOS DEL TRABAJO:
    - diagramas de diseño (ER y mínimo un diagrama de Casos de Uso por rol y uno de Secuencia). 
 - Uso de JEST (para al menos dos funciones) -------- (/DONE)
 - Cypress para una de las vistas -------- (/DONE)
-- Selenium para una de las vistas
+- Selenium para una de las vistas -------- (/DONE)
 - Realización de una prueba de carga al login con JMeter (mínimo 50 usuarios haciendo login a la vez)
 - Realización de un pdf con la documentación del proyecto, diagramas y descripción breve, extensión mínima 5 páginas.
 - Realización de despliegue.

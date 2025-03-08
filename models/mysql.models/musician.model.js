@@ -140,46 +140,46 @@ const Musician = sequelize.define('Musician', {
         defaultValue: DataTypes.NOW, // Automatically records the acceptance date
     },
 
-}, 
+},
 
-{ 
-    tableName: 'musicians',
-    hooks: {
-      // Hook before creating or updating the musician
-    //   beforeSave: (musician) => {
-    //     if (musician.birthdate) {
-    //         const age = handleAge(musician.birthdate);
-    //         musician.age = age;
-    //     }
-    //   },
-    //   beforeUpdate: (musician) => {
-    //     if (musician.birthdate) {
-    //         const age = handleAge(musician.birthdate);
-    //         musician.age = age;
-    //     }
-    //   },
-      beforeCreate: (musician) => {
-        if (musician.birthdate) {
-            const age = handleAge(musician.birthdate);
-            musician.age = age;
+    {
+        tableName: 'musicians',
+        hooks: {
+            // Hook before creating or updating the musician
+            //   beforeSave: (musician) => {
+            //     if (musician.birthdate) {
+            //         const age = handleAge(musician.birthdate);
+            //         musician.age = age;
+            //     }
+            //   },
+            //   beforeUpdate: (musician) => {
+            //     if (musician.birthdate) {
+            //         const age = handleAge(musician.birthdate);
+            //         musician.age = age;
+            //     }
+            //   },
+            beforeCreate: (musician) => {
+                if (musician.birthdate) {
+                    const age = handleAge(musician.birthdate);
+                    musician.age = age;
+                }
+            },
+            beforeBulkCreate: (musicians) => {
+                musicians.forEach(musician => {
+                    if (musician.birthdate) {
+                        const age = handleAge(musician.birthdate); // Calculamos la edad de cada músico
+                        musician.age = age;
+                    }
+                });
+            },
+
+
+
+
+            // Puedes agregar otros hooks si es necesario
+            // Por ejemplo, si necesitas validaciones adicionales o algún otro procesamiento
         }
-      },
-      beforeBulkCreate: (musicians) => {
-        musicians.forEach(musician => {
-          if (musician.birthdate) {
-            const age = handleAge(musician.birthdate); // Calculamos la edad de cada músico
-            musician.age = age;
-          }
-        });
-      },
-
-
-      
-
-      // Puedes agregar otros hooks si es necesario
-      // Por ejemplo, si necesitas validaciones adicionales o algún otro procesamiento
     }
-  }
 );
 
 export { Musician };
