@@ -5,6 +5,7 @@ import musicianService from "../services/mysql/musician.service.js";
 import Email from "../utils/mailing.js";
 import resetRequesting from "../utils/resetRequesting.js";
 import { ResError } from "../utils/errors/resErrors.js";
+import commService from "../services/mongo/comm.service.js";
 
 export default {
 
@@ -34,7 +35,9 @@ export default {
             await newEmail.send();
 
             //Creating musician
-            await musicianService.create({ email, username, password, birthdate, name });
+            const musician = await musicianService.create({ email, username, password, birthdate, name });
+
+            await commService.createComm(musician.id, '67cdc14e30c7311be44352aa');
 
             //Final response
             return res.status(200).json({

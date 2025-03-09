@@ -1,6 +1,5 @@
 # musikos_server
-### Sprint 5 - 08/03/2025 - Tarde - testing with jmeter
-
+### Sprint 5 - 09/03/2025 - Tarde - comms router
 
 ## 5o SPRINT (BACKEND)
 
@@ -9,6 +8,10 @@
 Mi intención en este sprint es tener las funcionalidades mínimas que se piden en el trabajo, para asegurar así cumplir todos los puntos.
 
 1. Realizadas pruebas unitarias con Jest con dos funciones (encryptPassword y validatePassword)
+2. Enpoints "comms" para comunicaciones -> Podemos enviar comunicados al usuario. Al crear una cuenta, por defecto se crea un comunicado de bienvenida.
+   - comm.routes.js
+   - comm.controller.js
+   - comm.service.js
 
 ## 4o SPRINT (BACKEND)
 
@@ -242,7 +245,8 @@ REQUISITOS DEL TRABAJO:
 - Uso de al menos un contexto en React y un custom hook -------- (DONE)
 - Elegir entre los dos tipos: Inventario o Aplicación de Librería, Películas, Música o similar. -------- (DONE)
 - Uso de JWT. -------- (DONE)
-- Debe usar MongoDB, con un mínimo de 2 colecciones, para una parte de los datos y MySQL, con un mínimo de dos tablas, para otra.
+- MongoDB (mínimo de 2 colecciones). -------- (DONE)
+- MySQL (mínimo de dos tablas). -------- (DONE)
 - Debe haber un uso correcto de Git y GitHub. -------- (DONE)
 - Código comentado. -------- (/DONE)
 - Codificación en inglés (variables, contantes, naming...), no necesario para comentarios, pero se deja libre elección en esto. -------- (DONE)

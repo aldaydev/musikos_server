@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import mongoConfig from '../../config/mongo.config.js';
 
 //Mongoose Seeding tables imports
-import seedLegal from './mongo.seed.js';
+import {seedLegal, seedComm, seedUsercomm} from './mongo.seed.js';
 
 //Close connection to MongoDB if server shutdowns
 export const shutdown = async () => {
@@ -47,6 +47,8 @@ export default {
     seedTables: async () => {
         try {
             await seedLegal();
+            await seedComm();
+            await seedUsercomm();
             logger.info('MongoDB - All static tables seeded');
         } catch (error) {
             logger.error('MongoDB - Error at seeding tables');

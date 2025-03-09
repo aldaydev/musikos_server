@@ -382,10 +382,16 @@ export default {
                 ],
                 //We group the data by musician id
                 group: ['Musician.id'],
-                //This having is to make the request look at all instrments asociated
-                having: sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
-                //This having is to make the request look at all styles asociated
-                having: sequelize.literal(`style_count >= ${stylesArray.length}`),  
+                having: {
+                    [Op.and]: [
+                        sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
+                        sequelize.literal(`style_count >= ${stylesArray.length}`)
+                    ]
+                },
+                // //This having is to make the request look at all instrments asociated
+                // having: sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
+                // //This having is to make the request look at all styles asociated
+                // having: sequelize.literal(`style_count >= ${stylesArray.length}`),  
                 raw: true,
                 nest: true,
 
@@ -469,7 +475,6 @@ export default {
     //Update password from recoverPassword request
     updateEmail: async (email, username) => {
         try {
-           
             const updatedMusician = await Musician.update(
                 { email: email },
                 { where: { username } }
@@ -491,7 +496,6 @@ export default {
     //Update password from recoverPassword request
     updateUsername: async (newUsername, username) => {
         try {
-           
             const updatedMusician = await Musician.update(
                 { username: newUsername },
                 { where: { username } }
