@@ -37,8 +37,8 @@ const seedComm = async () => {
         // If there are no documents, seeds the collection
         if (count === 0) {
             await Comm.insertMany([
-                { title: 'Bienvenido', message: 'Te damos la bienvenida a musikos' },
-                { title: 'Empieza ahora', message: 'Ya puedes empezar a buscar otros músicos y montar tu banda soñada' },
+                { keyword: 'Welcome', title: 'Bienvenido', message: 'Te damos la bienvenida a musikos' },
+                { keyword: 'Start', title: 'Empieza ahora', message: 'Ya puedes empezar a buscar otros músicos y montar tu banda soñada' },
             ]);
 
             logger.info('MongoDB - Seeding "comm" table');
@@ -62,11 +62,11 @@ const seedUsercomm = async () => {
         if (count === 0) {
             await Usercomm.insertMany([
                 { user_id: 2, user_comms: [
-                    '67cdc14e30c7311be44352aa', '67cdc14e30c7311be44352ab'
+                    'Welcome', 'Start'
                 ] 
                 },
                 { user_id: 3, user_comms: [
-                    '67cdc14e30c7311be44352aa'
+                    'Welcome'
                 ] 
                 },
             ]);

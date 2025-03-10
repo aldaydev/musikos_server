@@ -6,7 +6,7 @@ import authController from '../controllers/auth.controller.js';
 
 //Middleware imports
 import validationMiddleware from '../middlewares/validation.middleware.js';
-import encryptMiddleware from '../middlewares/encrypt.middelware.js';
+import encryptMiddleware from '../middlewares/encrypt.middleware.js';
 import tokenMiddleware from '../middlewares/token.middleware.js';
 
 //Router initialization

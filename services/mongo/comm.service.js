@@ -20,9 +20,9 @@ export default {
         }
     },
 
-    findComm: async (comm) => {
+    findComm: async (keyword) => {
         try {
-            return await Comm.find({ _id: comm });
+            return await Comm.find({ keyword });
         } catch (error) {
             const errorFindingComm = new LogError({
                 message: 'Fail at searching in MongoDB',

@@ -3,6 +3,10 @@ import mongoose from 'mongoose';
 
 // Defining Legal schema
 const commSchema = new mongoose.Schema({
+    keyword: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

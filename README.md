@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 5 - 09/03/2025 - Tarde - comms router
+### Sprint 5 - 10/03/2025 - Tarde - trying to upload images
 
 ## 5o SPRINT (BACKEND)
 
@@ -253,7 +253,9 @@ REQUISITOS DEL TRABAJO:
 - Se debe usar para documentar: 
    - Swagger -------- (/DONE)
    - JSDoc -------- (/DONE)
-   - diagramas de diseño (ER y mínimo un diagrama de Casos de Uso por rol y uno de Secuencia). 
+   - diagramas de diseño ER. 
+   - mínimo un diagrama de Casos de Uso por rol
+   - mínimo un diagrama de secuencia
 - Uso de JEST (para al menos dos funciones) -------- (/DONE)
 - Cypress para una de las vistas -------- (/DONE)
 - Selenium para una de las vistas -------- (/DONE)
