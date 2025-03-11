@@ -328,5 +328,14 @@ export default {
         } catch (error) {
             next(error);
         }
-    }
+    },
+
+    deleteAccount: async (req, res, next) => {   
+        try {
+            await musicianService.deleteAccount(req.body.username);
+            res.status(200).json({message: 'Cuenta eliminada correctamente. Cerrando sesión...'});
+        } catch (error) {
+            next(error);
+        }
+    } 
 }

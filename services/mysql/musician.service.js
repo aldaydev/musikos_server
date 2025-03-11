@@ -513,4 +513,23 @@ export default {
             };
         }
     },
+
+    deleteAccount: async (username) => {
+        try {
+            const deletedMusician = await Musician.destroy({
+                where: { username }
+            });
+            console.log('Deleting', deletedMusician);
+            return deletedMusician;
+        } catch (error) {
+            const errorDeletingMusician = new LogError({
+                message: 'Fail at deleting in MySQL',
+                error: error.message
+            }).add('errorDeletingMusician');
+            throw {
+                code: 'internalServerError',
+                key: errorDeletingMusician,
+            };
+        }
+    }
 }

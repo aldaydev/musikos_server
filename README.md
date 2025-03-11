@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 5 - 10/03/2025 - Tarde - trying to upload images
+### Sprint 5 - 11/03/2025 - Mañana - delete user endpoint
 
 ## 5o SPRINT (BACKEND)
 
@@ -12,6 +12,7 @@ Mi intención en este sprint es tener las funcionalidades mínimas que se piden 
    - comm.routes.js
    - comm.controller.js
    - comm.service.js
+3. Endpoint "delete-account" para eliminar la cuenta
 
 ## 4o SPRINT (BACKEND)
 
@@ -253,7 +254,7 @@ REQUISITOS DEL TRABAJO:
 - Se debe usar para documentar: 
    - Swagger -------- (/DONE)
    - JSDoc -------- (/DONE)
-   - diagramas de diseño ER. 
+   - diagramas de diseño ER. -------- (/DONE)
    - mínimo un diagrama de Casos de Uso por rol
    - mínimo un diagrama de secuencia
 - Uso de JEST (para al menos dos funciones) -------- (/DONE)

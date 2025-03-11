@@ -10,14 +10,16 @@ import { Town } from './town.model.js';
 Musician.belongsToMany(Style, { 
     through: 'musicians_styles', 
     foreignKey: 'musician_id', 
-    otherKey: 'style_id' 
+    otherKey: 'style_id',
+    onDelete: 'CASCADE' 
     }
 );
 
 Style.belongsToMany(Musician, {
     through: 'musicians_styles',
     foreignKey: 'style_id',
-    otherKey: 'musician_id' 
+    otherKey: 'musician_id',
+    onDelete: 'CASCADE' 
     }
 );
 

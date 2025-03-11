@@ -83,6 +83,11 @@ router.patch('/password-recover',
     authController.recoverPassword //Final controller
 );
 
-// tokenMiddleware.verifyRecoverPassToken, //Verifying 
+// ---------- DELETE ACCOUNT PROCESS ---------- //
+
+router.delete('/delete-account',
+    tokenMiddleware.verifyAccessToken, //Verifying AccessToken middleware
+    authController.deleteAccount //Final controller
+);
 
 export default router;
