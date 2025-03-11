@@ -1,5 +1,5 @@
 # musikos_server
-### Sprint 5 - 11/03/2025 - Mañana - delete user endpoint
+### Sprint 5 - 11/03/2025 - Tarde - checking testing
 
 ## 5o SPRINT (BACKEND)
 
@@ -260,7 +260,7 @@ REQUISITOS DEL TRABAJO:
 - Uso de JEST (para al menos dos funciones) -------- (/DONE)
 - Cypress para una de las vistas -------- (/DONE)
 - Selenium para una de las vistas -------- (/DONE)
-- Realización de una prueba de carga al login con JMeter (mínimo 50 usuarios haciendo login a la vez)
+- Realización de una prueba de carga al login con JMeter (mínimo 50 usuarios haciendo login a la vez) -------- (/DONE)
 - Realización de un pdf con la documentación del proyecto, diagramas y descripción breve, extensión mínima 5 páginas.
 - Realización de despliegue.
 - Entrega en uno o dos enlaces a los repositorios de código y uno o dos enlaces de despliegue.
