@@ -3,8 +3,8 @@ import sequelize from '../../config/mysql.config.js';
 import validating from '../../utils/validate.js';
 import handleAge from '../../utils/handleAge.js';
 
-// Defining Musician model
-const Musician = sequelize.define('Musician', {
+// Defining Profile model
+const Profile = sequelize.define('Profile', {
 
     id: {
         type: DataTypes.INTEGER,
@@ -143,7 +143,7 @@ const Musician = sequelize.define('Musician', {
 },
 
     {
-        tableName: 'musicians',
+        tableName: 'profiles',
         hooks: {
             // Hook before creating or updating the musician
             //   beforeSave: (musician) => {
@@ -182,4 +182,4 @@ const Musician = sequelize.define('Musician', {
     }
 );
 
-export { Musician };
+export { Profile };

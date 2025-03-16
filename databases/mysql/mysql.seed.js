@@ -1,62 +1,50 @@
 import logger from "../../config/logger.config.js";
 import { Instrument } from "../../models/mysql.models/instrument.model.js";
 import { Style } from "../../models/mysql.models/style.model.js";
-import { Musician } from "../../models/mysql.models/musician.model.js";
+import { Profile } from "../../models/mysql.models/profile.model.js";
 import { encryptPassword } from "../../utils/bcrypt.js";
-import { Region } from "../../models/mysql.models/region.model.js";
 import fs from "fs/promises";
 import { Province } from "../../models/mysql.models/province.model.js";
 import { Town } from "../../models/mysql.models/town.model.js";
-import Musician_Instrument from "../../models/mysql.models/musician_instrument.model.js";
-import Musician_Style from '../../models/mysql.models/musician_style.model.js';
+import Profile_Instrument from "../../models/mysql.models/profile_instrument.model.js";
+import Profile_Style from '../../models/mysql.models/profile_style.model.js';
+import { User } from "../../models/mysql.models/user.model.js";
 
-const seedMusicians = async () => {
+const seedUsers = async () => {
     try {
-        // Verifying if "musicians" already seeded
-        const count = await Musician.count();
+        // Verifying if "Profiles" already seeded
+        const count = await User.count();
+
+    } catch (error) {
+        
+    }
+}
+
+const seedProfiles = async () => {
+    try {
+        // Verifying if "Profiles" already seeded
+        const count = await Profile.count();
 
         if(!count){
             //Taking and converting json data
             const data = await fs.readFile(
-                "./databases/mysql/seeds/musicians.json", "utf8"
+                "./databases/mysql/seeds/Profiles.json", "utf8"
             );
-            const musicians = JSON.parse(data);
+            const Profiles = JSON.parse(data);
         
             //Uploading to MySQL
-            await Musician.bulkCreate(musicians, {
+            await Profile.bulkCreate(Profiles, {
             validate: true // Esto asegurará que las validaciones se ejecuten
             });
 
-            return logger.info('MySQL - "musicians" table seeded');
+            return logger.info('MySQL - "Profiles" table seeded');
         }else{
-            return logger.info('MySQL - "musicians" table already seeded');
+            return logger.info('MySQL - "Profiles" table already seeded');
         }
 
         
     } catch (error) {
-        logger.error({ message: 'MySQL - Error at seeding "musicians" table', error});
-    }
-};
-
-const seedRegions = async () => {
-    try {
-    
-        //Taking and converting json data
-        const data = await fs.readFile(
-            "./databases/mysql/seeds/regions.json", "utf8"
-        );
-        const regions = JSON.parse(data);
-        //Forming batch to upload
-        const batchData = regions.map((region) => ({
-            code: parseInt(region.code),
-            name: region.label,
-        }));
-        //Uploading to MySQL
-        await Region.bulkCreate(batchData);
-        return logger.info('MySQL - "regions" table seeded');
-        
-    } catch (error) {
-        logger.error('MySQL - Error at seeding "regions" table');
+        logger.error({ message: 'MySQL - Error at seeding "Profiles" table', error});
     }
 };
 
@@ -141,49 +129,48 @@ const seedInstruments = async () => {
     }
 };
 
-const seedMusiciansIntruments = async () => {
+const seedProfilesIntruments = async () => {
     try {
         
         //Taking and converting json data
         const data = await fs.readFile(
-            "./databases/mysql/seeds/musicians_instruments.json",
+            "./databases/mysql/seeds/Profiles_instruments.json",
             "utf8"
         );
-        const musicians_instruments = JSON.parse(data);
+        const Profiles_instruments = JSON.parse(data);
         //Uploading to MySQL
-        await Musician_Instrument.bulkCreate(musicians_instruments);
-        return logger.info('MySQL - "musicians_instruments" table seeded');
+        await Profile_Instrument.bulkCreate(Profiles_instruments);
+        return logger.info('MySQL - "Profiles_instruments" table seeded');
         
     } catch (error) {
-        logger.error('MySQL - Error at seeding "musicians_instruments" table', error);
+        logger.error('MySQL - Error at seeding "Profiles_instruments" table', error);
     }
 };
 
-const seedMusiciansStyles = async () => {
+const seedProfilesStyles = async () => {
     try {
         
         //Taking and converting json data
         const data = await fs.readFile(
-            "./databases/mysql/seeds/musicians_styles.json",
+            "./databases/mysql/seeds/Profiles_styles.json",
             "utf8"
         );
-        const musicians_styles = JSON.parse(data);
+        const Profiles_styles = JSON.parse(data);
         //Uploading to MySQL
-        await Musician_Style.bulkCreate(musicians_styles);
-        return logger.info('MySQL - "musicians_styles" table seeded');
+        await Profile_Style.bulkCreate(Profiles_styles);
+        return logger.info('MySQL - "Profiles_styles" table seeded');
         
     } catch (error) {
-        logger.error('MySQL - Error at seeding "musicians_styles" table', error);
+        logger.error('MySQL - Error at seeding "Profiles_styles" table', error);
     }
 };
 
 export {
     seedStyles,
     seedInstruments,
-    seedMusicians,
-    seedRegions,
+    seedProfiles,
     seedProvinces,
     seedTowns,
-    seedMusiciansIntruments,
-    seedMusiciansStyles
+    seedProfilesIntruments,
+    seedProfilesStyles
 };

@@ -5,15 +5,14 @@ import logger from "../../config/logger.config.js";
 import sequelize from "../../config/mysql.config.js";
 
 //Sequelize Models imports
-import { Musician, Style, Instrument } from '../../models/mysql.models/asociations.js';
-import { Region } from "../../models/mysql.models/region.model.js";
-import { Province } from "../../models/mysql.models/province.model.js";
-import { Town } from "../../models/mysql.models/town.model.js";
-import Musician_Style from "../../models/mysql.models/musician_style.model.js";
+import { User, Profile, Style, Instrument, Province, Town } from '../../models/mysql.models/associations.js';
+
+import Profile_Style from "../../models/mysql.models/profile_style.model.js";
+import Profile_Instrument from "../../models/mysql.models/profile_instrument.model.js";
 
 //Sequelize Seeding tables imports
-import { seedInstruments, seedMusicians, seedMusiciansIntruments, seedMusiciansStyles, seedProvinces, seedRegions, seedStyles, seedTowns } from "./mysql.seed.js";
-import Musician_Instrument from "../../models/mysql.models/musician_instrument.model.js";
+import { seedInstruments, seedProfiles, seedProfilesIntruments, seedProfilesStyles, seedProvinces, seedStyles, seedTowns } from "./mysql.seed.js";
+
 
 
 export default {
@@ -41,30 +40,24 @@ export default {
             await sequelize.query('SET FOREIGN_KEY_CHECKS = 0;');  // Desactivar claves foráneas
 
             //Force: true to delete all data an create black tables
-            await Musician.sync({ force: true });
-            await seedMusicians();
+            await User.sync({ force: true });
+
+            await Profile.sync({ force: true });
+            await seedProfiles();
             await Style.sync({ force: true });
             await seedStyles();
             await Instrument.sync({ force: true });
             await seedInstruments();
-            await Musician_Style.sync({ force: true });
-            await seedMusiciansStyles();
-            await Musician_Instrument.sync({ force: true });
-            await seedMusiciansIntruments();
+            await Profile_Style.sync({ force: true });
+            await seedProfilesStyles();
+            await Profile_Instrument.sync({ force: true });
+            await seedProfilesIntruments();
             
-            await Region.sync({ force: true });
-            await seedRegions();
             await Province.sync({ force: true });
             await seedProvinces();
             await Town.sync({ force: true });
             await seedTowns();
 
-            
-            
-            
-            
-
-            
 
             await sequelize.query('SET FOREIGN_KEY_CHECKS = 1;');  // Activar claves foráneas
             logger.info('MySQL - Models synchronized and cleared');
@@ -80,10 +73,10 @@ export default {
             // await seedRegions();
             // await seedProvinces();
             // await seedTowns();
-            // await seedMusicians();
+            // await seedProfiles();
             // await seedStyles();
             // await seedInstruments();
-            // await seedMusiciansIntruments();
+            // await seedProfilesIntruments();
             
             
         }catch(error){

@@ -1,14 +1,14 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysql.config.js';
 
-// Defining Musician_Instrument model
-const Musician_Instrument = sequelize.define(
-    'Musician_Instrument', 
+// Defining Profile_Instrument model
+const Profile_Instrument = sequelize.define(
+    'Profile_Instrument', 
     {
-        musician_id: {
+        profile_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Musician',
+                model: 'Profile',
                 key: 'id'
             },
             onUpdate: 'CASCADE',
@@ -25,9 +25,9 @@ const Musician_Instrument = sequelize.define(
         }
     },
     {
-        tableName: 'musicians_instruments', // Nombre exacto de la tabla
+        tableName: 'profiles_instruments', // Nombre exacto de la tabla
         timestamps: false,
     }
 );
 
-export default Musician_Instrument;
+export default Profile_Instrument;

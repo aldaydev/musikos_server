@@ -1,6 +1,6 @@
 import logger from "../../config/logger.config.js";
 import sequelize from "../../config/mysql.config.js";
-import { Instrument, Musician, Style } from "../../models/mysql.models/asociations.js";
+import { Instrument, Profile, Style } from "../../models/mysql.models/associations.js";
 import { Province } from "../../models/mysql.models/province.model.js";
 import { Town } from "../../models/mysql.models/town.model.js";
 import { LogError } from "../../utils/errors/logErrors.js";
@@ -8,25 +8,25 @@ import { Op } from "sequelize";
 
 export default {
 
-    //Find a Musician through a single value
+    //Find a Profile through a single value
     findOne: async (key, value) => {
         try {
-            const element = await Musician.findOne({ where: { [key]: value } });
+            const element = await Profile.findOne({ where: { [key]: value } });
             return element;
         } catch (error) {
-            const errorFindingMusician = new LogError({
+            const errorFindingProfile = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorFindingMusician');
-            throw { code: 'internalServerError', key: errorFindingMusician };
+            }).add('errorFindingProfile');
+            throw { code: 'internalServerError', key: errorFindingProfile };
         }
     },
 
-    //Create a new Musician
+    //Create a new Profile
     create: async (data) => {
         try {
-            const newMusician = await Musician.create(data);
-            return newMusician;
+            const newProfile = await Profile.create(data);
+            return newProfile;
         } catch (error) {
             //If username or email already exists
             if (error.name === 'SequelizeUniqueConstraintError') {
@@ -45,10 +45,10 @@ export default {
         }
     },
 
-    //Check if a Musician has confirmed the account
+    //Check if a Profile has confirmed the account
     checkConfirmed: async (username, type) => {
         try {
-            const isConfirmed = await Musician.findOne({
+            const isConfirmed = await Profile.findOne({
                 where: {
                     username,
                     is_confirmed: true
@@ -56,44 +56,44 @@ export default {
             });
             return isConfirmed;
         } catch (error) {
-            const errorFindingMusician = new LogError({
+            const errorFindingProfile = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorFindingMusician');
+            }).add('errorFindingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorFindingMusician,
+                key: errorFindingProfile,
                 redirect: `/login?error=internal&type=${type}&username=${username}`
             };
         }
     },
 
-    //Update is_confirmed value for a Musician (with redirection)
+    //Update is_confirmed value for a Profile (with redirection)
     updateIsConfirmed: async (username, type) => {
         try {
-            const updateMusician = await Musician.update(
+            const updateProfile = await Profile.update(
                 { is_confirmed: true },
                 { where: { username } }
             );
-            return updateMusician;
+            return updateProfile;
         } catch (error) {
-            const errorUpdatingMusician = new LogError({
+            const errorUpdatingProfile = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorUpdatingMusician');
+            }).add('errorUpdatingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorUpdatingMusician,
+                key: errorUpdatingProfile,
                 redirect: `/login?error=internal&type${type}&username=${username}`
             };
         }
     },
 
-    //Check if a usernmae or email exists related to a musician
+    //Check if a usernmae or email exists related to a Profile
     checkUser: async (login) => {
         try {
             //Find if username or email exists in MySQL
-            const result = await Musician.findOne({
+            const result = await Profile.findOne({
                 where: {
                     [Op.or]:
                         [
@@ -105,13 +105,13 @@ export default {
             return result;
 
         } catch (error) {
-            const errorCheckingMusician = new LogError({
+            const errorCheckingProfile = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorCheckingMusician');
+            }).add('errorCheckingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorCheckingMusician,
+                key: errorCheckingProfile,
             };
         }
     },
@@ -119,27 +119,27 @@ export default {
     //Update password from recoverPassword request
     updatePassword: async (password, username) => {
         try {
-            const updatedMusician = await Musician.update(
+            const updatedProfile = await Profile.update(
                 { password: password },
                 { where: { username } }
             );
-            return updatedMusician;
+            return updatedProfile;
         } catch (error) {
-            const errorUpdatingMusician = new LogError({
+            const errorUpdatingProfile = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorUpdatingMusician');
+            }).add('errorUpdatingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorUpdatingMusician,
+                key: errorUpdatingProfile,
             };
         }
     },
 
-    //Check if a Musician is requesting (can redirect)
+    //Check if a Profile is requesting (can redirect)
     checkisRequesting: async (username, response = normal) => {
         try {
-            const isConfirmed = await Musician.findOne({
+            const isConfirmed = await Profile.findOne({
                 where: {
                     username,
                     is_requesting: true
@@ -148,59 +148,59 @@ export default {
             return isConfirmed;
         } catch (error) {
 
-            const errorFindingMusician = new LogError({
+            const errorFindingProfile = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorFindingMusician');
+            }).add('errorFindingProfile');
 
             if (response === 'normal') {
                 throw {
                     code: 'internalServerError',
-                    key: errorFindingMusician,
+                    key: errorFindingProfile,
                 };
             } else if (response === 'query') {
                 throw {
                     code: 'internalServerError',
-                    key: errorFindingMusician,
+                    key: errorFindingProfile,
                     redirect: `/login?error=internal&type=isRequesting&username=${username}`
                 };
             }
         }
     },
 
-    //Update is_requesting value for a Musician (with redirection)
+    //Update is_requesting value for a Profile (with redirection)
     updateIsRequesting: async (username, state, response = 'normal') => {
         try {
-            const updatedMusician = await Musician.update(
+            const updatedProfile = await Profile.update(
                 { is_requesting: state },
                 { where: { username } }
             );
-            return updatedMusician;
+            return updatedProfile;
         } catch (error) {
-            const errorUpdatingMusician = new LogError({
+            const errorUpdatingProfile = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorUpdatingMusician');
+            }).add('errorUpdatingProfile');
 
             if (response === 'normal') {
                 throw {
                     code: 'internalServerError',
-                    key: errorUpdatingMusician,
+                    key: errorUpdatingProfile,
                 };
             } else if (response === 'query') {
                 throw {
                     code: 'internalServerError',
-                    key: errorUpdatingMusician,
+                    key: errorUpdatingProfile,
                     redirect: `/login?error=internal&type=isRequesting&username=${username}`
                 };
             }
         }
     },
 
-    //Update is_requesting value for all Musicians
+    //Update is_requesting value for all Profiles
     updateAllisRequesting: async () => {
         try {
-            await Musician.update(
+            await Profile.update(
                 { is_requesting: false },
                 { where: { is_requesting: true } }
             );
@@ -210,12 +210,12 @@ export default {
         }
     },
 
-    //Getting all confirmed musicians
+    //Getting all confirmed Profiles
     getAll: async () => {
         try {
-            const musicians = await Musician.findAll({
+            const Profiles = await Profile.findAll({
                 where: {
-                    //Musician must be confirmed
+                    //Profile must be confirmed
                     is_confirmed: true,
                 },
                 include: [
@@ -223,30 +223,30 @@ export default {
                     {
                         model: Instrument,
                         through: { attributes: [] },
-                        //Taking de name atribute of instruments associated to musicians
+                        //Taking de name atribute of instruments associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']]
                     },
                     //---STYLES---//
                     {
                         model: Style,
                         through: { attributes: [] },
-                        //Taking de name atribute of styles associated to musicians
+                        //Taking de name atribute of styles associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
                     },
                     //---PROVINCE---//
                     {
                         model: Province,
-                        //Taking de name atribute of province associated to musicians
+                        //Taking de name atribute of province associated to Profiles
                         attributes: ['name']
                     },
                     //---TOWN---//
                     {
                         model: Town,
-                        //Taking de name atribute of province associated to musicians
+                        //Taking de name atribute of province associated to Profiles
                         attributes: ['name']
                     },
                 ],
-                //Atributes of Musician we want to get 
+                //Atributes of Profile we want to get 
                 attributes: [
                     'id', 
                     'username',
@@ -254,25 +254,25 @@ export default {
                     'name',
                     'age'
                 ],
-                //We group the data by musician id
-                group: ['Musician.id'],
+                //We group the data by Profile id
+                group: ['Profile.id'],
                 raw: true,
                 nest: true
             });
-            return musicians;
+            return Profiles;
         } catch (error) {
-            const errorGettingMusicians = new LogError({
+            const errorGettingProfiles = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorGettingMusicians');
+            }).add('errorGettingProfiles');
             throw {
                 code: 'internalServerError',
-                key: errorGettingMusicians,
+                key: errorGettingProfiles,
             };
         }
     },
 
-    //Getting filtered musicians
+    //Getting filtered Profiles
     filter: async (minAge, maxAge, styles, instruments, province, town, name) => {
         try {
             //Initialize array for multiple instruments or styles
@@ -321,9 +321,9 @@ export default {
             }
 
             //Here begins the request to database
-            const musicians = await Musician.findAll({
+            const Profiles = await Profile.findAll({
                 where: {
-                    //Musician must be confirmed
+                    //Profile must be confirmed
                     is_confirmed: true,
                     //Selected age range
                     age: {
@@ -337,7 +337,7 @@ export default {
                     {
                         model: Instrument,
                         through: { attributes: [] },
-                        //Taking de name atribute of instruments associated to musicians
+                        //Taking de name atribute of instruments associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']],
                         //If instruments in queryString, filter by them
                         where: ifExists('instruments', instruments)
@@ -346,7 +346,7 @@ export default {
                     {
                         model: Style, 
                         through: { attributes: [] },
-                        //Taking de name atribute of styles associated to musicians
+                        //Taking de name atribute of styles associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']],
                         //If styles in queryString, filter by them
                         where: ifExists('styles', styles)
@@ -354,7 +354,7 @@ export default {
                     //---PROVINCE---//
                     {
                         model: Province,
-                        //Taking de name atribute of province associated to musicians
+                        //Taking de name atribute of province associated to Profiles
                         attributes: ['name'],
                         //If province in queryString, filter by it
                         where: ifExists('province', province)
@@ -362,26 +362,26 @@ export default {
                     //---TOWN---//
                     {
                         model: Town,
-                        //Taking de name atribute of town associated to musicians
+                        //Taking de name atribute of town associated to Profiles
                         attributes: ['name'],
                         //If town in queryString, filter by it
                         where: ifExists('town', town)
                     },
                 ],
-                //Atributes of Musician we want to get 
+                //Atributes of Profile we want to get 
                 attributes: [
                     'id', 
                     'username', 
                     'image',
                     'name',
                     'age',
-                    //We take the count of all instruments asociated to a musician
-                    [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_instruments`.`instrument_id`) FROM `musicians_instruments` WHERE `musicians_instruments`.`musician_id` = `Musician`.`id`)'), 'instrument_count'],
-                    //We take the count of all styles asociated to a musician
-                    [sequelize.literal('(SELECT COUNT(DISTINCT `musicians_styles`.`style_id`) FROM `musicians_styles` WHERE `musicians_styles`.`musician_id` = `Musician`.`id`)'), 'style_count']
+                    //We take the count of all instruments asociated to a Profile
+                    [sequelize.literal('(SELECT COUNT(DISTINCT `Profiles_instruments`.`instrument_id`) FROM `Profiles_instruments` WHERE `Profiles_instruments`.`Profile_id` = `Profile`.`id`)'), 'instrument_count'],
+                    //We take the count of all styles asociated to a Profile
+                    [sequelize.literal('(SELECT COUNT(DISTINCT `Profiles_styles`.`style_id`) FROM `Profiles_styles` WHERE `Profiles_styles`.`Profile_id` = `Profile`.`id`)'), 'style_count']
                 ],
-                //We group the data by musician id
-                group: ['Musician.id'],
+                //We group the data by Profile id
+                group: ['Profile.id'],
                 having: {
                     [Op.and]: [
                         sequelize.literal(`instrument_count >= ${instrumentsArray.length}`),
@@ -396,25 +396,25 @@ export default {
                 nest: true,
 
             });
-            return musicians;
+            return Profiles;
         } catch (error) {
-            const errorGettingMusicians = new LogError({
+            const errorGettingProfiles = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorGettingMusicians');
+            }).add('errorGettingProfiles');
             throw {
                 code: 'internalServerError',
-                key: errorGettingMusicians,
+                key: errorGettingProfiles,
             };
         }
     },
 
-    //Getting all confirmed musicians
+    //Getting all confirmed Profiles
     getOne: async (username) => {
         try {
-            const musicians = await Musician.findOne({
+            const Profiles = await Profile.findOne({
                 where: {
-                    //Musician must be confirmed
+                    //Profile must be confirmed
                     username: username,
                     is_confirmed: true,
                 },
@@ -423,30 +423,30 @@ export default {
                     {
                         model: Instrument,
                         through: { attributes: [] },
-                        //Taking de name atribute of instruments associated to musicians
+                        //Taking de name atribute of instruments associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `instruments`.`name`)'), 'instrument_names']]
                     },
                     //---STYLES---//
                     {
                         model: Style,
                         through: { attributes: [] },
-                        //Taking de name atribute of styles associated to musicians
+                        //Taking de name atribute of styles associated to Profiles
                         attributes: [[sequelize.literal('GROUP_CONCAT(DISTINCT `styles`.`name`)'), 'style_names']]
                     },
                     //---PROVINCE---//
                     {
                         model: Province,
-                        //Taking de name atribute of province associated to musicians
+                        //Taking de name atribute of province associated to Profiles
                         attributes: ['name']
                     },
                     //---TOWN---//
                     {
                         model: Town,
-                        //Taking de name atribute of province associated to musicians
+                        //Taking de name atribute of province associated to Profiles
                         attributes: ['name']
                     },
                 ],
-                //Atributes of Musician we want to get 
+                //Atributes of Profile we want to get 
                 attributes: [
                     'id', 
                     'username',
@@ -454,20 +454,20 @@ export default {
                     'name',
                     'age'
                 ],
-                //We group the data by musician id
-                group: ['Musician.id'],
+                //We group the data by Profile id
+                group: ['Profile.id'],
                 raw: true,
                 nest: true
             });
-            return musicians;
+            return Profiles;
         } catch (error) {
-            const errorGettingMusicians = new LogError({
+            const errorGettingProfiles = new LogError({
                 message: 'Fail at searching in MySQL',
                 error: error.message
-            }).add('errorGettingMusicians');
+            }).add('errorGettingProfiles');
             throw {
                 code: 'internalServerError',
-                key: errorGettingMusicians,
+                key: errorGettingProfiles,
             };
         }
     },
@@ -475,20 +475,20 @@ export default {
     //Update password from recoverPassword request
     updateEmail: async (email, username) => {
         try {
-            const updatedMusician = await Musician.update(
+            const updatedProfile = await Profile.update(
                 { email: email },
                 { where: { username } }
             );
-            console.log('Updated', updatedMusician);
-            return updatedMusician;
+            console.log('Updated', updatedProfile);
+            return updatedProfile;
         } catch (error) {
-            const errorUpdatingMusician = new LogError({
+            const errorUpdatingProfile = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorUpdatingMusician');
+            }).add('errorUpdatingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorUpdatingMusician,
+                key: errorUpdatingProfile,
             };
         }
     },
@@ -496,39 +496,39 @@ export default {
     //Update password from recoverPassword request
     updateUsername: async (newUsername, username) => {
         try {
-            const updatedMusician = await Musician.update(
+            const updatedProfile = await Profile.update(
                 { username: newUsername },
                 { where: { username } }
             );
-            console.log('Updated', updatedMusician);
-            return updatedMusician;
+            console.log('Updated', updatedProfile);
+            return updatedProfile;
         } catch (error) {
-            const errorUpdatingMusician = new LogError({
+            const errorUpdatingProfile = new LogError({
                 message: 'Fail at updating in MySQL',
                 error: error.message
-            }).add('errorUpdatingMusician');
+            }).add('errorUpdatingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorUpdatingMusician,
+                key: errorUpdatingProfile,
             };
         }
     },
 
     deleteAccount: async (username) => {
         try {
-            const deletedMusician = await Musician.destroy({
+            const deletedProfile = await Profile.destroy({
                 where: { username }
             });
-            console.log('Deleting', deletedMusician);
-            return deletedMusician;
+            console.log('Deleting', deletedProfile);
+            return deletedProfile;
         } catch (error) {
-            const errorDeletingMusician = new LogError({
+            const errorDeletingProfile = new LogError({
                 message: 'Fail at deleting in MySQL',
                 error: error.message
-            }).add('errorDeletingMusician');
+            }).add('errorDeletingProfile');
             throw {
                 code: 'internalServerError',
-                key: errorDeletingMusician,
+                key: errorDeletingProfile,
             };
         }
     }
