@@ -37,7 +37,7 @@ export default {
             //Creating musician
             const musician = await musicianService.create({ email, username, password, birthdate, name });
 
-            await commService.createComm(musician.id, '67cdc14e30c7311be44352aa');
+            await commService.createComm(musician.id, 'Welcome');
 
             //Final response
             return res.status(200).json({

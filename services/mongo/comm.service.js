@@ -32,11 +32,11 @@ export default {
         }
     },
 
-    createComm: async (user_id, comm_id) => {
+    createComm: async (user_id, comm_keyword) => {
         try {
             const newUserComm = {
                 user_id: user_id,
-                user_comms: [comm_id]
+                user_comms: [comm_keyword]
             }
             return await Usercomm.create(newUserComm);
         } catch (error) {
